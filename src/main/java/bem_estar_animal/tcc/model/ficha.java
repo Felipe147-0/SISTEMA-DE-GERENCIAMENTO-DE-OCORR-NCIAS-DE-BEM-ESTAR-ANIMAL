@@ -20,7 +20,7 @@ public class Ficha {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private Long ficha_id;
 
     private String processo;
 
@@ -30,17 +30,17 @@ public class Ficha {
 
     private Instant hora;
 
-    private String denunciante_id;
+    private Long denunciante_id;
 
     private String assunto;
 
     private String desfecho_da_notificacao;
 
-    private String data_tramite;
+    private Instant data_tramite;
 
-    private String hora_tramite;
+    private Instant hora_tramite;
 
-    private String funcionario_id;
+    private Long funcionario_id;
 
     private String historico;
 
