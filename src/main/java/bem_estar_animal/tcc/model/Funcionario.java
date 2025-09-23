@@ -22,7 +22,7 @@ import lombok.Setter;
 public class Funcionario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long funcionario_id;
 
     private String nome;

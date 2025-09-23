@@ -22,7 +22,7 @@ import lombok.Setter;
 public class Ficha {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ficha_id;
 
     private String processo;

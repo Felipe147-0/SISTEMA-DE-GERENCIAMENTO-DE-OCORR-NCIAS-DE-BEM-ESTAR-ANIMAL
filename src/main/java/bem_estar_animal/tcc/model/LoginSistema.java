@@ -1,5 +1,6 @@
 package bem_estar_animal.tcc.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +20,8 @@ import lombok.Setter;
 public class LoginSistema {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private Long longin_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long login_id;
 
     private String username;
 

@@ -1,5 +1,6 @@
 package bem_estar_animal.tcc.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,14 +21,12 @@ import lombok.Setter;
 public class Denunciante {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long denunciante_id;
 
     private String nome;
 
     private String telefone;
-
-    private Long endereco_id;
 
     @OneToOne(mappedBy = "denunciante")
     private Ficha ficha;
