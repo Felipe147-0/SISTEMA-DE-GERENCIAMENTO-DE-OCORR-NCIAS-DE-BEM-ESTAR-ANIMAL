@@ -24,5 +24,5 @@ public class Denunciante {
     
     private String telefone;
 
-    private String endereco_id;
+    private Long endereco_id;
 }

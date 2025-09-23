@@ -24,5 +24,5 @@ public class Login {
 
     private String password;
 
-    private String funcionario_id;
+    private Long funcionario_id;
 }
