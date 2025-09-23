@@ -1,0 +1,2 @@
+Discutir sobre como usar UUID (é infinitamente mais seguro)
+Discutir sobre a recursividade inifinita. A anotacao @JsonBackReference elimina o objeto do json, sendo assim, caso queira que ele apareça basta utilizar DTO
