@@ -2,6 +2,8 @@ package bem_estar_animal.tcc.model;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class Ficha {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ficha_id;
+    private Long id_ficha;
 
     private String processo;
 
@@ -34,7 +36,8 @@ public class Ficha {
     private Instant hora;
 
     @OneToOne
-    @JoinColumn(name = "denunciante_id", referencedColumnName = "denunciante_id")
+    @JoinColumn(name = "denunciante_id", referencedColumnName = "id_denunciante")
+    @JsonManagedReference
     private Denunciante denunciante;
 
     private String assunto;
@@ -46,7 +49,7 @@ public class Ficha {
     private Instant hora_tramite;
 
     @ManyToOne
-    @JoinColumn(name = "funcionario_id", referencedColumnName = "funcionario_id")
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "id_funcionario")
     private Funcionario funcionario;
 
     private String historico;

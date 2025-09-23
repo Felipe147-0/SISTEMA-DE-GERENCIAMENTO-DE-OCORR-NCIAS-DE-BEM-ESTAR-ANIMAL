@@ -3,6 +3,8 @@ package bem_estar_animal.tcc.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long funcionario_id;
+    private Long id_funcionario;
 
     private String nome;
 
@@ -32,8 +34,9 @@ public class Funcionario {
     private String funcao;
 
     @OneToMany(mappedBy = "funcionario")
+    @JsonBackReference
     private List<Ficha> fichalList = new ArrayList<>();
 
     @OneToOne(mappedBy = "funcionario")
-    private LoginSistema login;
+    private Login login;
 }

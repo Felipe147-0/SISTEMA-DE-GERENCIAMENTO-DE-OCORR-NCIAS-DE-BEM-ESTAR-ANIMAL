@@ -17,18 +17,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class LoginSistema {
+public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long login_id;
+    private Long id_login;
 
     private String username;
 
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "funcionario_id", referencedColumnName = "funcionario_id")
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "id_funcionario")
     private Funcionario funcionario;
 
     @OneToOne(mappedBy = "login")

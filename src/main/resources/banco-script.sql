@@ -1,128 +1,66 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+drop database if exists bem_estar_animal;
 
--- -----------------------------------------------------
--- Schema bem-estar-animal
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bem-estar-animal` DEFAULT CHARACTER SET utf8 ;
-USE `bem-estar-animal` ;
+create database if not exists bem_estar_animal;
 
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`funcionario`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`funcionario` ;
+use bem_estar_animal;
 
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`funcionario` (
-  `funcionario_id` BIGINT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `registro` VARCHAR(45) NULL,
-  `funcao` VARCHAR(45) NULL,
-  PRIMARY KEY (`funcionario_id`))
-ENGINE = InnoDB;
+create table funcionario(
+	id_funcionario bigint not null auto_increment,
+    nome varchar(255),
+    registro varchar(255),
+    funcao varchar(255),
+    primary key(id_funcionario)
+);
 
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`endereco`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`endereco` ;
+create table endereco(
+	id_endereco bigint not null auto_increment,
+    logradouro varchar(255),
+    bairro varchar(255),
+    ponto_de_referencia varchar(255),
+    primary key (id_endereco)
+);
 
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`endereco` (
-  `endereco_id` BIGINT NOT NULL,
-  `logradouro` VARCHAR(45) NULL,
-  `bairro` VARCHAR(45) NULL,
-  `ponto_de_referencia` VARCHAR(45) NULL,
-  PRIMARY KEY (`endereco_id`))
-ENGINE = InnoDB;
+create table denunciante(
+	id_denunciante bigint not null auto_increment,
+    nome varchar(255),
+    telefone varchar(255),
+    endereco_id bigint,
+    primary key (id_denunciante),
+    foreign key (endereco_id) references endereco (id_endereco)
+);
 
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`denunciante`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`denunciante` ;
+create table ficha(
+    id_ficha bigint not null auto_increment,
+    processo VARCHAR(255),
+    recebido_por VARCHAR(255),
+    data DATETIME,
+    hora DATETIME,
+    denunciante_id bigint,
+    assunto VARCHAR(255),
+    desfecho_da_notificacao VARCHAR(255), 
+    data_tramite DATETIME,
+    hora_tramite datetime,
+    funcionario_id bigint,
+    historico VARCHAR(255),
+    animal VARCHAR(255),
+    primary key (id_ficha),
+    foreign key (denunciante_id) references denunciante (id_denunciante),
+    foreign key (funcionario_id) references funcionario (id_funcionario)
+);
 
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`denunciante` (
-  `denunciante_id` BIGINT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `telefone` VARCHAR(45) NULL,
-  `endereco_id` BIGINT NOT NULL,
-  PRIMARY KEY (`denunciante_id`, `endereco_id`),
-  INDEX `fk_denunciante_endereco1_idx` (`endereco_id` ASC) VISIBLE,
-  CONSTRAINT `fk_denunciante_endereco1`
-    FOREIGN KEY (`endereco_id`)
-    REFERENCES `bem-estar-animal`.`endereco` (`endereco_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`ficha`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`ficha` ;
+create table login(
+	id_login bigint not null auto_increment,
+    username varchar(255),
+    password varchar(255),
+    funcionario_id bigint,
+    primary key (id_login),
+    foreign key (funcionario_id) references funcionario (id_funcionario)
+);
 
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`ficha` (
-  `ficha_id` BIGINT NOT NULL,
-  `processo` VARCHAR(45) NULL,
-  `recebido_por` VARCHAR(45) NULL,
-  `data` TIMESTAMP(6) NULL,
-  `hora` TIMESTAMP(6) NULL,
-  `assunto` VARCHAR(45) NULL,
-  `desfecho_da_notificacao` VARCHAR(45) NULL,
-  `data_tramite` TIMESTAMP(6) NULL,
-  `hora_tramite` TIMESTAMP(6) NULL,
-  `historico` VARCHAR(45) NULL,
-  `animal` VARCHAR(45) NULL,
-  `funcionario_id` BIGINT NOT NULL,
-  `denunciante_id` BIGINT NOT NULL,
-  PRIMARY KEY (`ficha_id`, `funcionario_id`, `denunciante_id`),
-  INDEX `fk_ficha_funcionario1_idx` (`funcionario_id` ASC) VISIBLE,
-  INDEX `fk_ficha_denunciante1_idx` (`denunciante_id` ASC) VISIBLE,
-  CONSTRAINT `fk_ficha_funcionario1`
-    FOREIGN KEY (`funcionario_id`)
-    REFERENCES `bem-estar-animal`.`funcionario` (`funcionario_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ficha_denunciante1`
-    FOREIGN KEY (`denunciante_id`)
-    REFERENCES `bem-estar-animal`.`denunciante` (`denunciante_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`login`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`login` ;
-
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`login` (
-  `login_id` BIGINT NOT NULL,
-  `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  `funcionario_id` BIGINT NOT NULL,
-  PRIMARY KEY (`login_id`, `funcionario_id`),
-  INDEX `fk_login_funcionario1_idx` (`funcionario_id` ASC) VISIBLE,
-  CONSTRAINT `fk_login_funcionario1`
-    FOREIGN KEY (`funcionario_id`)
-    REFERENCES `bem-estar-animal`.`funcionario` (`funcionario_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `bem-estar-animal`.`role`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bem-estar-animal`.`role` ;
-
-CREATE TABLE IF NOT EXISTS `bem-estar-animal`.`role` (
-  `role_id` BIGINT NOT NULL,
-  `login_id` BIGINT NOT NULL,
-  PRIMARY KEY (`role_id`, `login_id`),
-  INDEX `fk_role_login1_idx` (`login_id` ASC) VISIBLE,
-  CONSTRAINT `fk_role_login1`
-    FOREIGN KEY (`login_id`)
-    REFERENCES `bem-estar-animal`.`login` (`funcionario_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+create table role(
+	id_role bigint not null auto_increment,
+    login_id bigint,
+    primary key (id_role),
+    foreign key (login_id) references login (id_login)
+);

@@ -1,6 +1,5 @@
 package bem_estar_animal.tcc.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +20,9 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long role_id;
+    private Long id_role;
 
     @OneToOne
-    @JoinColumn(name = "login_id", referencedColumnName = "login_id")
-    private LoginSistema login;
+    @JoinColumn(name = "login_id", referencedColumnName = "id_login")
+    private Login login;
 }

@@ -1,6 +1,8 @@
 package bem_estar_animal.tcc.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,16 +24,18 @@ public class Denunciante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long denunciante_id;
+    private Long id_denunciante;
 
     private String nome;
 
     private String telefone;
 
     @OneToOne(mappedBy = "denunciante")
+    @JsonBackReference
     private Ficha ficha;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_id", referencedColumnName = "endereco_id")
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
+    @JsonBackReference
     private Endereco endereco;
 }
