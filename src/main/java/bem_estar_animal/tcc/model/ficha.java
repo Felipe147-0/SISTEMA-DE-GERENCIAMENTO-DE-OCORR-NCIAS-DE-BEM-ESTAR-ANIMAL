@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +33,9 @@ public class Ficha {
 
     private Instant hora;
 
-    private Long denunciante_id;
+    @OneToOne
+    @JoinColumn(name = "denunciante_id", referencedColumnName = "denunciante_id")
+    private Denunciante denunciante;
 
     private String assunto;
 
@@ -40,7 +45,9 @@ public class Ficha {
 
     private Instant hora_tramite;
 
-    private Long funcionario_id;
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "funcionario_id")
+    private Funcionario funcionario;
 
     private String historico;
 

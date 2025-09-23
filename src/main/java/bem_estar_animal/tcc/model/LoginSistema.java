@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Login {
+public class LoginSistema {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,5 +26,10 @@ public class Login {
 
     private String password;
 
-    private Long funcionario_id;
+    @OneToOne
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "funcionario_id")
+    private Funcionario funcionario;
+
+    @OneToOne(mappedBy = "login")
+    private Role role;
 }
