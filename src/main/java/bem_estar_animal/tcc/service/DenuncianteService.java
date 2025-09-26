@@ -31,12 +31,19 @@ public class DenuncianteService {
                 null,
                 null);
 
-        Endereco enderecoFound = enderecoService.findEnderecoById(denuncianteRecord.endereco());
-        denunciante.setEndereco(enderecoFound);
+        if (denuncianteRecord.enderecoId() != null && denuncianteRecord.enderecoId() != 0) {
+            Endereco enderecoFound = enderecoService.findEnderecoById(denuncianteRecord.enderecoId());
+            denunciante.setEndereco(enderecoFound);
+        }
 
         denuncianteRepository.save(denunciante);
 
         return denunciante;
+    }
+
+    public Denunciante findDenuncianteById(Long dununciante) {
+        Denunciante denuncianteFound = denuncianteRepository.findById(dununciante).get();
+        return denuncianteFound;
     }
 
 }
