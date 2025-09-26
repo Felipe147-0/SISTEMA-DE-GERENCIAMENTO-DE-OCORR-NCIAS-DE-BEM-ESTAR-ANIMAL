@@ -31,7 +31,7 @@ public class DenuncianteService {
                 null,
                 null);
 
-        Endereco enderecoFound = enderecoService.findById(denuncianteRecord.endereco());
+        Endereco enderecoFound = enderecoService.findEnderecoById(denuncianteRecord.endereco());
         denunciante.setEndereco(enderecoFound);
 
         denuncianteRepository.save(denunciante);
