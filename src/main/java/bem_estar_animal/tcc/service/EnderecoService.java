@@ -25,15 +25,39 @@ public class EnderecoService {
     public Endereco createEndereco(EnderecoRecord enderecoRecord) {
         Endereco endereco = new Endereco(null, enderecoRecord.logradouro(), enderecoRecord.bairro(),
                 enderecoRecord.ponto_de_referencia(), null);
-        
+
         enderecoRepository.save(endereco);
 
         return endereco;
     }
 
-    public Endereco findById(Long id) {
-         Optional<Endereco> endereco = enderecoRepository.findById(id);
+    public Endereco findEnderecoById(Long id) {
+        Optional<Endereco> endereco = enderecoRepository.findById(id);
         return endereco.get();
+    }
+
+    public void deleteEndereco(Long id) {
+        enderecoRepository.findById(id).ifPresent(endereco -> enderecoRepository.delete(endereco));
+    }
+
+    public Endereco updateEndereco(Long id, EnderecoRecord enderecoRecord) {
+        Endereco enderecoUpdate = enderecoRepository.findById(id).get();
+
+        if (enderecoRecord.logradouro() != null) {
+            enderecoUpdate.setLogradouro(enderecoRecord.logradouro());
+        }
+
+        if (enderecoRecord.bairro() != null) {
+            enderecoUpdate.setBairro(enderecoRecord.bairro());
+        }
+
+        if (enderecoRecord.ponto_de_referencia() != null) {
+            enderecoUpdate.setPonto_de_referencia(enderecoRecord.ponto_de_referencia());
+        }
+
+        enderecoRepository.save(enderecoUpdate);
+
+        return enderecoUpdate;
     }
 
 }

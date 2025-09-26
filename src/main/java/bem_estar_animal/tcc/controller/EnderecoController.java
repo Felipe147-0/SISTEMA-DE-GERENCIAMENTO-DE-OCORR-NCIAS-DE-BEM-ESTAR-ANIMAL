@@ -9,13 +9,13 @@ import bem_estar_animal.tcc.service.EnderecoService;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/endereco")
@@ -35,9 +35,21 @@ public class EnderecoController {
 
     @PostMapping("/criar")
     public ResponseEntity<Endereco> createEndereco(@RequestBody EnderecoRecord enderecoRecord) {
-        Endereco endereco = enderecoService.createEndereco(enderecoRecord);//TODO nao retornar o objeto criado. Colocar redirect
+        Endereco endereco = enderecoService.createEndereco(enderecoRecord);// TODO nao retornar o objeto criado. Colocar
+                                                                           // redirect
         return ResponseEntity.ok().body(endereco);
     }
-    
-    
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Endereco> updateEndereco(@PathVariable Long id,
+            @RequestBody EnderecoRecord enderecoRecord) {
+        Endereco endereco = enderecoService.updateEndereco(id, enderecoRecord);
+        return ResponseEntity.ok().body(endereco);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
+        enderecoService.deleteEndereco(id);
+        return ResponseEntity.noContent().build();
+    }
 }
