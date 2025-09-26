@@ -1,6 +1,7 @@
 package bem_estar_animal.tcc.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,8 @@ public class EnderecoService {
     }
 
     public Endereco findById(Long id) {
-        return findById(id);
+         Optional<Endereco> endereco = enderecoRepository.findById(id);
+        return endereco.get();
     }
 
 }
