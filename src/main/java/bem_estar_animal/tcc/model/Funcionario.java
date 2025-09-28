@@ -38,5 +38,6 @@ public class Funcionario {
     private List<Ficha> fichalList = new ArrayList<>();
 
     @OneToOne(mappedBy = "funcionario")
+    @JsonBackReference
     private Login login;
 }

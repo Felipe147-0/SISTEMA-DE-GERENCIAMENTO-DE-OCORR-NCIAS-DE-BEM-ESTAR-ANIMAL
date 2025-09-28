@@ -1,5 +1,7 @@
 package bem_estar_animal.tcc.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,5 +26,6 @@ public class Role {
 
     @OneToOne
     @JoinColumn(name = "login_id", referencedColumnName = "id_login")
+    @JsonBackReference
     private Login login;
 }
