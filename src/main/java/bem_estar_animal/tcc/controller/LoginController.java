@@ -40,7 +40,7 @@ public class LoginController {
         return ResponseEntity.ok().body(login);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Login> updateLogin(@PathVariable Long id, @RequestBody LoginRecord loginRecord) {
         Login login = loginService.updateLogin(id, loginRecord);
         return ResponseEntity.ok().body(login);
