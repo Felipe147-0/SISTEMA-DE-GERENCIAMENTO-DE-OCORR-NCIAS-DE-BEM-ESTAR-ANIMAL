@@ -39,13 +39,13 @@ public class FichaController {
         return ResponseEntity.ok().body(ficha);// TODO nao retornar o objeto criado. Colocar redirect
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Ficha> updateFicha(@PathVariable Long id, @RequestBody FichaRecord fichaRecord) {
         Ficha ficha = fichaService.updateFicha(id, fichaRecord);
         return ResponseEntity.ok().body(ficha);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFicha(@PathVariable Long id){
         fichaService.deleteFicha(id);
         return ResponseEntity.noContent().build();

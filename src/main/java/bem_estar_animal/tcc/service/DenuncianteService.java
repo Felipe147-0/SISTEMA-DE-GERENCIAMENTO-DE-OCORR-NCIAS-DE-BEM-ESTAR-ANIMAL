@@ -6,18 +6,24 @@ import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.model.Denunciante;
 import bem_estar_animal.tcc.model.Endereco;
+import bem_estar_animal.tcc.model.Ficha;
 import bem_estar_animal.tcc.record.DenuncianteRecord;
 import bem_estar_animal.tcc.repository.DenuncianteRepository;
+import bem_estar_animal.tcc.repository.EnderecoRepository;
+import bem_estar_animal.tcc.repository.FichaRepository;
 
 @Service
 public class DenuncianteService {
 
     private DenuncianteRepository denuncianteRepository;
-    private EnderecoService enderecoService;
+    private EnderecoRepository enderecoRepository;
+    private FichaRepository fichaRepository;
 
-    public DenuncianteService(DenuncianteRepository denuncianteRepository, EnderecoService enderecoService) {
+    public DenuncianteService(DenuncianteRepository denuncianteRepository, EnderecoRepository enderecoRepository,
+            FichaRepository fichaRepository) {
         this.denuncianteRepository = denuncianteRepository;
-        this.enderecoService = enderecoService;
+        this.enderecoRepository = enderecoRepository;
+        this.fichaRepository = fichaRepository;
     }
 
     public List<Denunciante> getAllDenunciante() {
@@ -31,8 +37,13 @@ public class DenuncianteService {
                 null,
                 null);
 
+        if (denuncianteRecord.fichaId() != null && denuncianteRecord.fichaId() != 0) {
+            Ficha fichaFound = fichaRepository.findById(denuncianteRecord.fichaId()).get();
+            denunciante.setFicha(fichaFound);
+        }
+
         if (denuncianteRecord.enderecoId() != null && denuncianteRecord.enderecoId() != 0) {
-            Endereco enderecoFound = enderecoService.findEnderecoById(denuncianteRecord.enderecoId());
+            Endereco enderecoFound = enderecoRepository.findById(denuncianteRecord.enderecoId()).get();
             denunciante.setEndereco(enderecoFound);
         }
 
@@ -41,9 +52,35 @@ public class DenuncianteService {
         return denunciante;
     }
 
-    public Denunciante findDenuncianteById(Long dununciante) {
-        Denunciante denuncianteFound = denuncianteRepository.findById(dununciante).get();
-        return denuncianteFound;
+    public Denunciante updateDununciante(Long id, DenuncianteRecord denuncianteRecord) {
+        Denunciante denunciante = denuncianteRepository.findById(id).get();
+
+        if (denuncianteRecord.nome() != null && !denuncianteRecord.nome().isBlank()) {
+            denunciante.setNome(denuncianteRecord.nome());
+        }
+
+        if (denuncianteRecord.telefone() != null && !denuncianteRecord.telefone().isBlank()) {
+            denunciante.setTelefone(denuncianteRecord.telefone());
+        }
+
+        if (denuncianteRecord.nome() != null && !denuncianteRecord.nome().isBlank()) {
+            denunciante.setNome(denuncianteRecord.nome());
+        }
+
+        denuncianteRepository.save(denunciante);
+
+        return denunciante;
+    }
+
+    public boolean deleteDununciante(Long id) {
+        Denunciante denunciante = denuncianteRepository.findById(id).get();
+
+        if (denunciante != null) {
+            denuncianteRepository.delete(denunciante);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

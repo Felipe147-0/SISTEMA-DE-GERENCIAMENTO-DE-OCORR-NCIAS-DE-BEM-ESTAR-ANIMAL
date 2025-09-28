@@ -10,21 +10,22 @@ import bem_estar_animal.tcc.model.Denunciante;
 import bem_estar_animal.tcc.model.Ficha;
 import bem_estar_animal.tcc.model.Funcionario;
 import bem_estar_animal.tcc.record.FichaRecord;
+import bem_estar_animal.tcc.repository.DenuncianteRepository;
 import bem_estar_animal.tcc.repository.FichaRepository;
+import bem_estar_animal.tcc.repository.FuncionarioRepository;
 
 @Service
 public class FichaService {
 
     private FichaRepository fichaRepository;
-    private DenuncianteService denuncianteService;
-    private FuncionarioService funcionarioService;
+    private DenuncianteRepository denuncianteRepository;
+    private FuncionarioRepository funcionarioRepository;
 
-    public FichaService(FichaRepository fichaRepository, DenuncianteService denuncianteService,
-            FuncionarioService funcionarioService) {
-
+    public FichaService(FichaRepository fichaRepository, DenuncianteRepository denuncianteRepository,
+            FuncionarioRepository funcionarioRepository) {
         this.fichaRepository = fichaRepository;
-        this.denuncianteService = denuncianteService;
-        this.funcionarioService = funcionarioService;
+        this.denuncianteRepository = denuncianteRepository;
+        this.funcionarioRepository = funcionarioRepository;
     }
 
     public List<Ficha> getAllFichas() {
@@ -51,12 +52,12 @@ public class FichaService {
                 fichaRecord.animal());
 
         if (fichaRecord.dununcianteId() != null && fichaRecord.dununcianteId() != 0) {
-            Denunciante denuncianteFound = denuncianteService.findDenuncianteById(fichaRecord.dununcianteId());
+            Denunciante denuncianteFound = denuncianteRepository.findById(fichaRecord.dununcianteId()).get();
             ficha.setDenunciante(denuncianteFound); // TODO OBRIGATORIO COLOCAR O DENUNCIANTE
         }
 
         if (fichaRecord.funcionarioId() != null && fichaRecord.funcionarioId() != 0) {
-            Funcionario funcionarioFound = funcionarioService.findFuncionarioById(fichaRecord.funcionarioId());
+            Funcionario funcionarioFound = funcionarioRepository.findById(fichaRecord.funcionarioId()).get();
             ficha.setFuncionario(funcionarioFound); // TODO OBRIGATORIO COLOCAR O FUNCIONARIO
         }
 
