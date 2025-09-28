@@ -48,19 +48,12 @@ create table ficha(
     foreign key (funcionario_id) references funcionario (id_funcionario)
 );
 
-
 create table login(
 	id_login bigint not null auto_increment,
     username varchar(255),
     password varchar(255),
     funcionario_id bigint,
+    role varchar(255),
     primary key (id_login),
     foreign key (funcionario_id) references funcionario (id_funcionario)
-);
-
-create table role(
-	id_role bigint not null auto_increment,
-    login_id bigint,
-    primary key (id_role),
-    foreign key (login_id) references login (id_login)
 );

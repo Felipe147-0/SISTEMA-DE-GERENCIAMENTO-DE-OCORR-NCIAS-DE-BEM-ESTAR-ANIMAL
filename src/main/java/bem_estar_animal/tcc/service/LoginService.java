@@ -6,24 +6,19 @@ import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.model.Funcionario;
 import bem_estar_animal.tcc.model.Login;
-import bem_estar_animal.tcc.model.Role;
 import bem_estar_animal.tcc.record.LoginRecord;
 import bem_estar_animal.tcc.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.repository.LoginRepository;
-import bem_estar_animal.tcc.repository.RoleRepository;
 
 @Service
 public class LoginService {
 
     private LoginRepository loginRepository;
     private FuncionarioRepository funcionarioRepository;
-    private RoleRepository roleRepository;
 
-    public LoginService(LoginRepository loginRepository, FuncionarioRepository funcionarioRepository,
-            RoleRepository roleRepository) {
+    public LoginService(LoginRepository loginRepository, FuncionarioRepository funcionarioRepository) {
         this.loginRepository = loginRepository;
         this.funcionarioRepository = funcionarioRepository;
-        this.roleRepository = roleRepository;
     }
 
     public List<Login> getAllLogins() {
@@ -43,9 +38,8 @@ public class LoginService {
             login.setFuncionario(funcionarioFound);
         }
 
-        if (loginRecord.roleId() != null && loginRecord.roleId() != 0) {
-            Role roleFound = roleRepository.findById(loginRecord.roleId()).get();
-            login.setRole(roleFound);
+        if (loginRecord.role() != null) {
+            login.setRole(loginRecord.role()); 
         }
         
         loginRepository.save(login);
@@ -69,9 +63,8 @@ public class LoginService {
             login.setFuncionario(funcionarioId);
         }
 
-        if (loginRecord.roleId() != null && loginRecord.roleId() != 0) {
-            Role roleId = roleRepository.findById(loginRecord.roleId()).get();
-            login.setRole(roleId);
+        if (loginRecord.role() != null) {
+            login.setRole(loginRecord.role()); 
         }
 
         loginRepository.save(login);

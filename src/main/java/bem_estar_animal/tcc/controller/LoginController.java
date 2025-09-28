@@ -46,15 +46,16 @@ public class LoginController {
         return ResponseEntity.ok().body(login);
     }
 
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteLogin(@PathVariable Long id) {
+    public ResponseEntity<String> deleteLogin(@PathVariable Long id) {
         boolean loginDeleted = loginService.deleteLogin(id);
 
         if (loginDeleted == false) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Login nao encontrado com o ID: " + id);
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Login deletado");
     }
 
 }

@@ -1,31 +1,30 @@
 package bem_estar_animal.tcc.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-@Entity
-public class Role {
+public enum Role {
+    ADMIN("Administrador"),
+    USER("Usuário"),
+    VETERINARIO("Veterinário"),
+    FUNCIONARIO("Funcionário"),
+    SUPERVISOR("Supervisor");
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_role;
+    private String descricao;
 
-    @OneToOne
-    @JoinColumn(name = "login_id", referencedColumnName = "id_login")
-    @JsonBackReference
-    private Login login;
+   @JsonCreator
+    public static Role ConvertFromString(String value) {
+        for (Role role : Role.values()) {
+            if (role.name().equalsIgnoreCase(value)) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Role inválida: " + value);
+    }
 }
