@@ -33,11 +33,10 @@ public class FuncionarioController {
         return ResponseEntity.ok().body(funcionarioList);
     }
 
-    @PostMapping("/criar/{id}")
-    public ResponseEntity<Funcionario> createFuncionario(@PathVariable Long id,
-            @RequestBody FuncionarioRecord funcionarioRecord) {
+    @PostMapping("/criar")
+    public ResponseEntity<Funcionario> createFuncionario(@RequestBody FuncionarioRecord funcionarioRecord) {
 
-        Funcionario funcionario = funcionarioService.createFuncionario(id, funcionarioRecord);
+        Funcionario funcionario = funcionarioService.createFuncionario(funcionarioRecord);
         return ResponseEntity.ok().body(funcionario);
     }
 
@@ -53,7 +52,7 @@ public class FuncionarioController {
     public ResponseEntity<Void> deleteFuncionario(@PathVariable Long id) {
         boolean deletedFuncionario = funcionarioService.deleteFuncionario(id);
 
-        if (deletedFuncionario) {
+        if (deletedFuncionario == false) {
             return ResponseEntity.badRequest().build();
         }
 

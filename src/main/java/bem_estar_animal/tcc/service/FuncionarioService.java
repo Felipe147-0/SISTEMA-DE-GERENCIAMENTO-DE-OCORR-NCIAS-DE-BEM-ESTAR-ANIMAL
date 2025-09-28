@@ -25,7 +25,7 @@ public class FuncionarioService {
         return funcionarioRepository.findAll();
     }
 
-    public Funcionario createFuncionario(Long id, FuncionarioRecord funcionarioRecord) {
+    public Funcionario createFuncionario(FuncionarioRecord funcionarioRecord) {
         Funcionario funcionario = new Funcionario(
             null,
             funcionarioRecord.nome(),
@@ -48,15 +48,15 @@ public class FuncionarioService {
     public Funcionario updateFuncionario(Long id, FuncionarioRecord funcionarioRecord) {
         Funcionario funcionario = funcionarioRepository.findById(id).get();
 
-        if (funcionarioRecord.nome() != null && funcionarioRecord.nome().isBlank()) {
+        if (funcionarioRecord.nome() != null && !funcionarioRecord.nome().isBlank()) {
             funcionario.setNome(funcionarioRecord.nome());
         }
 
-        if (funcionarioRecord.registro() != null && funcionarioRecord.registro().isBlank()) {
+        if (funcionarioRecord.registro() != null && !funcionarioRecord.registro().isBlank()) {
             funcionario.setRegistro(funcionarioRecord.registro());
         }
 
-        if (funcionarioRecord.funcao() != null && funcionarioRecord.funcao().isBlank()) {
+        if (funcionarioRecord.funcao() != null && !funcionarioRecord.funcao().isBlank()) {
             funcionario.setFuncao(funcionarioRecord.funcao());
         }
 
