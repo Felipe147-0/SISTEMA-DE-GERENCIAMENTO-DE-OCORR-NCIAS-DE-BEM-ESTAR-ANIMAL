@@ -1,14 +1,14 @@
-package bem_estar_animal.tcc.service;
+package bem_estar_animal.tcc.restfull.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bem_estar_animal.tcc.model.Funcionario;
-import bem_estar_animal.tcc.model.Login;
-import bem_estar_animal.tcc.record.FuncionarioRecord;
-import bem_estar_animal.tcc.repository.FuncionarioRepository;
-import bem_estar_animal.tcc.repository.LoginRepository;
+import bem_estar_animal.tcc.restfull.model.Funcionario;
+import bem_estar_animal.tcc.restfull.model.Login;
+import bem_estar_animal.tcc.restfull.record.FuncionarioRecord;
+import bem_estar_animal.tcc.restfull.repository.FuncionarioRepository;
+import bem_estar_animal.tcc.restfull.repository.LoginRepository;
 
 @Service
 public class FuncionarioService {

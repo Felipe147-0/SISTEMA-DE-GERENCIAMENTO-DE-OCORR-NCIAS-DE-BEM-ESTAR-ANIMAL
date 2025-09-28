@@ -1,21 +1,20 @@
-package bem_estar_animal.tcc.controller;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import bem_estar_animal.tcc.model.Ficha;
-import bem_estar_animal.tcc.record.FichaRecord;
-import bem_estar_animal.tcc.service.FichaService;
+package bem_estar_animal.tcc.restfull.controller;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import bem_estar_animal.tcc.restfull.model.Ficha;
+import bem_estar_animal.tcc.restfull.record.FichaRecord;
+import bem_estar_animal.tcc.restfull.service.FichaService;
 
 @RestController
 @RequestMapping("/ficha")

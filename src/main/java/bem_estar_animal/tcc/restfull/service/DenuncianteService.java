@@ -1,16 +1,16 @@
-package bem_estar_animal.tcc.service;
+package bem_estar_animal.tcc.restfull.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bem_estar_animal.tcc.model.Denunciante;
-import bem_estar_animal.tcc.model.Endereco;
-import bem_estar_animal.tcc.model.Ficha;
-import bem_estar_animal.tcc.record.DenuncianteRecord;
-import bem_estar_animal.tcc.repository.DenuncianteRepository;
-import bem_estar_animal.tcc.repository.EnderecoRepository;
-import bem_estar_animal.tcc.repository.FichaRepository;
+import bem_estar_animal.tcc.restfull.model.Denunciante;
+import bem_estar_animal.tcc.restfull.model.Endereco;
+import bem_estar_animal.tcc.restfull.model.Ficha;
+import bem_estar_animal.tcc.restfull.record.DenuncianteRecord;
+import bem_estar_animal.tcc.restfull.repository.DenuncianteRepository;
+import bem_estar_animal.tcc.restfull.repository.EnderecoRepository;
+import bem_estar_animal.tcc.restfull.repository.FichaRepository;
 
 @Service
 public class DenuncianteService {

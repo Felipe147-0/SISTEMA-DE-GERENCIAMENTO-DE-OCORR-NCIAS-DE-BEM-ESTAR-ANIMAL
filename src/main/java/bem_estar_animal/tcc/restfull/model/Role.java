@@ -1,4 +1,4 @@
-package bem_estar_animal.tcc.model;
+package bem_estar_animal.tcc.restfull.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
