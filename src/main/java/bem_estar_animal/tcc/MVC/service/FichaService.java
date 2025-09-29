@@ -86,6 +86,8 @@ public class FichaService {
             ficha.setDesfecho_da_notificacao(fichaRecord.desfecho_da_notificacao());
         }
 
+        //TODO colocar data tramite e hora tramite
+
         if (fichaRecord.historico() != null && !fichaRecord.historico().isBlank()) {
             ficha.setHistorico(fichaRecord.historico());
         }
