@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bem_estar_animal.tcc.restfull.model.Login;
+import bem_estar_animal.tcc.MVC.model.Login;
+import bem_estar_animal.tcc.MVC.service.LoginService;
 import bem_estar_animal.tcc.restfull.record.LoginRecord;
-import bem_estar_animal.tcc.restfull.service.LoginService;
 
 
 @RestController
 @RequestMapping("/fazerLogin")
-public class LoginController {
+public class RestLoginController {
 
     private LoginService loginService;
 
-    public LoginController(LoginService loginService) {
+    public RestLoginController(LoginService loginService) {
         this.loginService = loginService;
     }
 

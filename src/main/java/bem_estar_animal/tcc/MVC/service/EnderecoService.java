@@ -1,12 +1,12 @@
-package bem_estar_animal.tcc.restfull.service;
+package bem_estar_animal.tcc.MVC.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bem_estar_animal.tcc.restfull.model.Endereco;
+import bem_estar_animal.tcc.MVC.model.Endereco;
+import bem_estar_animal.tcc.MVC.repository.EnderecoRepository;
 import bem_estar_animal.tcc.restfull.record.EnderecoRecord;
-import bem_estar_animal.tcc.restfull.repository.EnderecoRepository;
 
 @Service
 public class EnderecoService {

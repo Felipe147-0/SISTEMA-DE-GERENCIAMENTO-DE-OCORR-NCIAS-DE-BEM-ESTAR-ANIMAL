@@ -1,4 +1,4 @@
-package bem_estar_animal.tcc.restfull.service;
+package bem_estar_animal.tcc.MVC.service;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bem_estar_animal.tcc.restfull.model.Denunciante;
-import bem_estar_animal.tcc.restfull.model.Ficha;
-import bem_estar_animal.tcc.restfull.model.Funcionario;
+import bem_estar_animal.tcc.MVC.model.Denunciante;
+import bem_estar_animal.tcc.MVC.model.Ficha;
+import bem_estar_animal.tcc.MVC.model.Funcionario;
+import bem_estar_animal.tcc.MVC.repository.DenuncianteRepository;
+import bem_estar_animal.tcc.MVC.repository.FichaRepository;
+import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
-import bem_estar_animal.tcc.restfull.repository.DenuncianteRepository;
-import bem_estar_animal.tcc.restfull.repository.FichaRepository;
-import bem_estar_animal.tcc.restfull.repository.FuncionarioRepository;
 
 @Service
 public class FichaService {

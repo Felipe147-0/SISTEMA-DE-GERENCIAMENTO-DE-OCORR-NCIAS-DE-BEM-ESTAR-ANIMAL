@@ -1,4 +1,4 @@
-package bem_estar_animal.tcc.restfull.model;
+package bem_estar_animal.tcc.MVC.model;
 
 import java.time.Instant;
 

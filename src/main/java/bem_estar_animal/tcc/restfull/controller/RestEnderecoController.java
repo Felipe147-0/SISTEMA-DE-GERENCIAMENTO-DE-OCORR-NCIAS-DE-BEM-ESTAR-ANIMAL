@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bem_estar_animal.tcc.restfull.model.Endereco;
+import bem_estar_animal.tcc.MVC.model.Endereco;
+import bem_estar_animal.tcc.MVC.service.EnderecoService;
 import bem_estar_animal.tcc.restfull.record.EnderecoRecord;
-import bem_estar_animal.tcc.restfull.service.EnderecoService;
 
 @RestController
 @RequestMapping("/endereco")
-public class EnderecoController {
+public class RestEnderecoController {
 
     private EnderecoService enderecoService;
 
-    public EnderecoController(EnderecoService enderecoService) {
+    public RestEnderecoController(EnderecoService enderecoService) {
         this.enderecoService = enderecoService;
     }
 

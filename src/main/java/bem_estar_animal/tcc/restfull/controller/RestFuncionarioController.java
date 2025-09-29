@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bem_estar_animal.tcc.restfull.model.Funcionario;
+import bem_estar_animal.tcc.MVC.model.Funcionario;
+import bem_estar_animal.tcc.MVC.service.FuncionarioService;
 import bem_estar_animal.tcc.restfull.record.FuncionarioRecord;
-import bem_estar_animal.tcc.restfull.service.FuncionarioService;
 
 @RestController
 @RequestMapping("/funcionario")
-public class FuncionarioController {
+public class RestFuncionarioController {
 
     private FuncionarioService funcionarioService;
 
-    public FuncionarioController(FuncionarioService funcionarioService) {
+    public RestFuncionarioController(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;
     }
 

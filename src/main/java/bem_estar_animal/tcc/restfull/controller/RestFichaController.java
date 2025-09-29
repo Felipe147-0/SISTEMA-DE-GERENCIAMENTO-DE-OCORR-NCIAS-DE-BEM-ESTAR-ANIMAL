@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bem_estar_animal.tcc.restfull.model.Ficha;
+import bem_estar_animal.tcc.MVC.model.Ficha;
+import bem_estar_animal.tcc.MVC.service.FichaService;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
-import bem_estar_animal.tcc.restfull.service.FichaService;
 
 @RestController
 @RequestMapping("/ficha")
-public class FichaController {
+public class RestFichaController {
 
     private FichaService fichaService;
 
-    public FichaController(FichaService fichaService) {
+    public RestFichaController(FichaService fichaService) {
         this.fichaService = fichaService;
     }
 
