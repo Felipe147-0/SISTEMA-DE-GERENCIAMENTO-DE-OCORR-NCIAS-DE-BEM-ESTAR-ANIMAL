@@ -17,7 +17,7 @@ import bem_estar_animal.tcc.MVC.service.DenuncianteService;
 import bem_estar_animal.tcc.restfull.record.DenuncianteRecord;
 
 @RestController
-@RequestMapping("/denunciante")
+@RequestMapping("/api/denunciante")
 public class RestDenuncianteController {
 
     private DenuncianteService denuncianteService;

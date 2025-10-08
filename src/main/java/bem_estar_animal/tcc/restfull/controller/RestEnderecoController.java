@@ -17,7 +17,7 @@ import bem_estar_animal.tcc.MVC.service.EnderecoService;
 import bem_estar_animal.tcc.restfull.record.EnderecoRecord;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/api/endereco")
 public class RestEnderecoController {
 
     private EnderecoService enderecoService;

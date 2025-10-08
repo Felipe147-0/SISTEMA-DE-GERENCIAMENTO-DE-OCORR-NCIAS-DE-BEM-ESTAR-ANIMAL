@@ -17,7 +17,7 @@ import bem_estar_animal.tcc.MVC.service.FuncionarioService;
 import bem_estar_animal.tcc.restfull.record.FuncionarioRecord;
 
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping("/api/funcionario")
 public class RestFuncionarioController {
 
     private FuncionarioService funcionarioService;

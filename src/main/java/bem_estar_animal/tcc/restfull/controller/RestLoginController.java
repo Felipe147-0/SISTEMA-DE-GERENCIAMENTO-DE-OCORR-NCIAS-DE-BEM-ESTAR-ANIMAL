@@ -18,7 +18,7 @@ import bem_estar_animal.tcc.restfull.record.LoginRecord;
 
 
 @RestController
-@RequestMapping("/fazerLogin")
+@RequestMapping("/api/fazerLogin")
 public class RestLoginController {
 
     private LoginService loginService;

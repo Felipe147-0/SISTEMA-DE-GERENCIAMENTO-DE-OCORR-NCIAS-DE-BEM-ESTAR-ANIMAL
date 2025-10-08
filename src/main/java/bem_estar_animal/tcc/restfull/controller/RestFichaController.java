@@ -17,7 +17,7 @@ import bem_estar_animal.tcc.MVC.service.FichaService;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
 
 @RestController
-@RequestMapping("/ficha")
+@RequestMapping("/api/ficha")
 public class RestFichaController {
 
     private FichaService fichaService;
