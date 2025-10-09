@@ -22,6 +22,7 @@ public class DenuncianteController {
     @GetMapping("/listar")
     public String getAllDenunciantes() {
         List<Denunciante> denuncianteList = denuncianteService.getAllDenunciante();
+        //TODO passar para a sessão
         return "home";
     }
 
