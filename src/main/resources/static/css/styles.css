@@ -1,3 +1,4 @@
+/* centralizar os botoes da home */
 .centralizar {
     display: flex;
     flex-direction: column;
@@ -5,6 +6,6 @@
     align-items: center;
     height: 100vh;
 }
-.btn {
+.btnHome {
     margin-bottom: 15px; 
 }
