@@ -40,5 +40,5 @@ public class Login {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role;
+    private TipoUsuarioEnum role;
 }
