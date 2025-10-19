@@ -32,11 +32,11 @@ public class RestFichaController {
         return ResponseEntity.ok().body(fichaList);
     }
 
-    @PostMapping("/criar")
-    public ResponseEntity<Ficha> createFicha(@RequestBody FichaRecord fichaRecord) {
-        Ficha ficha = fichaService.createFicha(fichaRecord);
-        return ResponseEntity.ok().body(ficha);// TODO nao retornar o objeto criado. Colocar redirect
-    }
+    // @PostMapping("/criar")
+    // public ResponseEntity<Ficha> createFicha(@RequestBody FichaRecord fichaRecord) {
+    //     Ficha ficha = fichaService.createFicha(fichaRecord);
+    //     return ResponseEntity.ok().body(ficha);// TODO nao retornar o objeto criado. Colocar redirect
+    // }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Ficha> updateFicha(@PathVariable Long id, @RequestBody FichaRecord fichaRecord) {
