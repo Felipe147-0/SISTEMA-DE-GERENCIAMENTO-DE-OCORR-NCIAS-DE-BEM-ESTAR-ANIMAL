@@ -33,32 +33,34 @@ public class FichaService {
         return fichaRepository.findAll();
     }
 
-    public Ficha createFicha(FichaRecord fichaRecord) {
+    public Ficha createFicha(Ficha fichaRecebida) {
         ZonedDateTime localDateTime = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
         Instant localDateTimeInstant = localDateTime.toInstant();
 
         Ficha ficha = new Ficha(
                 null,
-                fichaRecord.processo(),
-                fichaRecord.recebido_por(),
+                fichaRecebida.getProcesso(),
+                fichaRecebida.getRecebido_por(),
                 localDateTimeInstant,
                 localDateTimeInstant,
                 null,
-                fichaRecord.assunto(),
-                fichaRecord.desfecho_da_notificacao(),
+                fichaRecebida.getAssunto(),
+                fichaRecebida.getDesfecho_da_notificacao(),
                 null,
                 null,
                 null,
-                fichaRecord.historico(),
-                fichaRecord.animal());
+                fichaRecebida.getHistorico(),
+                fichaRecebida.getAnimal());
 
-        if (fichaRecord.dununcianteId() != null && fichaRecord.dununcianteId() != 0) {
-            Denunciante denuncianteFound = denuncianteRepository.findById(fichaRecord.dununcianteId()).get();
+        if (fichaRecebida.getDenunciante() != null) {
+            Denunciante denuncianteFound = denuncianteRepository
+                    .findById(fichaRecebida.getDenunciante().getId_denunciante()).get();
             ficha.setDenunciante(denuncianteFound); // TODO OBRIGATORIO COLOCAR O DENUNCIANTE
         }
 
-        if (fichaRecord.funcionarioId() != null && fichaRecord.funcionarioId() != 0) {
-            Funcionario funcionarioFound = funcionarioRepository.findById(fichaRecord.funcionarioId()).get();
+        if (fichaRecebida.getFuncionario() != null) {
+            Funcionario funcionarioFound = funcionarioRepository
+                    .findById(fichaRecebida.getFuncionario().getId_funcionario()).get();
             ficha.setFuncionario(funcionarioFound); // TODO OBRIGATORIO COLOCAR O FUNCIONARIO
         }
 
@@ -86,7 +88,7 @@ public class FichaService {
             ficha.setDesfecho_da_notificacao(fichaRecord.desfecho_da_notificacao());
         }
 
-        //TODO colocar data tramite e hora tramite
+        // TODO colocar data tramite e hora tramite
 
         if (fichaRecord.historico() != null && !fichaRecord.historico().isBlank()) {
             ficha.setHistorico(fichaRecord.historico());
