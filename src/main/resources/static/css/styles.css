@@ -9,3 +9,18 @@
 .btnHome {
     margin-bottom: 40px; 
 }
+
+.form-filtro {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.form-filtro .input-group {
+    max-width: 600px; 
+    width: 100%;
+}
+
+.form-filtro input {
+    max-width: 100%;
+}
