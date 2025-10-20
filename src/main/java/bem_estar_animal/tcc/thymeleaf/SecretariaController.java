@@ -32,8 +32,8 @@ public class SecretariaController {
     }
 
     @GetMapping()
-    public String viewSecretaria(){
-        return "secretaria";
+    public String viewHome(){
+        return "secretaria-home";
     }
 
     @PostMapping("/novo")
@@ -44,7 +44,7 @@ public class SecretariaController {
 
         fichaService.createFicha(ficha);
         
-        return "redirect:/secretaria";
+        return "redirect:/secretaria-home";
     }
     
 }
