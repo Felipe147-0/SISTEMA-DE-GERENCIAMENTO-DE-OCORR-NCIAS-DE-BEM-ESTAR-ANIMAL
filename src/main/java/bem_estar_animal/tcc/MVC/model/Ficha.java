@@ -27,26 +27,26 @@ public class Ficha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_ficha;
 
-    private String processo;
+    private String processo_ouvidoria;
 
-    private String recebido_por;
+    private String recebido_por_secretaria;
+    
+    private String recebido_por_ouvidoria;
 
-    private Instant data;
+    private Instant data_ouvidoria;
 
-    private Instant hora;
+    private Instant hora_ouvidoria;
 
     @OneToOne
     @JoinColumn(name = "denunciante_id", referencedColumnName = "id_denunciante")
     @JsonManagedReference
     private Denunciante denunciante;
 
-    private String assunto;
-
     private String desfecho_da_notificacao;
 
-    private Instant data_tramite;
+    private Instant data_secretaria;
 
-    private Instant hora_tramite;
+    private Instant hora_secretaria;
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id", referencedColumnName = "id_funcionario")
@@ -55,5 +55,19 @@ public class Ficha {
     private String historico;
 
     private String animal;
+
+    private String processo_secretaria;
+
+    private String fiscal;
+
+    private Instant data_tramite;
+
+    private Instant hora_tramite;
+
+    private String assunto;
+
+    private int interno;
+
+    private String protocolo;
 
 }

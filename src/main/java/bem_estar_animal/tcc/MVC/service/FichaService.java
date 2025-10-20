@@ -38,19 +38,20 @@ public class FichaService {
         Instant localDateTimeInstant = localDateTime.toInstant();
 
         Ficha ficha = new Ficha(
-                null,
-                fichaRecebida.getProcesso(),
-                fichaRecebida.getRecebido_por(),
-                localDateTimeInstant,
-                localDateTimeInstant,
-                null,
-                fichaRecebida.getAssunto(),
-                fichaRecebida.getDesfecho_da_notificacao(),
-                null,
-                null,
-                null,
-                fichaRecebida.getHistorico(),
-                fichaRecebida.getAnimal());
+                // null,
+                // fichaRecebida.getProcesso(),
+                // fichaRecebida.getRecebido_por(),
+                // localDateTimeInstant,
+                // localDateTimeInstant,
+                // null,
+                // fichaRecebida.getAssunto(),
+                // fichaRecebida.getDesfecho_da_notificacao(),
+                // null,
+                // null,
+                // null,
+                // fichaRecebida.getHistorico(),
+                // fichaRecebida.getAnimal()
+                );
 
         if (fichaRecebida.getDenunciante() != null) {
             Denunciante denuncianteFound = denuncianteRepository
@@ -72,13 +73,13 @@ public class FichaService {
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {
         Ficha ficha = fichaRepository.findById(id).get();
 
-        if (fichaRecord.processo() != null && !fichaRecord.processo().isBlank()) {
-            ficha.setProcesso(fichaRecord.processo());
-        }
+        // if (fichaRecord.processo() != null && !fichaRecord.processo().isBlank()) {
+        //     ficha.setProcesso(fichaRecord.processo());
+        // }
 
-        if (fichaRecord.recebido_por() != null && !fichaRecord.recebido_por().isBlank()) {
-            ficha.setRecebido_por(fichaRecord.recebido_por());
-        }
+        // if (fichaRecord.recebido_por() != null && !fichaRecord.recebido_por().isBlank()) {
+        //     ficha.setRecebido_por(fichaRecord.recebido_por());
+        // }
 
         if (fichaRecord.assunto() != null && !fichaRecord.assunto().isBlank()) {
             ficha.setAssunto(fichaRecord.assunto());

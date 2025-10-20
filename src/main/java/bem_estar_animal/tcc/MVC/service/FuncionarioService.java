@@ -5,20 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.MVC.model.Funcionario;
-import bem_estar_animal.tcc.MVC.model.Login;
 import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
-import bem_estar_animal.tcc.MVC.repository.LoginRepository;
 import bem_estar_animal.tcc.restfull.record.FuncionarioRecord;
 
 @Service
 public class FuncionarioService {
 
     private FuncionarioRepository funcionarioRepository;
-    private LoginRepository loginRepository;
     
-    public FuncionarioService(FuncionarioRepository funcionarioRepository, LoginRepository loginRepository) {
+    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
         this.funcionarioRepository = funcionarioRepository;
-        this.loginRepository = loginRepository;
     }
 
     public List<Funcionario> getAllFuncionarios() {
@@ -31,14 +27,9 @@ public class FuncionarioService {
             funcionarioRecord.nome(),
             funcionarioRecord.registro(),
             funcionarioRecord.funcao(),
-            null,
-            null 
+            null
         );
 
-        if (funcionarioRecord.loginId() != null && funcionarioRecord.loginId() != 0) {
-            Login loginFound = loginRepository.findById(funcionarioRecord.loginId()).get();
-            funcionario.setLogin(loginFound);
-        }
 
         funcionarioRepository.save(funcionario);
 
@@ -60,10 +51,6 @@ public class FuncionarioService {
             funcionario.setFuncao(funcionarioRecord.funcao());
         }
 
-        if (funcionarioRecord.loginId() != null && funcionarioRecord.loginId() != 0) {
-            Login loginFound = loginRepository.findById(funcionarioRecord.loginId()).get();
-            funcionario.setLogin(loginFound);
-        }
 
         funcionarioRepository.save(funcionario);
 
