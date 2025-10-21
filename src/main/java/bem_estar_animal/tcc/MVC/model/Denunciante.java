@@ -1,8 +1,8 @@
 package bem_estar_animal.tcc.MVC.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,14 +30,18 @@ public class Denunciante {
 
     private String nome;
 
+    private String cpf;
+
     private String telefone;
 
     @OneToOne(mappedBy = "denunciante")
-    @JsonBackReference
     private Ficha ficha;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
-    @JsonBackReference
     private Endereco endereco;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_lista_exclusao", referencedColumnName = "id_lista_exclusao")
+    private ListaExclusao listaExclusao;
 }

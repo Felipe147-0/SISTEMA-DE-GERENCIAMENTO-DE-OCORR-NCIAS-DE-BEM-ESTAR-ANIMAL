@@ -3,7 +3,6 @@ package bem_estar_animal.tcc.MVC.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +32,5 @@ public class Endereco {
     private String ponto_de_referencia;
 
     @OneToMany(mappedBy = "endereco")
-    @JsonManagedReference
     private List<Denunciante> denuncianteList = new ArrayList<>();
 }

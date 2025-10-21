@@ -2,8 +2,8 @@ package bem_estar_animal.tcc.MVC.model;
 
 import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,9 +37,8 @@ public class Ficha {
 
     private Instant hora_ouvidoria;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "denunciante_id", referencedColumnName = "id_denunciante")
-    @JsonManagedReference
     private Denunciante denunciante;
 
     private String desfecho_da_notificacao;

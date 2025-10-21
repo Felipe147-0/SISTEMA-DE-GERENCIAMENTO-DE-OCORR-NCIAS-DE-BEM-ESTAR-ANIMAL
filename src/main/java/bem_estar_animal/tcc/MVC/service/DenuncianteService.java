@@ -31,11 +31,13 @@ public class DenuncianteService {
     }
 
     public Denunciante createDenunciante(DenuncianteRecord denuncianteRecord) {
-        Denunciante denunciante = new Denunciante(null,
-                denuncianteRecord.nome(),
-                denuncianteRecord.telefone(),
-                null,
-                null);
+        Denunciante denunciante = new Denunciante(
+                // null,
+                // denuncianteRecord.nome(),
+                // denuncianteRecord.telefone(),
+                // null,
+                // null
+                );
 
         if (denuncianteRecord.fichaId() != null && denuncianteRecord.fichaId() != 0) {
             Ficha fichaFound = fichaRepository.findById(denuncianteRecord.fichaId()).get();
