@@ -106,7 +106,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `bem_estar_animal`.`listaExclusao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`listaExclusao` (
+CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`lista_exclusao` (
   `id_lista_exclusao` BIGINT NOT NULL,
   `observacao` VARCHAR(500) NULL,
   `id_ficha` BIGINT NULL,
