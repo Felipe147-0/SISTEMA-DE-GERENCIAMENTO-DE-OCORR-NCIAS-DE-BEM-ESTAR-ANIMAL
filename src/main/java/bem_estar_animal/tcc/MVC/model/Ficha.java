@@ -1,7 +1,5 @@
 package bem_estar_animal.tcc.MVC.model;
 
-import java.time.Instant;
-
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,9 +31,9 @@ public class Ficha {
     
     private String recebido_por_ouvidoria;
 
-    private Instant data_ouvidoria;
+    private String data_ouvidoria;
 
-    private Instant hora_ouvidoria;
+    private String hora_ouvidoria;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "denunciante_id", referencedColumnName = "id_denunciante")
@@ -43,9 +41,9 @@ public class Ficha {
 
     private String desfecho_da_notificacao;
 
-    private Instant data_secretaria;
+    private String data_secretaria;
 
-    private Instant hora_secretaria;
+    private String hora_secretaria;
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id", referencedColumnName = "id_funcionario")
@@ -59,9 +57,9 @@ public class Ficha {
 
     private String fiscal;
 
-    private Instant data_tramite;
+    private String data_tramite;
 
-    private Instant hora_tramite;
+    private String hora_tramite;
 
     private String assunto;
 

@@ -17,6 +17,8 @@ import bem_estar_animal.tcc.MVC.service.FichaService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 
@@ -63,6 +65,8 @@ public class OuvidoriaController {
         
         denunciante.setEndereco(endereco);
         ficha.setDenunciante(denunciante);
+        ficha.setData_ouvidoria(dataAtual);
+        ficha.setHora_ouvidoria(horaAtual);
 
         model.addAttribute("ficha", ficha);
         model.addAttribute("data", dataAtual);
@@ -70,6 +74,12 @@ public class OuvidoriaController {
         
         return "ouvidoria-criarFicha";
     }
+
+    @PostMapping("/ficha")
+    public String criarFicha() {
+        return "redirect:/ouvidoria";
+    }
+    
     
     
 }
