@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.model.Endereco;
@@ -23,18 +21,12 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/ficha")
-@SessionAttributes("ficha")
 public class FichaController {
 
      private FichaService fichaService;
 
     public FichaController (FichaService fichaService){
         this.fichaService = fichaService;
-    }
-
-    @ModelAttribute(name = "ficha")
-    public Ficha ficha(){
-        return new Ficha();
     }
 
     @GetMapping("/criar")
@@ -64,9 +56,8 @@ public class FichaController {
     }
 
     @PostMapping("/criar")
-    public String criarFicha(@Valid @ModelAttribute Ficha ficha, Errors errors, SessionStatus sessionStatus) {
+    public String criarFicha(@Valid @ModelAttribute Ficha ficha, Errors errors) {
         fichaService.createFicha(ficha);
-        sessionStatus.setComplete();
         return "redirect:/ouvidoria";
     }
 }
