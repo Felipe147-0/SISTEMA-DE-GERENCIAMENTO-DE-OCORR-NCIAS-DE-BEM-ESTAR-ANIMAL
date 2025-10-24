@@ -9,7 +9,7 @@
         <h2>ABERTURA DE OCORRÊNCIA</h2>
         <div class="linha"></div>
 
-        <form method="post" th:action="@{/ouvidoria/ficha}" th:object="${ficha}">
+        <form method="post" th:action="@{/ficha/criar}" th:object="${ficha}">
             <div class="info-topo">
                 <div>
                     <p><b>Processo:</b> <span th:text="*{processo_ouvidoria}"></span></p>

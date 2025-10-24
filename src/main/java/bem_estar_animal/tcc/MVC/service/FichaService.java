@@ -1,13 +1,9 @@
 package bem_estar_animal.tcc.MVC.service;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.model.Funcionario;
 import bem_estar_animal.tcc.MVC.repository.DenuncianteRepository;
@@ -33,41 +29,10 @@ public class FichaService {
         return fichaRepository.findAll();
     }
 
-    public Ficha createFicha(Ficha fichaRecebida) {
-        ZonedDateTime localDateTime = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
-        Instant localDateTimeInstant = localDateTime.toInstant();
-
-        Ficha ficha = new Ficha(
-                // null,
-                // fichaRecebida.getProcesso(),
-                // fichaRecebida.getRecebido_por(),
-                // localDateTimeInstant,
-                // localDateTimeInstant,
-                // null,
-                // fichaRecebida.getAssunto(),
-                // fichaRecebida.getDesfecho_da_notificacao(),
-                // null,
-                // null,
-                // null,
-                // fichaRecebida.getHistorico(),
-                // fichaRecebida.getAnimal()
-                );
-
-        if (fichaRecebida.getDenunciante() != null) {
-            Denunciante denuncianteFound = denuncianteRepository
-                    .findById(fichaRecebida.getDenunciante().getId_denunciante()).get();
-            ficha.setDenunciante(denuncianteFound); // TODO OBRIGATORIO COLOCAR O DENUNCIANTE
-        }
-
-        if (fichaRecebida.getFuncionario() != null) {
-            Funcionario funcionarioFound = funcionarioRepository
-                    .findById(fichaRecebida.getFuncionario().getId_funcionario()).get();
-            ficha.setFuncionario(funcionarioFound); // TODO OBRIGATORIO COLOCAR O FUNCIONARIO
-        }
-
-        fichaRepository.save(ficha);
-
-        return ficha;
+    public void createFicha(Ficha fichaRecebida) {
+        Funcionario funcionario = funcionarioRepository.findByNome(fichaRecebida.getFuncionario().getNome());
+        fichaRecebida.setFuncionario(funcionario);
+        fichaRepository.save(fichaRecebida);
     }
 
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {

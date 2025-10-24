@@ -7,5 +7,4 @@ import bem_estar_animal.tcc.MVC.model.Denunciante;
 
 @Repository
 public interface DenuncianteRepository extends JpaRepository<Denunciante, Long> {
-
 }

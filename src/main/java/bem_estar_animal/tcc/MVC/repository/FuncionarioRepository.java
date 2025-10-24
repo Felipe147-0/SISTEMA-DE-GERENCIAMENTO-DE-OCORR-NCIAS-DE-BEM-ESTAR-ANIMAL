@@ -8,5 +8,5 @@ import bem_estar_animal.tcc.MVC.model.Funcionario;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
-
+    Funcionario findByNome(String nome);
 }
