@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/headPrincipal :: headBase}"></head>
+
+<body>
+
+    <form th:action="@{/ouvidoria/listar}" method="get" class="d-flex form-filtro">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" placeholder="Digite o protocolo"
+                th:value="${query}">
+            <button class="btn btn btn-outline-secondary" type="submit" style="margin-top:4px;">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+
+</body>
+
+</html>
