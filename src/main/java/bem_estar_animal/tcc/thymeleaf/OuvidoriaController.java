@@ -12,4 +12,10 @@ public class OuvidoriaController {
     public String viewHome() {
         return "ouvidoria-home";
     }
+
+    @GetMapping("/protocolos")
+    public String constultarProtocolos() {
+        return "ouvidoria-consultarProtocolos";
+    }
+    
 }
