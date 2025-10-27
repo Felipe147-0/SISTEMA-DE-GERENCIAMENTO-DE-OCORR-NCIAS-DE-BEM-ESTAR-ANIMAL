@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/headPrincipal :: headBase}"></head>
+
+<body>
+    <div class="container-ouvidoria" th:object="${ficha}">
+        <h4 class="titulo-principal">OUVIDORIA</h4>
+        <h2>ABERTURA DE OCORRÊNCIA</h2>
+        <div class="linha"></div>
+
+        <div class="info-topo">
+            <div>
+                <p><b>Processo:</b> <span th:text="*{processo_ouvidoria}"></span></p>
+                <p><b>Recebido por:</b> <span th:text="*{recebido_por_ouvidoria}"></span></p>
+            </div>
+            <div>
+                <p><b>Data:</b> <span th:text="*{data_ouvidoria}"></span></p>
+                <p><b>Hora:</b> <span th:text="*{hora_ouvidoria}"></span></p>
+            </div>
+        </div>
+
+        <h5><b>FICHA DE OUVIDORIA</b></h5>
+
+        <div class="dados-grid">
+            <div>
+                <p><b>Nome:</b> <span th:text="*{denunciante.nome}"></span></p>
+            </div>
+
+            <div>
+                <p><b>Telefone:</b> <span th:text="*{denunciante.telefone}"></span></p>
+            </div>
+
+            <div>
+                <p><b>Endereço:</b> <span th:text="*{denunciante.endereco.logradouro}"></span></p>
+            </div>
+
+            <div>
+                <p><b>Bairro:</b> <span th:text="*{denunciante.endereco.bairro}"></span></p>
+            </div>
+
+            <div>
+                <p><b>Ponto de Referência:</b> <span th:text="*{denunciante.endereco.ponto_de_referencia}"></span>
+                </p>
+            </div>
+        </div>
+
+        <br><br>
+
+        <h5><b>INFORMAÇÕES</b></h5>
+
+        <p><b>Assunto:</b> <span th:text="*{assunto}"></span></p>
+
+        <p><b>Desfecho da Notificação:</b> <span th:text="*{desfecho_da_notificacao}"></span></p>
+
+        <div class="dados-grid">
+            <div>
+                <p><b>Funcionário:</b> <span th:text="*{funcionario.nome}"></span></p>
+            </div>
+
+            <br>
+
+            <div>
+                <p><b>Data:</b> <span th:text="*{data_tramite}"></span></p>
+            </div>
+
+            <div>
+                <p><b>Hora:</b> <span th:text="*{hora_tramite}"></span></p>
+            </div>
+        </div>
+
+        <div class="botoes mt-4">
+            <a th:href="@{/ficha/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
+
+            <form th:action="@{/ficha/edit/{id}(id=${ficha.id_ficha})}" method="get">
+                <button type="submit" class="btn btn-success btn-custom">EDITAR</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/formatarData.js"></script>
+</body>
+
+</html>

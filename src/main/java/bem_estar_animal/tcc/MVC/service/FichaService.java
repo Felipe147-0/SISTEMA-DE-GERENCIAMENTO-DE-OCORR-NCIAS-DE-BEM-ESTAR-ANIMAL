@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.model.Funcionario;
-import bem_estar_animal.tcc.MVC.repository.DenuncianteRepository;
 import bem_estar_animal.tcc.MVC.repository.FichaRepository;
 import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
@@ -15,18 +14,19 @@ import bem_estar_animal.tcc.restfull.record.FichaRecord;
 public class FichaService {
 
     private FichaRepository fichaRepository;
-    private DenuncianteRepository denuncianteRepository;
     private FuncionarioRepository funcionarioRepository;
 
-    public FichaService(FichaRepository fichaRepository, DenuncianteRepository denuncianteRepository,
-            FuncionarioRepository funcionarioRepository) {
+    public FichaService(FichaRepository fichaRepository, FuncionarioRepository funcionarioRepository) {
         this.fichaRepository = fichaRepository;
-        this.denuncianteRepository = denuncianteRepository;
         this.funcionarioRepository = funcionarioRepository;
     }
 
     public List<Ficha> getAllFichas() {
         return fichaRepository.findAll();
+    }
+
+    public Ficha encontrarPorId(Long id) {
+        return fichaRepository.findById(id).get();
     }
 
     public void createFicha(Ficha fichaRecebida) {
@@ -39,11 +39,12 @@ public class FichaService {
         Ficha ficha = fichaRepository.findById(id).get();
 
         // if (fichaRecord.processo() != null && !fichaRecord.processo().isBlank()) {
-        //     ficha.setProcesso(fichaRecord.processo());
+        // ficha.setProcesso(fichaRecord.processo());
         // }
 
-        // if (fichaRecord.recebido_por() != null && !fichaRecord.recebido_por().isBlank()) {
-        //     ficha.setRecebido_por(fichaRecord.recebido_por());
+        // if (fichaRecord.recebido_por() != null &&
+        // !fichaRecord.recebido_por().isBlank()) {
+        // ficha.setRecebido_por(fichaRecord.recebido_por());
         // }
 
         if (fichaRecord.assunto() != null && !fichaRecord.assunto().isBlank()) {
