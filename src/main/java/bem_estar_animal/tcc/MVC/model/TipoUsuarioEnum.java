@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public enum TipoUsuarioEnum {
+
+    // TODO SETOR ve se da para usar isso
     
     ADMIN("Administrador"),
     USER("Usuário"),
