@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,4 +34,8 @@ public class Funcionario {
 
     @OneToMany(mappedBy = "funcionario")
     private List<Ficha> fichalList = new ArrayList<>();
+
+    // TODO SETOR colocar o setor
+    // @OneToOne
+    // private Setor id_setor;
 }
