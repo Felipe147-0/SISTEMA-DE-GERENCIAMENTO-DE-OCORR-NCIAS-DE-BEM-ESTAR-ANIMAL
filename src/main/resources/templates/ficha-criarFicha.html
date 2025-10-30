@@ -4,94 +4,94 @@
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
 <body>
-    <div class="container-ouvidoria">
-        <h4 class="titulo-principal">OUVIDORIA</h4>
-        <h2>ABERTURA DE OCORRÊNCIA</h2>
-        <div class="linha"></div>
+<div class="container-ouvidoria">
+    <h4 class="titulo-principal">OUVIDORIA</h4>
+    <h2>ABERTURA DE OCORRÊNCIA</h2>
+    <div class="linha"></div>
 
-        <form method="post" th:action="@{/ficha/criar}" th:object="${ficha}">
-            <div class="info-topo">
-                <div>
-                    <p><b>Processo:</b> <span th:text="*{processo_ouvidoria}"></span></p>
-                    <p><b>Recebido por:</b> <span th:text="*{recebido_por_ouvidoria}"></span></p>
-                </div>
-                <div>
-                    <p><b>Data:</b> <span th:text="*{data_ouvidoria}"></span></p>
-                    <input type="hidden" th:field="*{data_ouvidoria}">
-                    
-                    <p><b>Hora:</b> <span th:text="*{hora_ouvidoria}"></span></p>
-                    <input type="hidden" th:field="*{hora_ouvidoria}">
-                </div>
+    <form method="post" th:action="@{/ficha/criar}" th:object="${ficha}">
+        <div class="info-topo">
+            <div>
+                <p><b>Processo:</b> <span th:text="*{processoOuvidoria}"></span></p>
+                <p><b>Recebido por:</b> <span th:text="*{recebido_por_ouvidoria}"></span></p>
+            </div>
+            <div>
+                <p><b>Data:</b> <span th:text="*{data_ouvidoria}"></span></p>
+                <input type="hidden" th:field="*{data_ouvidoria}">
+
+                <p><b>Hora:</b> <span th:text="*{hora_ouvidoria}"></span></p>
+                <input type="hidden" th:field="*{hora_ouvidoria}">
+            </div>
+        </div>
+
+        <h5><b>FICHA DE OUVIDORIA</b></h5>
+
+        <div class="dados-grid">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{denunciante.nome}">
             </div>
 
-            <h5><b>FICHA DE OUVIDORIA</b></h5>
-
-            <div class="dados-grid">
-                <div>
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" th:field="*{denunciante.nome}">
-                </div>
-
-                <div>
-                    <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" th:field="*{denunciante.telefone}">
-                </div>
-
-                <div>
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" th:field="*{denunciante.endereco.logradouro}">
-                </div>
-
-                <div>
-                    <label for="bairro">Bairro:</label>
-                    <input type="text" id="bairro" th:field="*{denunciante.endereco.bairro}">
-                </div>
-
-                <div>
-                    <label for="ponto">Ponto de Referência:</label>
-                    <input type="text" th:field="*{denunciante.endereco.ponto_de_referencia}" />
-                </div>
+            <div>
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" th:field="*{denunciante.telefone}">
             </div>
 
-            <br><br>
-
-            <h5><b>INFORMAÇÕES</b></h5>
-
-            <label for="assunto">Assunto:</label>
-            <textarea id="assunto" rows="2" th:field="*{assunto}"></textarea>
-
-            <br>
-
-            <label for="desfecho">Desfecho da Notificação:</label>
-            <textarea id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}"></textarea>
-
-            <br>
-
-            <div class="dados-grid">
-                <div>
-                    <label for="funcionario">Funcionário:</label>
-                    <input type="text" id="funcionario" th:field="*{funcionario.nome}">
-                </div>
-
-                <div>
-                    <label for="dataTramite">Data:</label>
-                    <input type="text" id="dataTramite" th:field="*{data_tramite}">
-                </div>
-
-                <div>
-                    <label for="horaTramite">Hora:</label>
-                    <input type="text" id="horaTramite" th:field="*{hora_tramite}">
-                </div>
+            <div>
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" th:field="*{denunciante.endereco.logradouro}">
             </div>
 
-            <div class="botoes mt-4">
-                <a th:href="@{/ouvidoria}" class="btn btn-primary btn-custom">VOLTAR</a>
-                <button type="submit" class="btn btn-success btn-custom">ENVIAR</button>
+            <div>
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" th:field="*{denunciante.endereco.bairro}">
             </div>
-        </form>
-    </div>
 
-    <script src="/js/formatarData.js"></script>
+            <div>
+                <label for="ponto">Ponto de Referência:</label>
+                <input type="text" th:field="*{denunciante.endereco.ponto_de_referencia}"/>
+            </div>
+        </div>
+
+        <br><br>
+
+        <h5><b>INFORMAÇÕES</b></h5>
+
+        <label for="assunto">Assunto:</label>
+        <textarea id="assunto" rows="2" th:field="*{assunto}"></textarea>
+
+        <br>
+
+        <label for="desfecho">Desfecho da Notificação:</label>
+        <textarea id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}"></textarea>
+
+        <br>
+
+        <div class="dados-grid">
+            <div>
+                <label for="funcionario">Funcionário:</label>
+                <input type="text" id="funcionario" th:field="*{funcionario.nome}">
+            </div>
+
+            <div>
+                <label for="dataTramite">Data:</label>
+                <input type="text" id="dataTramite" th:field="*{data_tramite}">
+            </div>
+
+            <div>
+                <label for="horaTramite">Hora:</label>
+                <input type="text" id="horaTramite" th:field="*{hora_tramite}">
+            </div>
+        </div>
+
+        <div class="botoes mt-4">
+            <a th:href="@{/ouvidoria}" class="btn btn-primary btn-custom">VOLTAR</a>
+            <button type="submit" class="btn btn-success btn-custom">ENVIAR</button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/formatarData.js"></script>
 </body>
 
 </html>

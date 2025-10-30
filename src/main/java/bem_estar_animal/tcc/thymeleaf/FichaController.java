@@ -1,28 +1,22 @@
 package bem_estar_animal.tcc.thymeleaf;
 
+import bem_estar_animal.tcc.MVC.model.Denunciante;
+import bem_estar_animal.tcc.MVC.model.Endereco;
+import bem_estar_animal.tcc.MVC.model.Ficha;
+import bem_estar_animal.tcc.MVC.service.FichaService;
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import bem_estar_animal.tcc.MVC.model.Denunciante;
-import bem_estar_animal.tcc.MVC.model.Endereco;
-import bem_estar_animal.tcc.MVC.model.Ficha;
-import bem_estar_animal.tcc.MVC.service.FichaService;
-import jakarta.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/ficha")
@@ -61,18 +55,22 @@ public class FichaController {
 
     @GetMapping("/perfil/{id}")
     public String fichaPerfil(@PathVariable Long id, Model model) {
-        Ficha ficha = fichaService.encontrarPorId(id);
+        Optional<Ficha> ficha = fichaService.encontrarPorId(id);
 
-        model.addAttribute("ficha", ficha);
+        if (ficha.isPresent()) {
+            model.addAttribute("ficha", ficha.get());
+        }
 
         return "ficha-perfil";
     }
 
     @GetMapping("/edit/{id}")
     public String fichaEditar(@PathVariable Long id, Model model) {
-        Ficha ficha = fichaService.encontrarPorId(id);
+        Optional<Ficha> ficha = fichaService.encontrarPorId(id);
 
-        model.addAttribute("ficha", ficha);
+        if (ficha.isPresent()) {
+            model.addAttribute("ficha", ficha.get());
+        }
 
         return "ficha-editar";
     }
@@ -80,16 +78,17 @@ public class FichaController {
     // TODO TESTE TESTAR O CAMPO DE BUSCA
     @GetMapping("/buscar")
     public String listarTodasFichas(Model model, @RequestParam(name = "query", required = false) String query) {
-        List<Ficha> fichas = new ArrayList<>();
+        List<Ficha> fichaList = new ArrayList<>();
+
+        fichaList = fichaService.getAllFichas();
+        model.addAttribute("fichas", fichaList);
 
         if (query != null && !query.isEmpty()) {
-            long queryLong = Long.parseLong(query);
-            fichas.add(fichaService.encontrarPorId(queryLong));
-        } else {
-            fichas = fichaService.getAllFichas();
+            List<Ficha> fichaEncontrada = fichaService.busca(query);
+            if (fichaEncontrada != null) {
+                model.addAttribute("fichas", fichaEncontrada);
+            }
         }
-
-        model.addAttribute("fichas", fichas);
 
         return "buscar";
     }
@@ -106,7 +105,7 @@ public class FichaController {
             model.addAttribute("ficha", ficha);
             return "ficha-editar";
         }
-        
+
         fichaService.createFicha(ficha);
 
         return "redirect:/ficha/perfil/" + ficha.getId_ficha();

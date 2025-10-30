@@ -1,14 +1,7 @@
 package bem_estar_animal.tcc.MVC.model;
 
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +18,11 @@ public class Ficha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_ficha;
 
-    private String processo_ouvidoria;
+    @Column(name = "processo_ouvidoria")
+    private String processoOuvidoria;
 
     private String recebido_por_secretaria;
-    
+
     private String recebido_por_ouvidoria;
 
     private String data_ouvidoria;

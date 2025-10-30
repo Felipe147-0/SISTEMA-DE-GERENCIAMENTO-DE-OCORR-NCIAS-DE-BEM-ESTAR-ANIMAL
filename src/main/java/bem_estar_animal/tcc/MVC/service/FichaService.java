@@ -1,14 +1,14 @@
 package bem_estar_animal.tcc.MVC.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.model.Funcionario;
 import bem_estar_animal.tcc.MVC.repository.FichaRepository;
 import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FichaService {
@@ -25,8 +25,21 @@ public class FichaService {
         return fichaRepository.findAll();
     }
 
-    public Ficha encontrarPorId(Long id) {
-        return fichaRepository.findById(id).get();
+    public Optional<Ficha> encontrarPorId(Long id) {
+        return fichaRepository.findById(id);
+    }
+
+    public List<Ficha> busca(String query) {
+        List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_Nome(query);
+        List<Ficha> encontradoPorProcesso = fichaRepository.findByProcessoOuvidoria(query);
+
+        if (!encontradoPorDenunciante.isEmpty()) {
+            return encontradoPorDenunciante;
+        } else if (!encontradoPorProcesso.isEmpty()) {
+            return encontradoPorProcesso;
+        }
+
+        return null;
     }
 
     public void createFicha(Ficha fichaRecebida) {
