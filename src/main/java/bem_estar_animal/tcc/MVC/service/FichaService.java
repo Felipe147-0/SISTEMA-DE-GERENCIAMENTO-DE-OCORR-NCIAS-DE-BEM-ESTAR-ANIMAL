@@ -7,6 +7,8 @@ import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,16 +32,22 @@ public class FichaService {
     }
 
     public List<Ficha> busca(String query) {
-        List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_Nome(query);
-        List<Ficha> encontradoPorProcesso = fichaRepository.findByProcessoOuvidoria(query);
+        if (query.matches("\\d+")) {
+            List<Ficha> encontradoPorProcesso = fichaRepository.findByProcessoOuvidoria(query);
 
-        if (!encontradoPorDenunciante.isEmpty()) {
-            return encontradoPorDenunciante;
-        } else if (!encontradoPorProcesso.isEmpty()) {
-            return encontradoPorProcesso;
+            if (!encontradoPorProcesso.isEmpty()) {
+                return encontradoPorProcesso;
+            }
+
+        } else if (query.matches("\\w+")) {
+            List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_Nome(query);
+
+            if (!encontradoPorDenunciante.isEmpty()) {
+                return encontradoPorDenunciante;
+            }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public void createFicha(Ficha fichaRecebida) {

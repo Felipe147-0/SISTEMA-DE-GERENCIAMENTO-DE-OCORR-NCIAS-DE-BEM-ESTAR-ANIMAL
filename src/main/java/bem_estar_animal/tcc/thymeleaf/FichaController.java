@@ -78,17 +78,20 @@ public class FichaController {
     // TODO TESTE TESTAR O CAMPO DE BUSCA
     @GetMapping("/buscar")
     public String listarTodasFichas(Model model, @RequestParam(name = "query", required = false) String query) {
-        List<Ficha> fichaList = new ArrayList<>();
-
-        fichaList = fichaService.getAllFichas();
-        model.addAttribute("fichas", fichaList);
+        List<Ficha> fichaList;
 
         if (query != null && !query.isEmpty()) {
-            List<Ficha> fichaEncontrada = fichaService.busca(query);
-            if (fichaEncontrada != null) {
-                model.addAttribute("fichas", fichaEncontrada);
+            fichaList = fichaService.busca(query);
+
+            if (fichaList.isEmpty()) {
+                fichaList = fichaService.getAllFichas();
             }
+
+        } else {
+            fichaList = fichaService.getAllFichas();
         }
+
+        model.addAttribute("fichas", fichaList);
 
         return "buscar";
     }
