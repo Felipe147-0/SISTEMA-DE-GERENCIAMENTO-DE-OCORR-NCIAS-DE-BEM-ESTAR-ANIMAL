@@ -75,7 +75,6 @@ public class FichaController {
         return "ficha-editar";
     }
 
-    // TODO TESTE TESTAR O CAMPO DE BUSCA
     @GetMapping("/buscar")
     public String listarTodasFichas(Model model, @RequestParam(name = "query", required = false) String query) {
         List<Ficha> fichaList;

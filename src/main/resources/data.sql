@@ -11,10 +11,45 @@ VALUES
 insert into setor values (1);
 insert into funcionario values (1, "pietro", 2222, "Usuário", 1);
 
-INSERT INTO `bem_estar_animal`.`ficha` 
-  (`id_ficha`, `processo_ouvidoria`, `recebido_por_secretaria`, `recebido_por_ouvidoria`, `data_ouvidoria`, `hora_ouvidoria`, 
-   `denunciante_id`, `desfecho_da_notificacao`, `data_secretaria`, `hora_secretaria`, `funcionario_id`, `historico`, `animal`, 
-   `processo_secretaria`, `fiscal`, `data_tramite`, `hora_tramite`, `assunto`, `interno`, `protocolo`) 
-VALUES 
-  (NULL, NULL, NULL, NULL, '27/10/2025', '19:14', '1', 'aaaaaaaaaaaaaa', NULL, NULL, '1', NULL, NULL, NULL, NULL, '12/10/2222', 
-   '2222', 'aaaaaaaa', '0', NULL);
+INSERT INTO `bem_estar_animal`.`ficha` (
+  `processo_ouvidoria`,
+  `recebido_por_secretaria`,
+  `recebido_por_ouvidoria`,
+  `data_ouvidoria`,
+  `hora_ouvidoria`,
+  `denunciante_id`,
+  `desfecho_da_notificacao`,
+  `data_secretaria`,
+  `hora_secretaria`,
+  `funcionario_id`,
+  `historico`,
+  `animal`,
+  `processo_secretaria`,
+  `fiscal`,
+  `data_tramite`,
+  `hora_tramite`,
+  `assunto`,
+  `interno`,
+  `protocolo`
+) VALUES
+(
+  'PROC-OUV-2025-001',
+  'Secretaria de Meio Ambiente',
+  'Ouvidoria Municipal',
+  '2025-11-04',
+  '10:35',
+  1,  -- denunciante_id (ok)
+  'Notificação encaminhada para fiscalização.',
+  '2025-11-05',
+  '09:15',
+  1,  -- funcionario_id corrigido para 1
+  'Denúncia recebida e encaminhada à equipe de campo.',
+  'Cachorro',
+  'PROC-SEC-2025-045',
+  'Fiscal João da Silva',
+  '2025-11-06',
+  '14:00',
+  'Maus-tratos a animal doméstico',
+  0,
+  'PROTO-2025-98765'
+);

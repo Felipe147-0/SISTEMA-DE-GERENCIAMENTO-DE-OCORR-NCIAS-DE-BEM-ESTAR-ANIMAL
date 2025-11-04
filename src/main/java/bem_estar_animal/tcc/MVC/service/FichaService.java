@@ -67,7 +67,7 @@ public class FichaService {
         fichaRepository.gerarSequencia();
         Long numero = fichaRepository.buscarUltimoNumero();
         int ano = Year.now().getValue();
-        return String.format("%d%04d", ano, numero);
+        return String.format("PROC-OUV-%d-%04d", ano, numero);
     }
 
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {
