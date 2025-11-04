@@ -5,8 +5,10 @@ import bem_estar_animal.tcc.MVC.model.Funcionario;
 import bem_estar_animal.tcc.MVC.repository.FichaRepository;
 import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -50,10 +52,22 @@ public class FichaService {
         return Collections.emptyList();
     }
 
+    @Transactional
     public void createFicha(Ficha fichaRecebida) {
+        if (fichaRecebida.getProcessoOuvidoria() == null || fichaRecebida.getProcessoOuvidoria().isEmpty()) {
+            String numeroProcesso = gerarNumeroProcesso();
+            fichaRecebida.setProcessoOuvidoria(numeroProcesso);
+        }
         Funcionario funcionario = funcionarioRepository.findByNome(fichaRecebida.getFuncionario().getNome());
         fichaRecebida.setFuncionario(funcionario);
         fichaRepository.save(fichaRecebida);
+    }
+
+    private String gerarNumeroProcesso() {
+        fichaRepository.gerarSequencia();
+        Long numero = fichaRepository.buscarUltimoNumero();
+        int ano = Year.now().getValue();
+        return String.format("%d%04d", ano, numero);
     }
 
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {
