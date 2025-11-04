@@ -8,6 +8,7 @@ import bem_estar_animal.tcc.restfull.record.FichaRecord;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.MonthDay;
 import java.time.Year;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,10 +65,16 @@ public class FichaService {
     }
 
     private String gerarNumeroProcesso() {
-        fichaRepository.gerarSequencia();
-        Long numero = fichaRepository.buscarUltimoNumero();
+        Long numero = fichaRepository.contarFichas() + 1;
         int ano = Year.now().getValue();
-        return String.format("PROC-OUV-%d-%04d", ano, numero);
+        int mes = MonthDay.now().getMonthValue();
+        int dia = MonthDay.now().getDayOfMonth();
+        return String.format("PROC-OUV-%d%d%d-%04d", ano, mes, dia, numero);
+
+        /*USADO NO PROCESSO OUVIDORIA*/
+        /*CHAMA OS METODOS DO REPOSITORY*/
+        /*fichaRepository.gerarSequencia();*/
+        /*Long numero = fichaRepository.buscarUltimoNumero();*/
     }
 
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {

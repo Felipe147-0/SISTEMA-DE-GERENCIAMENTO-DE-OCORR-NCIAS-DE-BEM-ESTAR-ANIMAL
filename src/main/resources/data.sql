@@ -33,7 +33,7 @@ INSERT INTO `bem_estar_animal`.`ficha` (
   `protocolo`
 ) VALUES
 (
-  'PROC-OUV-2025-001',
+  'PROC-OUV-2025-0001',
   'Secretaria de Meio Ambiente',
   'Ouvidoria Municipal',
   '2025-11-04',

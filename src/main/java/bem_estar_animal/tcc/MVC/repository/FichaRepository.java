@@ -16,10 +16,15 @@ public interface FichaRepository extends JpaRepository<Ficha, Long> {
 
     List<Ficha> findByProcessoOuvidoria(String processo);
 
-    @Modifying //usado para modificar o banco ( quando nao é um select)
-    @Query(value = "INSERT INTO sequencia_ouvidoria VALUES (NULL)", nativeQuery = true)
-    void gerarSequencia();
+    @Query(value = "select count(id_ficha) from ficha", nativeQuery = true)
+    Long contarFichas();
 
-    @Query(value = "SELECT MAX(id) FROM sequencia_ouvidoria", nativeQuery = true)
-    Long buscarUltimoNumero();
+    /*USADO NO PROCESSO OUVIDORIA*/
+    /* USADO PARA GERAR O ID EM UMA TABELA SEPARADA E GERAR UM NUMERO BASEADO NO MAIOR ID*/
+    /*@Modifying //usado para modificar o banco ( quando nao é um select)
+    @Query(value = "INSERT INTO sequencia_ouvidoria VALUES (NULL)", nativeQuery = true)
+    void gerarSequencia();*/
+
+    /*@Query(value = "SELECT MAX(id) FROM sequencia_ouvidoria", nativeQuery = true)
+    Long buscarUltimoNumero();*/
 }
