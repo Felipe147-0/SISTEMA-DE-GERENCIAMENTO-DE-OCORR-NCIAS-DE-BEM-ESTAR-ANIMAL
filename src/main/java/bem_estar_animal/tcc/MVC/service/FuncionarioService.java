@@ -27,6 +27,7 @@ public class FuncionarioService {
             funcionarioRecord.nome(),
             funcionarioRecord.registro(),
             funcionarioRecord.funcao(),
+            null,
             null
         );
 

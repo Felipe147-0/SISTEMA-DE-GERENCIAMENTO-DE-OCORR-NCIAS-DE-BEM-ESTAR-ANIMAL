@@ -20,34 +20,34 @@ import bem_estar_animal.tcc.restfull.record.FichaRecord;
 @RequestMapping("/api/ficha")
 public class RestFichaController {
 
-    private FichaService fichaService;
+    // private FichaService fichaService;
 
-    public RestFichaController(FichaService fichaService) {
-        this.fichaService = fichaService;
-    }
-
-    @GetMapping("/listar")
-    public ResponseEntity<List<Ficha>> getAllFichas() {
-        List<Ficha> fichaList = fichaService.getAllFichas();
-        return ResponseEntity.ok().body(fichaList);
-    }
-
-    // @PostMapping("/criar")
-    // public ResponseEntity<Ficha> createFicha(@RequestBody FichaRecord fichaRecord) {
-    //     Ficha ficha = fichaService.createFicha(fichaRecord);
-    //     return ResponseEntity.ok().body(ficha);// TODO nao retornar o objeto criado. Colocar redirect
+    // public RestFichaController(FichaService fichaService) {
+    //     this.fichaService = fichaService;
     // }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Ficha> updateFicha(@PathVariable Long id, @RequestBody FichaRecord fichaRecord) {
-        Ficha ficha = fichaService.updateFicha(id, fichaRecord);
-        return ResponseEntity.ok().body(ficha);
-    }
+    // @GetMapping("/listar")
+    // public ResponseEntity<List<Ficha>> getAllFichas() {
+    //     List<Ficha> fichaList = fichaService.getAllFichas();
+    //     return ResponseEntity.ok().body(fichaList);
+    // }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteFicha(@PathVariable Long id){
-        fichaService.deleteFicha(id);
-        return ResponseEntity.noContent().build();
-    }
+    // // @PostMapping("/criar")
+    // // public ResponseEntity<Ficha> createFicha(@RequestBody FichaRecord fichaRecord) {
+    // //     Ficha ficha = fichaService.createFicha(fichaRecord);
+    // //     return ResponseEntity.ok().body(ficha);// TODO nao retornar o objeto criado. Colocar redirect
+    // // }
+
+    // @PutMapping("/update/{id}")
+    // public ResponseEntity<Ficha> updateFicha(@PathVariable Long id, @RequestBody FichaRecord fichaRecord) {
+    //     Ficha ficha = fichaService.updateFicha(id, fichaRecord);
+    //     return ResponseEntity.ok().body(ficha);
+    // }
+
+    // @DeleteMapping("/delete/{id}")
+    // public ResponseEntity<Void> deleteFicha(@PathVariable Long id){
+    //     fichaService.deleteFicha(id);
+    //     return ResponseEntity.noContent().build();
+    // }
 
 }

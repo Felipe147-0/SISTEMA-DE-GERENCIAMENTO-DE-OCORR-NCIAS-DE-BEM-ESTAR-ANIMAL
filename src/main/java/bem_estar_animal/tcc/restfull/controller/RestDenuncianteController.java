@@ -20,39 +20,39 @@ import bem_estar_animal.tcc.restfull.record.DenuncianteRecord;
 @RequestMapping("/api/denunciante")
 public class RestDenuncianteController {
 
-    private DenuncianteService denuncianteService;
+    // private DenuncianteService denuncianteService;
 
-    public RestDenuncianteController(DenuncianteService denuncianteService) {
-        this.denuncianteService = denuncianteService;
-    }
+    // public RestDenuncianteController(DenuncianteService denuncianteService) {
+    //     this.denuncianteService = denuncianteService;
+    // }
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<Denunciante>> getAllDenunciante() {
-        List<Denunciante> denuncianteList = denuncianteService.getAllDenunciante();
-        return ResponseEntity.ok().body(denuncianteList);
-    }
+    // @GetMapping("/listar")
+    // public ResponseEntity<List<Denunciante>> getAllDenunciante() {
+    //     List<Denunciante> denuncianteList = denuncianteService.getAllDenunciante();
+    //     return ResponseEntity.ok().body(denuncianteList);
+    // }
 
-    @PostMapping("/criar")
-    public ResponseEntity<Denunciante> createDenunciante(@RequestBody DenuncianteRecord denuncianteRecord) {
-        Denunciante denunciante = denuncianteService.createDenunciante(denuncianteRecord);// TODO nao retornar o objeto
-                                                                                          // criado. Colocar redirect
-        return ResponseEntity.ok().body(denunciante);
-    }
+    // @PostMapping("/criar")
+    // public ResponseEntity<Denunciante> createDenunciante(@RequestBody DenuncianteRecord denuncianteRecord) {
+    //     Denunciante denunciante = denuncianteService.createDenunciante(denuncianteRecord);// TODO nao retornar o objeto
+    //                                                                                       // criado. Colocar redirect
+    //     return ResponseEntity.ok().body(denunciante);
+    // }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Denunciante> updateDununciante(@PathVariable Long id, @RequestBody DenuncianteRecord denuncianteRecord) {
-        Denunciante denunciante = denuncianteService.updateDununciante(id, denuncianteRecord);//TODO nao retornar o objeto criado. Colocar redirect
-        return ResponseEntity.ok().body(denunciante);
-    }
+    // @PutMapping("/update/{id}")
+    // public ResponseEntity<Denunciante> updateDununciante(@PathVariable Long id, @RequestBody DenuncianteRecord denuncianteRecord) {
+    //     Denunciante denunciante = denuncianteService.updateDununciante(id, denuncianteRecord);//TODO nao retornar o objeto criado. Colocar redirect
+    //     return ResponseEntity.ok().body(denunciante);
+    // }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDununciante (@PathVariable Long id){
-        boolean deletedDununciante = denuncianteService.deleteDununciante(id);
+    // @DeleteMapping("/delete/{id}")
+    // public ResponseEntity<Void> deleteDununciante (@PathVariable Long id){
+    //     boolean deletedDununciante = denuncianteService.deleteDununciante(id);
 
-        if (deletedDununciante == false) {
-            return  ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok().build();
-    }
+    //     if (deletedDununciante == false) {
+    //         return  ResponseEntity.badRequest().build();
+    //     }
+    //     return ResponseEntity.ok().build();
+    // }
 
 }

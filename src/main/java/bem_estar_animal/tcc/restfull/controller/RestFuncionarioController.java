@@ -20,42 +20,42 @@ import bem_estar_animal.tcc.restfull.record.FuncionarioRecord;
 @RequestMapping("/api/funcionario")
 public class RestFuncionarioController {
 
-    private FuncionarioService funcionarioService;
+    // private FuncionarioService funcionarioService;
 
-    public RestFuncionarioController(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
-    }
+    // public RestFuncionarioController(FuncionarioService funcionarioService) {
+    //     this.funcionarioService = funcionarioService;
+    // }
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<Funcionario>> getAllFuncionarios() {
-        List<Funcionario> funcionarioList = funcionarioService.getAllFuncionarios();
-        return ResponseEntity.ok().body(funcionarioList);
-    }
+    // @GetMapping("/listar")
+    // public ResponseEntity<List<Funcionario>> getAllFuncionarios() {
+    //     List<Funcionario> funcionarioList = funcionarioService.getAllFuncionarios();
+    //     return ResponseEntity.ok().body(funcionarioList);
+    // }
 
-    @PostMapping("/criar")
-    public ResponseEntity<Funcionario> createFuncionario(@RequestBody FuncionarioRecord funcionarioRecord) {
+    // @PostMapping("/criar")
+    // public ResponseEntity<Funcionario> createFuncionario(@RequestBody FuncionarioRecord funcionarioRecord) {
 
-        Funcionario funcionario = funcionarioService.createFuncionario(funcionarioRecord);
-        return ResponseEntity.ok().body(funcionario);
-    }
+    //     Funcionario funcionario = funcionarioService.createFuncionario(funcionarioRecord);
+    //     return ResponseEntity.ok().body(funcionario);
+    // }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id,
-            @RequestBody FuncionarioRecord funcionarioRecord) {
+    // @PutMapping("/update/{id}")
+    // public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id,
+    //         @RequestBody FuncionarioRecord funcionarioRecord) {
 
-        Funcionario funcionario = funcionarioService.updateFuncionario(id, funcionarioRecord);
-        return ResponseEntity.ok().body(funcionario);
-    }
+    //     Funcionario funcionario = funcionarioService.updateFuncionario(id, funcionarioRecord);
+    //     return ResponseEntity.ok().body(funcionario);
+    // }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteFuncionario(@PathVariable Long id) {
-        boolean deletedFuncionario = funcionarioService.deleteFuncionario(id);
+    // @DeleteMapping("/delete/{id}")
+    // public ResponseEntity<Void> deleteFuncionario(@PathVariable Long id) {
+    //     boolean deletedFuncionario = funcionarioService.deleteFuncionario(id);
 
-        if (deletedFuncionario == false) {
-            return ResponseEntity.badRequest().build();
-        }
+    //     if (deletedFuncionario == false) {
+    //         return ResponseEntity.badRequest().build();
+    //     }
 
-        return ResponseEntity.ok().build();
-    }
+    //     return ResponseEntity.ok().build();
+    // }
 
 }
