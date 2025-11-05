@@ -39,10 +39,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bem_estar_animal`.`setor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`setor` (
-  `id_setor` BIGINT NOT NULL,
-  PRIMARY KEY (`id_setor`))
-ENGINE = InnoDB;
-
+  `id_setor` BIGINT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_setor`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table `bem_estar_animal`.`funcionario`
@@ -154,4 +154,3 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- CREATE TABLE sequencia_ouvidoria (
     -- id BIGINT AUTO_INCREMENT PRIMARY KEY
 -- );
-

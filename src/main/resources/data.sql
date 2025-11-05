@@ -1,16 +1,24 @@
+-- ENDERECO
 INSERT INTO `bem_estar_animal`.`endereco` 
   (`logradouro`, `bairro`, `ponto_de_referencia`) 
 VALUES 
   ('rua ffffffffffffffffffffffffffff', 'bairooooooooooooo', 'aaaaaaaa');
 
+-- DENUNCIANTE
 INSERT INTO `bem_estar_animal`.`denunciante` 
   (`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
 VALUES 
   ('noememememe', NULL, '32132121', '1', NULL);
   
-insert into setor values (1);
+-- SETOR
+insert into setor values (1, "administracao");
+insert into setor values (2, "secretaria");
+insert into setor values (3, "ouvidoria");
+
+-- FUNCIONARIO
 insert into funcionario values (1, "pietro", 2222, "Usuário", 1);
 
+-- FICHA
 INSERT INTO `bem_estar_animal`.`ficha` (
   `processo_ouvidoria`,
   `recebido_por_secretaria`,

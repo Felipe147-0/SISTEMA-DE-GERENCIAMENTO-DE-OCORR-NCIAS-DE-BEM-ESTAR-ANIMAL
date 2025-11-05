@@ -21,19 +21,17 @@ public class FuncionarioService {
         return funcionarioRepository.findAll();
     }
 
-    public Funcionario createFuncionario(FuncionarioRecord funcionarioRecord) {
+    public void createFuncionario(Funcionario funcionarioRecebido) {
         Funcionario funcionario = new Funcionario(
             null,
-            funcionarioRecord.nome(),
-            funcionarioRecord.registro(),
-            funcionarioRecord.funcao(),
-            null
+            funcionarioRecebido.getNome(),
+            funcionarioRecebido.getRegistro(),
+            funcionarioRecebido.getFuncao(),
+            null,
+            funcionarioRecebido.getSetor()
         );
 
-
         funcionarioRepository.save(funcionario);
-
-        return funcionario;
     }
 
     public Funcionario updateFuncionario(Long id, FuncionarioRecord funcionarioRecord) {
