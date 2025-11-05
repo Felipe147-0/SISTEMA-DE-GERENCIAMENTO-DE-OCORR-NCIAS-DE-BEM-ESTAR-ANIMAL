@@ -26,6 +26,8 @@ public class Setor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_setor;
 
+    private String nome;
+
     @OneToMany(mappedBy = "setor")
     private List<Funcionario> funcionariosList = new ArrayList<>();
 }

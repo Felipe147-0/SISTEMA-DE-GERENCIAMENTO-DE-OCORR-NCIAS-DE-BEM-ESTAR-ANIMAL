@@ -5,38 +5,49 @@
 
 <body>
 
-<div class="container-ouvidoria">
-    <h4 class="titulo-principal">SETOR DE ADMINISTRAÇÃO</h4>
+    <div class="container-ouvidoria">
+        <h4 class="titulo-principal">SETOR DE ADMINISTRAÇÃO</h4>
 
-    <h2>CADASTRO DE FUNCIONÁRIOS</h2>
+        <h2>CADASTRO DE FUNCIONÁRIOS</h2>
 
-    <div class="linha"></div>
+        <div class="linha"></div>
 
-    <!-- Formulário de cadastro -->
-    <form method="post" th:action="@{/funcionario/salvar}" th:object="${funcionario}">
-        <div class="dados-grid">
-            <div>
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" th:field="*{nome}" placeholder="Nome completo">
+        <form method="post" th:action="@{/funcionario/criar}" th:object="${funcionario}">
+            <div class="dados-grid">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" th:field="*{nome}" placeholder="Nome completo">
+                </div>
+
+                <div>
+                    <label for="registro">Registro:</label>
+                    <input type="text" id="registro" th:field="*{registro}" placeholder="Número do registro">
+                </div>
+
+                <div>
+                    <label for="funcao">Função:</label>
+                    <input type="text" id="funcao" th:field="*{funcao}" placeholder="Cargo ou função">
+                </div>
+
+                <div>
+                    <label for="setor-select">Escolha o setor:</label>
+                    <select id="setor-select" th:field="*{setor}">
+                        <option value="">--Selecione uma setor--</option>
+                        <option th:each="setor : ${setoresList}" th:value="${setor.id_setor}" th:text="${setor.nome}">
+                        </option>
+                    </select>
+                </div>
+
+
             </div>
 
-            <div>
-                <label for="registro">Registro:</label>
-                <input type="text" id="registro" th:field="*{registro}" placeholder="Número do registro">
+            <div class="botoes mt-4">
+                <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
+                <button type="submit" class="btn btn-success btn-custom">SALVAR</button>
             </div>
+        </form>
 
-            <div>
-                <label for="funcao">Função:</label>
-                <input type="text" id="funcao" th:field="*{funcao}" placeholder="Cargo ou função">
-            </div>
-        </div>
-
-        <div class="botoes mt-4">
-            <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-            <button type="submit" class="btn btn-success btn-custom">SALVAR</button>
-        </div>
-    </form>
-
-</div>
+    </div>
 </body>
+
 </html>

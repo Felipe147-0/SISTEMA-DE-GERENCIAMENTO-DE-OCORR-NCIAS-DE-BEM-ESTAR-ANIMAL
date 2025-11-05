@@ -60,12 +60,14 @@ label {
 }
 
 input[type="text"],
-textarea {
+textarea,
+select {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 8px;
 }
+
 
 textarea {
     resize: none;
