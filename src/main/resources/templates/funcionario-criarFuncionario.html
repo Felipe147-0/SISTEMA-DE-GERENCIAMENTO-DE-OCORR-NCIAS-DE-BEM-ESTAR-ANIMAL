@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/headPrincipal :: headBase}"></head>
+
+<body>
+
+<div class="container-ouvidoria">
+    <h4 class="titulo-principal">SETOR DE ADMINISTRAÇÃO</h4>
+
+    <h2>CADASTRO DE FUNCIONÁRIOS</h2>
+
+    <div class="linha"></div>
+
+    <!-- Formulário de cadastro -->
+    <form method="post" th:action="@{/funcionario/salvar}" th:object="${funcionario}">
+        <div class="dados-grid">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Nome completo">
+            </div>
+
+            <div>
+                <label for="registro">Registro:</label>
+                <input type="text" id="registro" th:field="*{registro}" placeholder="Número do registro">
+            </div>
+
+            <div>
+                <label for="funcao">Função:</label>
+                <input type="text" id="funcao" th:field="*{funcao}" placeholder="Cargo ou função">
+            </div>
+        </div>
+
+        <div class="botoes mt-4">
+            <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
+            <button type="submit" class="btn btn-success btn-custom">SALVAR</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

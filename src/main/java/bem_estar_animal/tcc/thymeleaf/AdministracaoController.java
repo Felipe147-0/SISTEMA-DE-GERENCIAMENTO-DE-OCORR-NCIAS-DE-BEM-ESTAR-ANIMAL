@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequestMapping("/administracao")
-public class Administracao {
+public class AdministracaoController {
 
     @GetMapping()
     public String viewHome() {
