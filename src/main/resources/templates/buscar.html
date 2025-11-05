@@ -5,26 +5,26 @@
 
 <body>
 
-    <form th:action="@{/ficha/buscar}" method="get" class="d-flex form-filtro">
-        <div class="input-group">
-            <input type="text" class="form-control" name="query" th:value="${query}">
-            <button class="btn btn btn-outline-secondary" type="submit" style="margin-top:4px;">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
-    </form>
-
-    <div class="container container-listar">
-		<ul>
-			<li th:each="ficha : ${fichas}">
-				<a th:href="@{/ficha/perfil/{id}(id=${ficha.id_ficha})}" th:text="${ficha.denunciante.nome}"></a>
-			</li>
-		</ul>
-	</div>
-
-    <div class="botoes mt-4">
-        <a th:href="@{/}" class="btn btn-primary btn-custom">VOLTAR</a>
+<form th:action="@{/ficha/buscar}" method="get" class="d-flex form-filtro">
+    <div class="input-group">
+        <input type="text" class="form-control" name="query" th:value="${query}">
+        <button class="btn btn btn-outline-secondary" type="submit" style="margin-top:4px;">
+            <i class="bi bi-search"></i>
+        </button>
     </div>
+</form>
+
+<div class="container container-listar">
+    <ul>
+        <li th:each="ficha : ${fichas}">
+            <a th:href="@{/ficha/perfil/{id}(id=${ficha.id_ficha})}" th:text="${ficha.processoOuvidoria}"></a>
+        </li>
+    </ul>
+</div>
+
+<div class="botoes mt-4">
+    <a th:href="@{/ouvidoria}" class="btn btn-primary btn-custom">VOLTAR</a>
+</div>
 </body>
 
 </html>

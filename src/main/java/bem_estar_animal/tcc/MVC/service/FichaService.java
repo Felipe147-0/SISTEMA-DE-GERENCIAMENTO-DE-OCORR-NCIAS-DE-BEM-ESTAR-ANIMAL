@@ -1,14 +1,19 @@
 package bem_estar_animal.tcc.MVC.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.model.Funcionario;
 import bem_estar_animal.tcc.MVC.repository.FichaRepository;
 import bem_estar_animal.tcc.MVC.repository.FuncionarioRepository;
 import bem_estar_animal.tcc.restfull.record.FichaRecord;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+
+import java.time.MonthDay;
+import java.time.Year;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FichaService {
@@ -25,14 +30,51 @@ public class FichaService {
         return fichaRepository.findAll();
     }
 
-    public Ficha encontrarPorId(Long id) {
-        return fichaRepository.findById(id).get();
+    public Optional<Ficha> encontrarPorId(Long id) {
+        return fichaRepository.findById(id);
     }
 
+    public List<Ficha> busca(String query) {
+        if (query.matches("\\d+")) {
+            List<Ficha> encontradoPorProcesso = fichaRepository.findByProcessoOuvidoria(query);
+
+            if (!encontradoPorProcesso.isEmpty()) {
+                return encontradoPorProcesso;
+            }
+
+        } else if (query.matches("\\w+")) {
+            List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_Nome(query);
+
+            if (!encontradoPorDenunciante.isEmpty()) {
+                return encontradoPorDenunciante;
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    @Transactional
     public void createFicha(Ficha fichaRecebida) {
+        if (fichaRecebida.getProcessoOuvidoria() == null || fichaRecebida.getProcessoOuvidoria().isEmpty()) {
+            String numeroProcesso = gerarNumeroProcesso();
+            fichaRecebida.setProcessoOuvidoria(numeroProcesso);
+        }
         Funcionario funcionario = funcionarioRepository.findByNome(fichaRecebida.getFuncionario().getNome());
         fichaRecebida.setFuncionario(funcionario);
         fichaRepository.save(fichaRecebida);
+    }
+
+    private String gerarNumeroProcesso() {
+        Long numero = fichaRepository.contarFichas() + 1;
+        int ano = Year.now().getValue();
+        int mes = MonthDay.now().getMonthValue();
+        int dia = MonthDay.now().getDayOfMonth();
+        return String.format("PROC-OUV-%d%d%d-%04d", ano, mes, dia, numero);
+
+        /*USADO NO PROCESSO OUVIDORIA*/
+        /*CHAMA OS METODOS DO REPOSITORY*/
+        /*fichaRepository.gerarSequencia();*/
+        /*Long numero = fichaRepository.buscarUltimoNumero();*/
     }
 
     public Ficha updateFicha(Long id, FichaRecord fichaRecord) {
