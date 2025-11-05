@@ -8,7 +8,7 @@ INSERT INTO `bem_estar_animal`.`denunciante`
 VALUES 
   ('noememememe', NULL, '32132121', '1', NULL);
   
-insert into setor values (1);
+insert into setor values (1, "administracao");
 insert into funcionario values (1, "pietro", 2222, "Usuário", 1);
 
 INSERT INTO `bem_estar_animal`.`ficha` (

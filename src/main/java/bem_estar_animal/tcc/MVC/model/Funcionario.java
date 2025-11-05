@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -36,6 +38,7 @@ public class Funcionario {
     private List<Ficha> fichalList = new ArrayList<>();
 
     // TODO SETOR colocar o setor
-    // @OneToOne
-    // private Setor id_setor;
+    @ManyToOne
+    @JoinColumn(name = "id_setor")
+    private Setor setor;
 }
