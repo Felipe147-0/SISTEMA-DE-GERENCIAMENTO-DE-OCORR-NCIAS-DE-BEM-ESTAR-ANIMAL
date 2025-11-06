@@ -41,7 +41,7 @@ public class FichaService {
             }
 
         } else if (query.matches("\\w+")) {
-            List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_Nome(query);
+            List<Ficha> encontradoPorDenunciante = fichaRepository.findByDenunciante_NomeLike("%" + query + "%");
 
             if (!encontradoPorDenunciante.isEmpty()) {
                 return encontradoPorDenunciante;
