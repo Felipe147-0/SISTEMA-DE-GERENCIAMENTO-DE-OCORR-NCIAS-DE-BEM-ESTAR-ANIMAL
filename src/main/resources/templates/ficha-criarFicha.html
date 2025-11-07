@@ -64,13 +64,20 @@
 
         <h5><b>INFORMAÇÕES</b></h5>
 
-        <label for="assunto">Assunto:</label>
-        <textarea id="assunto" rows="2" th:field="*{assunto}"></textarea>
+        <div>
+            <label for="assunto">Assunto:</label>
+            <textarea id="assunto" rows="2" th:field="*{assunto}"></textarea>
+        </div>
 
         <br>
 
-        <label for="desfecho">Desfecho da Notificação:</label>
-        <textarea id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}"></textarea>
+        <!-- TODO deixar invisivel quando colocar o login -->
+        <!-- colocar isso nas divs do desfecho, funcionario, data/hora tramite -->
+        <!--  th:if="${user.isAdmin} ou th:unless="${user.isGuest} -->
+        <div>
+            <label for="desfecho">Desfecho da Notificação:</label>
+            <textarea id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}"></textarea>
+        </div>
 
         <br>
 
