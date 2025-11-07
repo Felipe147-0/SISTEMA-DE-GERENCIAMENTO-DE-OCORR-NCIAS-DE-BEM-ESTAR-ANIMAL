@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface FichaRepository extends JpaRepository<Ficha, Long> {
-    List<Ficha> findByDenunciante_Nome(String nome);
+    List<Ficha> findByDenunciante_NomeLike(String nome);
 
     List<Ficha> findByProcessoOuvidoria(String processo);
 
