@@ -46,6 +46,7 @@ public class FichaController {
         ficha.setDenunciante(denunciante);
         ficha.setData_ouvidoria(dataAtual);
         ficha.setHora_ouvidoria(horaAtual);
+        ficha.setProcessoOuvidoria(fichaService.gerarNumeroProcesso());
 
         model.addAttribute("ficha", ficha);
 

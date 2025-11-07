@@ -20,8 +20,6 @@ import lombok.Setter;
 @Entity
 public class Setor {
 
-    //TODO SETOR dividir o setor por categoria
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_setor;

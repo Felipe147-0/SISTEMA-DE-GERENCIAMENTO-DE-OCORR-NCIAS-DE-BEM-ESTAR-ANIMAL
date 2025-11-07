@@ -11,9 +11,10 @@ VALUES
   ('noememememe', NULL, '32132121', '1', NULL);
   
 -- SETOR
-insert into setor values (1, "administracao");
-insert into setor values (2, "secretaria");
-insert into setor values (3, "ouvidoria");
+insert into setor values (1, "ADMINISTRACAO");
+insert into setor values (2, "SECRETARIA");
+insert into setor values (3, "OUVIDORIA");
+insert into setor values (4, "FISCAL");
 
 -- FUNCIONARIO
 insert into funcionario values (1, "pietro", 2222, "Usuário", 1);

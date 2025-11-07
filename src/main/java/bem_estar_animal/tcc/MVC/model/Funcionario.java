@@ -37,7 +37,6 @@ public class Funcionario {
     @OneToMany(mappedBy = "funcionario")
     private List<Ficha> fichalList = new ArrayList<>();
 
-    // TODO SETOR colocar o setor
     @ManyToOne
     @JoinColumn(name = "id_setor")
     private Setor setor;
