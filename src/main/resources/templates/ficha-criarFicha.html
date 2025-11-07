@@ -41,7 +41,7 @@
 
                 <div>
                     <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" th:field="*{denunciante.telefone}">
+                    <input type="text" class="apenas-numeros" id="telefone" th:field="*{denunciante.telefone}">
                 </div>
 
                 <div>
@@ -107,7 +107,6 @@
         </form>
     </div>
 
-    <script src="/js/formatarData.js"></script>
     <script src="/js/cpfExiste.js"></script>
 </body>
 
