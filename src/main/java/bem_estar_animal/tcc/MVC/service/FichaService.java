@@ -62,7 +62,7 @@ public class FichaService {
         fichaRepository.save(fichaRecebida);
     }
 
-    private String gerarNumeroProcesso() {
+    public String gerarNumeroProcesso() {
         Long numero = fichaRepository.contarFichas() + 1;
         int ano = Year.now().getValue();
         int mes = MonthDay.now().getMonthValue();
