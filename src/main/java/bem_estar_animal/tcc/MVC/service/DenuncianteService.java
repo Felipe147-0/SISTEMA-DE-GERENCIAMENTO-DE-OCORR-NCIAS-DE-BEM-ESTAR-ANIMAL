@@ -1,16 +1,15 @@
 package bem_estar_animal.tcc.MVC.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.MVC.model.Denunciante;
-import bem_estar_animal.tcc.MVC.model.Endereco;
-import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.repository.DenuncianteRepository;
 import bem_estar_animal.tcc.MVC.repository.EnderecoRepository;
 import bem_estar_animal.tcc.MVC.repository.FichaRepository;
-import bem_estar_animal.tcc.restfull.record.DenuncianteRecord;
 
 @Service
 public class DenuncianteService {
@@ -30,48 +29,27 @@ public class DenuncianteService {
         return denuncianteRepository.findAll();
     }
 
-    public Denunciante createDenunciante(DenuncianteRecord denuncianteRecord) {
-        Denunciante denunciante = new Denunciante(
-                // null,
-                // denuncianteRecord.nome(),
-                // denuncianteRecord.telefone(),
-                // null,
-                // null
-                );
+    public List<Denunciante> busca(String query) {
+        if (query.matches("\\d+")) {
+            List<Denunciante> encontradoPorCpf = denuncianteRepository.findByCpf(query);
 
-        if (denuncianteRecord.fichaId() != null && denuncianteRecord.fichaId() != 0) {
-            Ficha fichaFound = fichaRepository.findById(denuncianteRecord.fichaId()).get();
-            denunciante.setFicha(fichaFound);
+            if (!encontradoPorCpf.isEmpty()) {
+                return encontradoPorCpf;
+            }
+
+        } else if (query.matches("\\w+")) {
+            List<Denunciante> encontradoPorNome = denuncianteRepository.findByNome("%" + query + "%");
+
+            if (!encontradoPorNome.isEmpty()) {
+                return encontradoPorNome;
+            }
         }
 
-        if (denuncianteRecord.enderecoId() != null && denuncianteRecord.enderecoId() != 0) {
-            Endereco enderecoFound = enderecoRepository.findById(denuncianteRecord.enderecoId()).get();
-            denunciante.setEndereco(enderecoFound);
-        }
-
-        denuncianteRepository.save(denunciante);
-
-        return denunciante;
+        return Collections.emptyList();
     }
 
-    public Denunciante updateDununciante(Long id, DenuncianteRecord denuncianteRecord) {
-        Denunciante denunciante = denuncianteRepository.findById(id).get();
-
-        if (denuncianteRecord.nome() != null && !denuncianteRecord.nome().isBlank()) {
-            denunciante.setNome(denuncianteRecord.nome());
-        }
-
-        if (denuncianteRecord.telefone() != null && !denuncianteRecord.telefone().isBlank()) {
-            denunciante.setTelefone(denuncianteRecord.telefone());
-        }
-
-        if (denuncianteRecord.nome() != null && !denuncianteRecord.nome().isBlank()) {
-            denunciante.setNome(denuncianteRecord.nome());
-        }
-
+    public void createDenunciante(Denunciante denunciante) {
         denuncianteRepository.save(denunciante);
-
-        return denunciante;
     }
 
     public boolean deleteDununciante(Long id) {
@@ -83,6 +61,10 @@ public class DenuncianteService {
         } else {
             return false;
         }
+    }
+
+    public Optional<Denunciante> encontrarPorId(Long id) {
+        return denuncianteRepository.findById(id);
     }
 
 }

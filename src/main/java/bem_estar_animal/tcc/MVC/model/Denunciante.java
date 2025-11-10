@@ -1,7 +1,6 @@
 package bem_estar_animal.tcc.MVC.model;
 
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"ficha", "endereco", "listaExclusao"})
 @Getter
 @Setter
 @Entity
@@ -41,7 +40,7 @@ public class Denunciante {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_lista_exclusao", referencedColumnName = "id_lista_exclusao")
     private ListaExclusao listaExclusao;
 }

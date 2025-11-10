@@ -104,20 +104,23 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `bem_estar_animal`.`listaExclusao`
+-- Table `bem_estar_animal`.`lista_exclusao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`lista_exclusao` (
   `id_lista_exclusao` BIGINT NOT NULL,
   `observacao` VARCHAR(500) NULL,
-  `id_ficha` BIGINT NULL,
+  `id_denunciante` BIGINT NULL,
   PRIMARY KEY (`id_lista_exclusao`),
-  INDEX `fk_listaExclusao_ficha1_idx` (`id_ficha` ASC) VISIBLE,
-  CONSTRAINT `fk_listaExclusao_ficha1`
-    FOREIGN KEY (`id_ficha`)
-    REFERENCES `bem_estar_animal`.`ficha` (`id_ficha`)
+  INDEX `fk_listaExclusao_denunciante1_idx` (`id_denunciante` ASC) VISIBLE,
+  CONSTRAINT `fk_listaExclusao_denunciante1`
+    FOREIGN KEY (`id_denunciante`)
+    REFERENCES `bem_estar_animal`.`denunciante` (`id_denunciante`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
 
 
 -- -----------------------------------------------------
