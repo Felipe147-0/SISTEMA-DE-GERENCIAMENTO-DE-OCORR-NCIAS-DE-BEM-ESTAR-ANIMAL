@@ -9,50 +9,61 @@
         <h2>INFORMAÇÕES DO DENUNCIANTE</h2>
         <div class="linha"></div>
 
-        <!-- A tag form agora está corretamente posicionada -->
         <div class="dados-grid">
             <div>
                 <p><b>CPF:</b> <span th:text="*{cpf}"></span></p>
             </div>
-
             <div>
                 <p><b>Nome:</b> <span th:text="*{nome}"></span></p>
             </div>
-
             <div>
                 <p><b>Telefone:</b> <span th:text="*{telefone}"></span></p>
             </div>
+        </div>
 
-            <div th:if="${denunciante.emLista}">
-                <p><b>EM LISTA NEGRA</b></p>
-            </div>
+        <div th:if="${denunciante.emLista}" class="mt-4">
+            <p class="text-danger">
+                <b>ESTE DENUNCIANTE ESTÁ EM LISTA NEGRA</b>
+            </p>
+            <p>
+                <b>OBSERVAÇÃO DA EXCLUSÃO:</b>
+                <span th:text="${listaExclusao?.observacao}">[Observação não carregada]</span>
+            </p>
+        </div>
 
-            <!-- Campos de endereço comentados, caso precise deles, basta descomentar -->
-            <!--
-                <div>
-                    <p><b>Endereço:</b> <span th:text="*{endereco.logradouro}"></span></p>
+        <div class="linha mt-4"></div>
+
+        <div id="exclusao-form-container" style="display: none;" class="observacoes-container mt-4">
+            <h4 class="titulo-secundario">Observações para Lista de Exclusão:</h4>
+
+            <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post"
+                id="formExclusao">
+                <input type="hidden" name="em_lista" value="true" />
+
+                <textarea id="observacaoLista" name="observacao" rows="5" class="form-control mb-3"
+                    placeholder="Descreva aqui o motivo detalhado para inclusão na Lista de Exclusão..."
+                    required></textarea>
+
+                <div class="botoes-form-exclusao">
+                    <button type="button" onclick="cancelarExclusao()" class="btn btn-secondary btn-custom">
+                        CANCELAR
+                    </button>
+                    <button type="submit" id="confirmarExclusao" class="btn btn-danger btn-custom">
+                        CONFIRMAR EXCLUSÃO
+                    </button>
                 </div>
-
-                <div>
-                    <p><b>Bairro:</b> <span th:text="*{endereco.bairro}"></span></p>
-                </div>
-
-                <div>
-                    <p><b>Ponto de Referência:</b> <span th:text="*{endereco.ponto_de_referencia}"></span></p>
-                </div>
-                -->
+            </form>
         </div>
 
         <div class="botoes mt-4">
             <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
-
-            <!-- TODO COLOCAR PERMISSAO PARA APENAS O ADM NO LOGIN -->
-            <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post">
-                <input type="hidden" name="em_lista" value="true">
-                <button type="submit" id="enviar" class="btn btn-dark btn-custom">LISTA DE EXCLUSÃO</button>
-            </form>
+            <button type="button" id="ativarExclusao" class="btn btn-dark btn-custom" onclick="exibirCampoObservacao()">
+                LISTA DE EXCLUSÃO
+            </button>
         </div>
     </div>
+
+    <script src="/js/observacao.js"></script>
 </body>
 
 </html>

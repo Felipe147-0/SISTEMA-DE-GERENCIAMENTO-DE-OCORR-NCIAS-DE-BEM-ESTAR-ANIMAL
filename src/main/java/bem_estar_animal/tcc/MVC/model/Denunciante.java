@@ -44,7 +44,6 @@ public class Denunciante {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @ManyToOne()//cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    @JoinColumn(name = "id_lista_exclusao", referencedColumnName = "id_lista_exclusao")
+    @OneToOne(mappedBy = "denunciante")
     private ListaExclusao listaExclusao;
 }
