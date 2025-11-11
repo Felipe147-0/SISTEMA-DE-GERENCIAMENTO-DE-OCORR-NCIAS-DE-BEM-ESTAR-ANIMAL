@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import bem_estar_animal.tcc.MVC.model.Denunciante;
+import bem_estar_animal.tcc.MVC.model.ListaExclusao;
 import bem_estar_animal.tcc.MVC.service.DenuncianteService;
+import bem_estar_animal.tcc.MVC.service.ListaExclusaoService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 @RequestMapping("/denunciante")
@@ -25,13 +25,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class DenuncianteController {
 
     private DenuncianteService denuncianteService;
+    private ListaExclusaoService listaExclusaoService;
 
-    public DenuncianteController(DenuncianteService denuncianteService) {
+    public DenuncianteController(DenuncianteService denuncianteService, ListaExclusaoService listaExclusaoService) {
         this.denuncianteService = denuncianteService;
+        this.listaExclusaoService = listaExclusaoService;
     }
 
     @ModelAttribute("denunciante")
-    public Denunciante denunciante(){
+    public Denunciante denunciante() {
         return new Denunciante();
     }
 
@@ -57,23 +59,26 @@ public class DenuncianteController {
 
     @GetMapping("/perfil/{id}")
     public String denunciantePerfil(@PathVariable Long id, Model model) {
-        Optional<Denunciante> denunciante = denuncianteService.encontrarPorId(id);
+        Denunciante denunciante = denuncianteService.encontrarPorId(id).get();
+        ListaExclusao listaExclusao = listaExclusaoService.getListaByDenunciante(denunciante);
 
-        model.addAttribute("denunciante", denunciante.get());
-        
+        model.addAttribute("denunciante", denunciante);
+        model.addAttribute("listaExclusao", listaExclusao);
+
         return "denunciante-perfil";
     }
 
     @PostMapping("/aprovar/{id}")
-    public String colocarDenuncianteListaExclusao(@PathVariable("id") Long id, @RequestParam("em_lista") String em_lista) {
+    public String colocarDenuncianteListaExclusao(@RequestParam("observacao") String observacao,
+            @PathVariable("id") Long id, @RequestParam("em_lista") String em_lista) {
+
         Optional<Denunciante> denuncianteOpt = denuncianteService.encontrarPorId(id);
 
-        if(denuncianteOpt.isPresent() && em_lista.equals("true")){
+        if (denuncianteOpt.isPresent() && em_lista.equals("true")) {
             Denunciante denunciante = denuncianteOpt.get();
-            denunciante.setEmLista(true);
-            denuncianteService.createDenunciante(denunciante);
+            denuncianteService.adicionarAListaDeExclusao(denunciante, observacao);
         }
         return "redirect:/denunciante/perfil/" + id;
     }
-    
+
 }

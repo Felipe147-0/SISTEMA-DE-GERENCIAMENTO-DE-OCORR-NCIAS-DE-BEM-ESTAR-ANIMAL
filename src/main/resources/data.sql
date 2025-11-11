@@ -6,39 +6,39 @@ VALUES
 
 -- DENUNCIANTE
 INSERT INTO `bem_estar_animal`.`denunciante` 
-  (`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+  (`nome`, `cpf`, `telefone`, `endereco_id`) 
 VALUES 
-  ('noememememe', NULL, '32132121', '1', NULL);
+  ('noememememe', NULL, '32132121', '1');
 
   -- Insert 1
 INSERT INTO `bem_estar_animal`.`denunciante` 
-(`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+(`nome`, `cpf`, `telefone`, `endereco_id` ) 
 VALUES 
-('João Silva', '123.456.789-00', '(11) 98765-4321', null, NULL);
+('João Silva', '123.456.789-00', '(11) 98765-4321', null);
 
 -- Insert 2
 INSERT INTO `bem_estar_animal`.`denunciante` 
-(`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+(`nome`, `cpf`, `telefone`, `endereco_id` ) 
 VALUES 
-('Maria Oliveira', '234.567.890-11', '(21) 99876-5432', null, NULL);
+('Maria Oliveira', '234.567.890-11', '(21) 99876-5432', null);
 
 -- Insert 3
 INSERT INTO `bem_estar_animal`.`denunciante` 
-(`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+(`nome`, `cpf`, `telefone`, `endereco_id` ) 
 VALUES 
-('Carlos Pereira', '345.678.901-22', '(31) 95555-6677', null, null);
+('Carlos Pereira', '345.678.901-22', '(31) 95555-6677', null);
 
 -- Insert 4
 INSERT INTO `bem_estar_animal`.`denunciante` 
-(`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+(`nome`, `cpf`, `telefone`, `endereco_id` ) 
 VALUES 
-('Ana Souza', '456.789.012-33', '(41) 92222-3344', null, NULL);
+('Ana Souza', '456.789.012-33', '(41) 92222-3344', null);
 
 -- Insert 5
 INSERT INTO `bem_estar_animal`.`denunciante` 
-(`nome`, `cpf`, `telefone`, `endereco_id`, `id_lista_exclusao`) 
+(`nome`, `cpf`, `telefone`, `endereco_id`) 
 VALUES 
-('Lucas Lima', '567.890.123-44', '(51) 91111-2233', null, null);
+('Lucas Lima', '567.890.123-44', '(51) 91111-2233', null);
 
   
 -- SETOR
