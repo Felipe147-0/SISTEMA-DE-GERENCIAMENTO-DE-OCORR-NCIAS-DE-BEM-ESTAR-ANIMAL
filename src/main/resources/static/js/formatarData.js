@@ -13,9 +13,9 @@ function formatarData(campo) {
 
     if (valor.length >= 4) {
         let mes = valor.substring(2, 4);
-        if(parseInt(mes) > 12){
+        if (parseInt(mes) > 12) {
             mes = "";
-        }else if(parseInt(mes) === 0){
+        } else if (parseInt(mes) === 0) {
             mes = "01";
         }
         valor = valor.substring(0, 2) + mes + valor.substring(4);
@@ -27,5 +27,8 @@ function formatarData(campo) {
         .slice(0, 10);
 }
 
-const input = document.getElementById("dataTramite");
-input.addEventListener("input", () => formatarData(input));
+const todosInput = document.querySelectorAll(".data-format");
+
+todosInput.forEach((input) => {
+    input.addEventListener("input", () => formatarData(input));
+});

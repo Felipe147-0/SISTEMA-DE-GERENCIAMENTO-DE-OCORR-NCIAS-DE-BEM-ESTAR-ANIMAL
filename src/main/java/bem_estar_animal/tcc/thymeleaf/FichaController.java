@@ -92,7 +92,7 @@ public class FichaController {
 
         model.addAttribute("fichas", fichaList);
 
-        return "buscar";
+        return "ficha-buscar";
     }
 
     @PostMapping("/criar")

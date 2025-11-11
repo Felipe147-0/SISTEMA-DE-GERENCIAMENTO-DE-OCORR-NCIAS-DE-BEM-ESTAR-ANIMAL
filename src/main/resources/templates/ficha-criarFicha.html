@@ -31,7 +31,7 @@
             <div class="dados-grid">
                 <div>
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" th:field="*{denunciante.cpf}">
+                    <input type="text" class="apenas-numeros" id="cpf" th:field="*{denunciante.cpf}">
                 </div>
 
                 <div>
@@ -41,7 +41,7 @@
 
                 <div>
                     <label for="telefone">Telefone:</label>
-                    <input type="text" id="telefone" th:field="*{denunciante.telefone}">
+                    <input type="text" class="apenas-numeros" id="telefone" th:field="*{denunciante.telefone}">
                 </div>
 
                 <div>
@@ -91,7 +91,7 @@
 
                 <div>
                     <label for="dataTramite">Data:</label>
-                    <input type="text" id="dataTramite" th:field="*{data_tramite}">
+                    <input type="text" class="data-format" id="dataTramite" th:field="*{data_tramite}">
                 </div>
 
                 <div>
@@ -107,7 +107,6 @@
         </form>
     </div>
 
-    <script src="/js/formatarData.js"></script>
     <script src="/js/cpfExiste.js"></script>
 </body>
 

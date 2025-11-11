@@ -6,11 +6,11 @@
 <body>
 
     <div class="centralizar">
-        <a class="btn btnHome btn-primary btn-lg">CONSULTA DE OCORRENCIAS</a>
         <a class="btn btnHome btn-primary btn-lg">CONSULTAR DADOS DE ANIMAIS COM CHIP</a>
+        <a class="btn btnHome btn-primary btn-lg">CONSULTA DE OCORRENCIAS</a>
         <a th:href="@{/funcionario/criar}" class="btn btnHome btn-primary btn-lg">ADICIONAR FUNCIONARIO</a>
-        <a class="btn btnHome btn-primary btn-lg">BUSCAR</a>
-        <a class="btn btnHome btn-dark btn-lg">LISTA DE EXCLUSÃO</a>
+        <a th:href="@{/denunciante/buscar}" class="btn btnHome btn-primary btn-lg">DENUNCIANTES</a>
+        <a th:href="@{/listaExclusao/buscar}" class="btn btnHome btn-dark btn-lg">LISTA DE EXCLUSÃO</a>
         <a th:href="@{/}" class="btn btnHome btn-success btn-lg">VOLTAR</a>
     </div>
 
