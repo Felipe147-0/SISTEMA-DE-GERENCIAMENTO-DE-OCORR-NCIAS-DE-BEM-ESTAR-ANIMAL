@@ -11,22 +11,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.model.ListaExclusao;
 import bem_estar_animal.tcc.MVC.service.DenuncianteService;
-import bem_estar_animal.tcc.MVC.service.ListaExclusaoService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/listaExclusao")
 public class ListaExclusaoController {
 
     private DenuncianteService denuncianteService;
-    private ListaExclusaoService exclusaoService;
 
-    public ListaExclusaoController(DenuncianteService denuncianteService, ListaExclusaoService exclusaoService) {
+    public ListaExclusaoController(DenuncianteService denuncianteService) {
         this.denuncianteService = denuncianteService;
-        this.exclusaoService = exclusaoService;
+    }
+
+    @ModelAttribute("listaExclusao")
+    public ListaExclusao listaExclusao(){
+        return new ListaExclusao();
     }
 
     @GetMapping("/buscar")
@@ -38,51 +39,15 @@ public class ListaExclusaoController {
             denuncianteList = denuncianteService.busca(query);
 
             if (denuncianteList.isEmpty()) {
-                denuncianteList = denuncianteService.getAllDenunciante();
+                denuncianteList = denuncianteService.getDenunciantePorEmLista();
             }
 
         } else {
-            denuncianteList = denuncianteService.getAllDenunciante();
+            denuncianteList = denuncianteService.getDenunciantePorEmLista();
         }
 
         model.addAttribute("denuncianteList", denuncianteList);
 
         return "listaExclusao-home";
     }
-
-    @PostMapping("/adicionarLista")
-    public String adicionarLista(@RequestParam Long listaExclusao, @RequestParam Long idDenunciante) {
-        Optional<ListaExclusao> listOptional = exclusaoService.getListaByid(listaExclusao);
-        Optional<Denunciante> denuncianteOptional = denuncianteService.encontrarPorId(idDenunciante);
-
-        if (listOptional.isPresent() && denuncianteOptional.isPresent()) {
-            Denunciante denunciante = denuncianteOptional.get();
-
-            denunciante.setListaExclusao(listOptional.get());
-            denuncianteService.createDenunciante(denunciante);
-        }
-
-        return "redirect:/listaExclusao/buscar";
-    }
-
-    // @GetMapping("/criar")
-    // public String criarLista(Model model) {
-    //     ListaExclusao listaExclusao = new ListaExclusao();
-    //     Denunciante denunciante = new Denunciante();
-
-    //     // faz a associação
-    //     denunciante.setListaExclusao(listaExclusao);
-    //     listaExclusao.getDenunciantes().add(denunciante); // caso a listaExclusao tenha a lista de denunciantes
-
-    //     model.addAttribute("listaExclusao", listaExclusao);
-    //     return "listaExclusao-criar"; // template para criar a lista
-    // }
-
-    // @PostMapping("/criar")
-    // public String salvarLista(@ModelAttribute ListaExclusao listaExclusao) {
-    //     // CascadeType.PERSIST garante que o denunciante seja salvo junto
-    //     exclusaoService.save(listaExclusao);
-    //     return "redirect:/listaExclusao/buscar";
-    // }
-
 }

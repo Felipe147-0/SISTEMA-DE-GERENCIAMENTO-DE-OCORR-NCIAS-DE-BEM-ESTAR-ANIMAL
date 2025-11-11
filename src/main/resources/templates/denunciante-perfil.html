@@ -10,22 +10,25 @@
         <div class="linha"></div>
 
         <!-- A tag form agora está corretamente posicionada -->
-        <form th:action="@{/listaExclusao/adicionarLista}" method="post" th:object="${denunciante}">
-            <div class="dados-grid">
-                <div>
-                    <p><b>CPF:</b> <span th:text="*{cpf}"></span></p>
-                </div>
+        <div class="dados-grid">
+            <div>
+                <p><b>CPF:</b> <span th:text="*{cpf}"></span></p>
+            </div>
 
-                <div>
-                    <p><b>Nome:</b> <span th:text="*{nome}"></span></p>
-                </div>
+            <div>
+                <p><b>Nome:</b> <span th:text="*{nome}"></span></p>
+            </div>
 
-                <div>
-                    <p><b>Telefone:</b> <span th:text="*{telefone}"></span></p>
-                </div>
+            <div>
+                <p><b>Telefone:</b> <span th:text="*{telefone}"></span></p>
+            </div>
 
-                <!-- Campos de endereço comentados, caso precise deles, basta descomentar -->
-                <!--
+            <div th:if="${denunciante.emLista}">
+                <p><b>EM LISTA NEGRA</b></p>
+            </div>
+
+            <!-- Campos de endereço comentados, caso precise deles, basta descomentar -->
+            <!--
                 <div>
                     <p><b>Endereço:</b> <span th:text="*{endereco.logradouro}"></span></p>
                 </div>
@@ -38,18 +41,17 @@
                     <p><b>Ponto de Referência:</b> <span th:text="*{endereco.ponto_de_referencia}"></span></p>
                 </div>
                 -->
-                <div>
-                    <input type="hidden" name="listaExclusao" id="listaExclusao" value="1">
-                    <input type="hidden" name="idDenunciante" id="idDenunciante" th:value="*{id_denunciante}">
-                </div>
-            </div>
+        </div>
 
-            <div class="botoes mt-4">
-                <a th:href="@{/listaExclusao/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
+        <div class="botoes mt-4">
+            <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
 
+            <!-- TODO COLOCAR PERMISSAO PARA APENAS O ADM NO LOGIN -->
+            <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post">
+                <input type="hidden" name="em_lista" value="true">
                 <button type="submit" id="enviar" class="btn btn-dark btn-custom">LISTA DE EXCLUSÃO</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 

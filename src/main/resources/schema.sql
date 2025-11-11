@@ -124,7 +124,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `bem_estar_animal`.`denunciante`
+-- Table `bem_estar_animal`.`denunciante` (REFEITA APENAS COM em_lista)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`denunciante` (
   `id_denunciante` BIGINT NOT NULL AUTO_INCREMENT,
@@ -133,17 +133,14 @@ CREATE TABLE IF NOT EXISTS `bem_estar_animal`.`denunciante` (
   `telefone` VARCHAR(255) NULL DEFAULT NULL,
   `endereco_id` BIGINT NULL DEFAULT NULL,
   `id_lista_exclusao` BIGINT NULL,
+  `em_lista` TINYINT(1) NULL DEFAULT 0, 
   PRIMARY KEY (`id_denunciante`),
   INDEX `endereco_id` (`endereco_id` ASC) VISIBLE,
   INDEX `fk_denunciante_listaExclusao1_idx` (`id_lista_exclusao` ASC) VISIBLE,
   CONSTRAINT `denunciante_ibfk_1`
     FOREIGN KEY (`endereco_id`)
-    REFERENCES `bem_estar_animal`.`endereco` (`id_endereco`),
-  CONSTRAINT `fk_denunciante_listaExclusao1`
-    FOREIGN KEY (`id_lista_exclusao`)
-    REFERENCES `bem_estar_animal`.`listaExclusao` (`id_lista_exclusao`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `bem_estar_animal`.`endereco` (`id_endereco`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;

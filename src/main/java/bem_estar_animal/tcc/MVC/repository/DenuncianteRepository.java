@@ -13,4 +13,6 @@ public interface DenuncianteRepository extends JpaRepository<Denunciante, Long> 
     List<Denunciante> findByCpf(String query);
 
     List<Denunciante> findByNome(String string);
+
+    List<Denunciante> findByEmListaTrue();
 }

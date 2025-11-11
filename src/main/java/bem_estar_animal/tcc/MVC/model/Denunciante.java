@@ -2,6 +2,7 @@ package bem_estar_animal.tcc.MVC.model;
 
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,9 @@ public class Denunciante {
 
     private String telefone;
 
+    @Column(name = "em_lista")
+    private boolean emLista;
+
     @OneToOne(mappedBy = "denunciante")
     private Ficha ficha;
 
@@ -40,7 +44,7 @@ public class Denunciante {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne()//cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     @JoinColumn(name = "id_lista_exclusao", referencedColumnName = "id_lista_exclusao")
     private ListaExclusao listaExclusao;
 }

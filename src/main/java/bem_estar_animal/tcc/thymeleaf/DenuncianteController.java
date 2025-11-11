@@ -13,16 +13,26 @@ import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.service.DenuncianteService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/denunciante")
+@SessionAttributes("denunciante")
 public class DenuncianteController {
 
     private DenuncianteService denuncianteService;
 
     public DenuncianteController(DenuncianteService denuncianteService) {
         this.denuncianteService = denuncianteService;
+    }
+
+    @ModelAttribute("denunciante")
+    public Denunciante denunciante(){
+        return new Denunciante();
     }
 
     @GetMapping("/buscar")
@@ -53,4 +63,17 @@ public class DenuncianteController {
         
         return "denunciante-perfil";
     }
+
+    @PostMapping("/aprovar/{id}")
+    public String colocarDenuncianteListaExclusao(@PathVariable("id") Long id, @RequestParam("em_lista") String em_lista) {
+        Optional<Denunciante> denuncianteOpt = denuncianteService.encontrarPorId(id);
+
+        if(denuncianteOpt.isPresent() && em_lista.equals("true")){
+            Denunciante denunciante = denuncianteOpt.get();
+            denunciante.setEmLista(true);
+            denuncianteService.createDenunciante(denunciante);
+        }
+        return "redirect:/denunciante/perfil/" + id;
+    }
+    
 }

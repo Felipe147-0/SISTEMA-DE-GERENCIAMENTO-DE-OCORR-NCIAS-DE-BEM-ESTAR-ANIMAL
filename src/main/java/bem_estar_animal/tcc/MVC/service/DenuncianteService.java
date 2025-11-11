@@ -15,18 +15,17 @@ import bem_estar_animal.tcc.MVC.repository.FichaRepository;
 public class DenuncianteService {
 
     private DenuncianteRepository denuncianteRepository;
-    private EnderecoRepository enderecoRepository;
-    private FichaRepository fichaRepository;
 
-    public DenuncianteService(DenuncianteRepository denuncianteRepository, EnderecoRepository enderecoRepository,
-            FichaRepository fichaRepository) {
+    public DenuncianteService(DenuncianteRepository denuncianteRepository) {
         this.denuncianteRepository = denuncianteRepository;
-        this.enderecoRepository = enderecoRepository;
-        this.fichaRepository = fichaRepository;
     }
 
     public List<Denunciante> getAllDenunciante() {
         return denuncianteRepository.findAll();
+    }
+
+    public List<Denunciante> getDenunciantePorEmLista(){
+        return denuncianteRepository.findByEmListaTrue();
     }
 
     public List<Denunciante> busca(String query) {
