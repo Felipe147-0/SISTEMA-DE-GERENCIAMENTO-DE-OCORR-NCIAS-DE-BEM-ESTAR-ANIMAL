@@ -18,4 +18,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
     List<Animal> findByNumeroChipContaining(String numeroChip);
 
+    boolean existsByNumeroChip(String numeroChip);
+
 }

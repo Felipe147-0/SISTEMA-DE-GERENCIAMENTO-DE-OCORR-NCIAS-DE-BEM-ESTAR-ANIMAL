@@ -9,13 +9,12 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import bem_estar_animal.tcc.MVC.model.Animal;
-import bem_estar_animal.tcc.MVC.model.Ficha;
 import bem_estar_animal.tcc.MVC.repository.AnimalRepository;
 
 @Service
 public class AnimalService {
 
-    private AnimalRepository animalRepository;
+    private final AnimalRepository animalRepository;
 
     public AnimalService(AnimalRepository animalRepository) {
         this.animalRepository = animalRepository;
@@ -34,27 +33,44 @@ public class AnimalService {
     }
 
     public String gerarChip() {
-        int numero = animalRepository.contarAnimais() + 1;
         int ano = Year.now().getValue();
         int mes = MonthDay.now().getMonthValue();
         int dia = MonthDay.now().getDayOfMonth();
-        return String.format("CHIP-%d%d%d-%04d", ano, mes, dia, numero);
+        int numero = 1;
+
+        String chip;
+        do {
+            chip = String.format("CHIP-%d%d%d-%04d", ano, mes, dia, numero);
+            numero++;
+        } while (animalRepository.existsByNumeroChip(chip));
+
+        return chip;
     }
 
     public Animal criarAnimal() {
         Animal animal = new Animal();
-
-        String registro = gerarRegistro();
-        String chip = gerarChip();
-
-        animal.setRegistro(registro);
-        animal.setNumeroChip(chip);
-
+        animal.setRegistro(gerarRegistro());
+        animal.setPossuiChip(false);
         return animal;
     }
 
     public void salvarAnimal(Animal animal) {
+        if (animal.getNumeroChip() == null || animal.getNumeroChip().isBlank()) {
+            animal.setPossuiChip(false);
+        } else {
+            animal.setPossuiChip(true);
+        }
+
         animalRepository.save(animal);
+    }
+
+    public void removerChip(Long idAnimal) {
+        Optional<Animal> animalOpt = animalRepository.findById(idAnimal);
+        animalOpt.ifPresent(animal -> {
+            animal.setNumeroChip(null);
+            animal.setPossuiChip(false);
+            animalRepository.save(animal);
+        });
     }
 
     public Optional<Animal> encontrarPorId(Long id) {
@@ -63,13 +79,11 @@ public class AnimalService {
 
     public List<Animal> busca(String query) {
         if (query.matches("\\d+")) {
-            // Buscar por número do chip (somente dígitos)
             List<Animal> encontradoPorChip = animalRepository.findByNumeroChipContaining(query);
             if (!encontradoPorChip.isEmpty()) {
                 return encontradoPorChip;
             }
         } else {
-            // Buscar por registro (texto)
             List<Animal> encontradoPorRegistro = animalRepository.findByRegistroContainingIgnoreCase(query);
             if (!encontradoPorRegistro.isEmpty()) {
                 return encontradoPorRegistro;
@@ -78,5 +92,4 @@ public class AnimalService {
 
         return Collections.emptyList();
     }
-
 }

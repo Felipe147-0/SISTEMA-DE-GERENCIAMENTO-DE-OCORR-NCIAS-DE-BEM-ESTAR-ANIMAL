@@ -3,62 +3,65 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
+<body
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
 
-    <div class="container-ouvidoria">
-        <h4 class="titulo-principal">SETOR DE ADMINISTRAÇÃO</h4>
+    <div class="card shadow-lg border-0 rounded-5 p-5" style="width: 700px; background: #fff;">
+        <div class="text-center mb-4">
+            <i class="bi bi-patch-check text-success fs-1"></i>
+            <h3 class="fw-bold text-success mb-0">Cadastro de Animal</h3>
+            <p class="text-muted mb-0">Registre e mantenha os dados dos animais atualizados</p>
+        </div>
 
-        <h2>CADASTRO DE ANIMAIS</h2>
-
-        <div class="linha"></div>
-
-        <!-- Formulário de cadastro de animal -->
         <form method="post" th:action="@{/animal/salvar}" th:object="${animal}">
-            <div class="dados-grid">
-
-                <!-- Tipo do animal -->
-                <!-- <div>
-                    <label for="tipo">Tipo do Animal:</label>
-                    <select id="tipo" th:field="*{tipo}">
-                        <option value="">--Selecione o tipo--</option>
-                        <option value="GATO">Gato</option>
-                        <option value="CACHORRO">Cachorro</option>
-                    </select>
-                </div> -->
-
-                <!-- Chip (campo exibido apenas para visualização, já que é gerado automaticamente) -->
-                <div>
-                    <label for="chip">Número do Chip:</label>
-                    <input type="text" id="chip" th:field="*{numeroChip}" placeholder="Gerado automaticamente" readonly>
-                </div>
-
-                <!-- ID do animal (gerado automaticamente pelo back-end) -->
-                <div>
-                    <label for="registro">Registro do Animal:</label>
-                    <input type="text" id="registro" th:field="*{registro}" placeholder="Gerado automaticamente" readonly>
-                </div>
-
-                <!-- Selecionar ficha (opcional, caso o animal não pertença a uma) -->
-                <!-- <div>
-                    <label for="ficha-select">Vincular a uma Ficha de Ocorrência:</label>
-                    <select id="ficha-select" th:field="*{ficha}">
-                        <option value="">--Não vinculado--</option>
-                        <option th:each="ficha : ${fichasList}" 
-                                th:value="${ficha.id}" 
-                                th:text="'Ficha nº ' + ${ficha.id}">
-                        </option>
-                    </select>
-                </div> -->
-
+            
+            <!-- Tipo do Animal -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Tipo do Animal</label>
+                <select class="form-select" th:field="*{tipo}">
+                    <option value="">--Selecione o tipo--</option>
+                    <option th:each="tipo : ${tipoAnimalEnums}" th:value="${tipo}" th:text="${tipo.descricao}">
+                    </option>
+                </select>
             </div>
 
-            <div class="botoes mt-4">
+            <!-- Número do Chip -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Número do Chip</label>
+                <div class="input-group gap-2">
+                    <input type="text" class="form-control" th:field="*{numeroChip}"
+                        placeholder="Gerado automaticamente" id="numeroChip" readonly>
+                    <button type="button" class="btn btn-success btn-custom" id="btnGerarChip">
+                        <i class="bi bi-cpu"></i> Adicionar Chip
+                    </button>
+                    <button type="button" class="btn btn-danger btn-custom d-none" id="btnRemoverChip">
+                        <i class="bi bi-trash"></i> Remover Chip
+                    </button>
+                </div>
+            </div>
+
+            <!-- Registro -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Registro</label>
+                <input type="text" class="form-control" th:field="*{registro}" placeholder="Gerado automaticamente"
+                    readonly>
+            </div>
+
+            <!-- Observação -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Observação</label>
+                <textarea class="form-control" th:field="*{observacao}" rows="3"
+                    placeholder="Digite observações sobre o animal..."></textarea>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
                 <a th:href="@{/animal/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
                 <button type="submit" class="btn btn-success btn-custom">SALVAR</button>
             </div>
         </form>
-
     </div>
+
+    <script src="/js/cadastrar-animal.js"></script>
 </body>
 
 </html>

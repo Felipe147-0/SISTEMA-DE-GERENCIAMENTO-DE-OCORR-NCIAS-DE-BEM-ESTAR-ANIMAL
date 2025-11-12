@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `possui_chip` TINYINT(1) NULL DEFAULT 0,
   `numero_chip` VARCHAR(255) NULL,
   `observacao` VARCHAR(500) NULL,
+  `tipo` VARCHAR(50) NULL,
   `ficha_id` BIGINT NULL,
   PRIMARY KEY (`id_animal`),
   INDEX `ficha_id_idx` (`ficha_id` ASC),
