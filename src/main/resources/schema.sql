@@ -2,6 +2,7 @@ DROP SCHEMA IF EXISTS `bem_estar_animal`;
 CREATE SCHEMA IF NOT EXISTS `bem_estar_animal` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `bem_estar_animal`;
 
+-- TABELA ENDERECO
 CREATE TABLE IF NOT EXISTS `endereco` (
   `id_endereco` BIGINT NOT NULL AUTO_INCREMENT,
   `logradouro` VARCHAR(255) NULL DEFAULT NULL,
@@ -10,12 +11,14 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   PRIMARY KEY (`id_endereco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- TABELA SETOR
 CREATE TABLE IF NOT EXISTS `setor` (
   `id_setor` BIGINT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_setor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- TABELA DENUNCIANTE
 CREATE TABLE IF NOT EXISTS `denunciante` (
   `id_denunciante` BIGINT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NULL DEFAULT NULL,
@@ -30,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `denunciante` (
     REFERENCES `endereco` (`id_endereco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- TABELA FUNCIONARIO
 CREATE TABLE IF NOT EXISTS `funcionario` (
   `id_funcionario` BIGINT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NULL DEFAULT NULL,
@@ -45,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- TABELA LISTA_EXCLUSAO
 CREATE TABLE IF NOT EXISTS `lista_exclusao` (
   `id_lista_exclusao` BIGINT NOT NULL AUTO_INCREMENT,
   `observacao` VARCHAR(500) NULL,
@@ -56,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `lista_exclusao` (
     REFERENCES `denunciante` (`id_denunciante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- TABELA FICHA
 CREATE TABLE IF NOT EXISTS `ficha` (
   `id_ficha` BIGINT NOT NULL AUTO_INCREMENT,
   `processo_ouvidoria` VARCHAR(50) NULL DEFAULT NULL,
@@ -69,7 +75,6 @@ CREATE TABLE IF NOT EXISTS `ficha` (
   `hora_secretaria` VARCHAR(40) NULL DEFAULT NULL,
   `funcionario_id` BIGINT NULL DEFAULT NULL,
   `historico` VARCHAR(255) NULL DEFAULT NULL,
-  `animal` VARCHAR(10) NULL DEFAULT NULL,
   `processo_secretaria` VARCHAR(50) NULL DEFAULT NULL,
   `fiscal` VARCHAR(50) NULL DEFAULT NULL,
   `data_tramite` VARCHAR(40) NULL DEFAULT NULL,
@@ -86,4 +91,21 @@ CREATE TABLE IF NOT EXISTS `ficha` (
   CONSTRAINT `ficha_ibfk_2`
     FOREIGN KEY (`funcionario_id`)
     REFERENCES `funcionario` (`id_funcionario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- TABELA ANIMAL
+CREATE TABLE IF NOT EXISTS `animal` (
+  `id_animal` BIGINT NOT NULL AUTO_INCREMENT,
+  `registro` VARCHAR(255) NULL,
+  `possui_chip` TINYINT(1) NULL DEFAULT 0,
+  `numero_chip` VARCHAR(255) NULL,
+  `observacao` VARCHAR(500) NULL,
+  `ficha_id` BIGINT NULL,
+  PRIMARY KEY (`id_animal`),
+  INDEX `ficha_id_idx` (`ficha_id` ASC),
+  CONSTRAINT `fk_animal_ficha`
+    FOREIGN KEY (`ficha_id`)
+    REFERENCES `ficha` (`id_ficha`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

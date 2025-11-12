@@ -5,26 +5,39 @@
 
 <body>
 
+<!-- Filtro de pesquisa -->
 <form th:action="@{/ficha/buscar}" method="get" class="d-flex form-filtro">
     <div class="input-group">
-        <input type="text" class="form-control" name="query" th:value="${query}">
-        <button class="btn btn btn-outline-secondary" type="submit" style="margin-top:4px;">
+        <input type="text" class="form-control" name="query" placeholder="Buscar ficha..." th:value="${query}">
+        <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
             <i class="bi bi-search"></i>
         </button>
     </div>
 </form>
 
 <div class="container container-listar">
+    <!-- Botões de ação -->
     <div class="botoes mt-4">
         <a th:href="@{/ouvidoria}" class="btn btn-primary btn-custom">VOLTAR</a>
+        <a th:href="@{/ficha/adicionar}" class="btn btn-success">ADICIONAR FICHA</a>
     </div>
-    
-    <ul>
-        <li th:each="ficha : ${fichas}">
-            <a th:href="@{/ficha/perfil/{id}(id=${ficha.id_ficha})}" th:text="${ficha.processoOuvidoria}"></a>
+
+    <!-- Lista de fichas -->
+    <ul class="list-group mt-3">
+        <li class="list-group-item" th:each="ficha : ${fichas}">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <strong th:text="${ficha.processoOuvidoria}">Processo / Ouvidoria</strong>
+                    <div class="text-muted" th:text="${ficha.assunto != null ? ficha.assunto : 'Sem assunto'}">Assunto</div>
+                </div>
+                <div>
+                    <a th:href="@{/ficha/perfil/{id}(id=${ficha.id_ficha})}" class="btn btn-sm btn-primary">VER</a>
+                    <a th:href="@{/ficha/edit/{id}(id=${ficha.id_ficha})}" class="btn btn-sm btn-warning">EDITAR</a>
+                </div>
+            </div>
         </li>
     </ul>
 </div>
-</body>
 
+</body>
 </html>

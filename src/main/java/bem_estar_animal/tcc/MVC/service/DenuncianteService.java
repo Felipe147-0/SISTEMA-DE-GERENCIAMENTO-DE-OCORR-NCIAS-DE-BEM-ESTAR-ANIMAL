@@ -59,7 +59,7 @@ public class DenuncianteService {
             }
 
         } else if (query.matches("\\w+")) {
-            List<Denunciante> encontradoPorNome = denuncianteRepository.findByNome("%" + query + "%");
+            List<Denunciante> encontradoPorNome = denuncianteRepository.findByNomeLike("%" + query + "%");
 
             if (!encontradoPorNome.isEmpty()) {
                 return encontradoPorNome;

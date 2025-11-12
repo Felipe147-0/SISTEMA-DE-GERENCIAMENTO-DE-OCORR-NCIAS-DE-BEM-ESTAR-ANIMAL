@@ -1,6 +1,9 @@
 package bem_estar_animal.tcc.MVC.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,7 +48,8 @@ public class Ficha {
 
     private String historico;
 
-    private String animal;
+    @OneToMany(mappedBy = "ficha")
+    private List<Animal> animal = new ArrayList<>();
 
     private String processo_secretaria;
 
