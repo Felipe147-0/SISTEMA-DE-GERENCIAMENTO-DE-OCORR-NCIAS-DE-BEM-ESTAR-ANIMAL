@@ -5,27 +5,41 @@
 
 <body>
 
+<!-- Filtro de pesquisa -->
 <form th:action="@{/denunciante/buscar}" method="get" class="d-flex form-filtro">
     <div class="input-group">
-        <input type="text" class="form-control" name="query" th:value="${query}">
-        <button class="btn btn btn-outline-secondary" type="submit" style="margin-top:4px;">
+        <input type="text" class="form-control" name="query" placeholder="Buscar denunciante..." th:value="${query}">
+        <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
             <i class="bi bi-search"></i>
         </button>
     </div>
 </form>
 
 <div class="container container-listar">
+    <!-- Botões de ação -->
     <div class="botoes mt-4">
         <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
     </div>
 
-    <ul>
-        <li th:each="denunciante : ${denuncianteList}">
-            <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}"
-               th:text="${denunciante.nome}"></a>
+    <!-- Lista de denunciantes -->
+    <ul class="list-group mt-3">
+        <li class="list-group-item" th:each="denunciante : ${denuncianteList}">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <strong th:text="${denunciante.nome}">Nome do Denunciante</strong>
+                    <div class="text-muted">
+                        <span th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
+                        <span class="ms-2" th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>
+                    </div>
+                </div>
+                <div>
+                    <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}" class="btn btn-sm btn-primary">VER</a>
+                    <a th:href="@{/denunciante/editar/{id}(id=${denunciante.id_denunciante})}" class="btn btn-sm btn-warning">EDITAR</a>
+                </div>
+            </div>
         </li>
     </ul>
 </div>
-</body>
 
+</body>
 </html>
