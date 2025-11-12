@@ -13,33 +13,33 @@
         <div class="linha"></div>
 
         <!-- Formulário de cadastro de animal -->
-        <form method="post" th:action="@{/animal/criar}" th:object="${animal}">
+        <form method="post" th:action="@{/animal/salvar}" th:object="${animal}">
             <div class="dados-grid">
 
                 <!-- Tipo do animal -->
-                <div>
+                <!-- <div>
                     <label for="tipo">Tipo do Animal:</label>
                     <select id="tipo" th:field="*{tipo}">
                         <option value="">--Selecione o tipo--</option>
                         <option value="GATO">Gato</option>
                         <option value="CACHORRO">Cachorro</option>
                     </select>
-                </div>
+                </div> -->
 
                 <!-- Chip (campo exibido apenas para visualização, já que é gerado automaticamente) -->
                 <div>
                     <label for="chip">Número do Chip:</label>
-                    <input type="text" id="chip" th:field="*{chip}" placeholder="Gerado automaticamente" readonly>
+                    <input type="text" id="chip" th:field="*{numeroChip}" placeholder="Gerado automaticamente" readonly>
                 </div>
 
                 <!-- ID do animal (gerado automaticamente pelo back-end) -->
                 <div>
-                    <label for="id">ID do Animal:</label>
-                    <input type="text" id="id" th:field="*{id}" placeholder="Gerado automaticamente" readonly>
+                    <label for="registro">Registro do Animal:</label>
+                    <input type="text" id="registro" th:field="*{registro}" placeholder="Gerado automaticamente" readonly>
                 </div>
 
                 <!-- Selecionar ficha (opcional, caso o animal não pertença a uma) -->
-                <div>
+                <!-- <div>
                     <label for="ficha-select">Vincular a uma Ficha de Ocorrência:</label>
                     <select id="ficha-select" th:field="*{ficha}">
                         <option value="">--Não vinculado--</option>
@@ -48,7 +48,7 @@
                                 th:text="'Ficha nº ' + ${ficha.id}">
                         </option>
                     </select>
-                </div>
+                </div> -->
 
             </div>
 
