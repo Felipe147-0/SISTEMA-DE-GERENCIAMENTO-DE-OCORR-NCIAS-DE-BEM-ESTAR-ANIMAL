@@ -17,7 +17,7 @@
 
 <div class="container container-listar">
     <!-- Botões de ação -->
-    <div class="botoes mt-4">
+    <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
         <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
     </div>
 
@@ -27,6 +27,10 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <strong th:text="${denunciante.nome}">Nome do Denunciante</strong>
+
+                    <!-- Badge indicando se está em lista -->
+                    <span th:if="${denunciante.emLista}" class="badge bg-danger ms-2">Em Lista</span>
+
                     <div class="text-muted">
                         <span th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
                         <span class="ms-2" th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>

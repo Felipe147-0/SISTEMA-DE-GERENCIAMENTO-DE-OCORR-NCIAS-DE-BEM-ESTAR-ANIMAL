@@ -50,7 +50,7 @@ insert into setor values (4, "FISCAL");
 -- FUNCIONARIO
 insert into funcionario values (1, "pietro", 2222, "Usuário", 1);
 
--- FICHA
+-- FICHA (insert first)
 INSERT INTO `bem_estar_animal`.`ficha` (
   `processo_ouvidoria`,
   `recebido_por_secretaria`,
@@ -63,7 +63,6 @@ INSERT INTO `bem_estar_animal`.`ficha` (
   `hora_secretaria`,
   `funcionario_id`,
   `historico`,
-  `animal`,
   `processo_secretaria`,
   `fiscal`,
   `data_tramite`,
@@ -78,13 +77,12 @@ INSERT INTO `bem_estar_animal`.`ficha` (
   'Ouvidoria Municipal',
   '2025-11-04',
   '10:35',
-  1,  -- denunciante_id (ok)
+  1,
   'Notificação encaminhada para fiscalização.',
   '2025-11-05',
   '09:15',
-  1,  -- funcionario_id corrigido para 1
+  1,
   'Denúncia recebida e encaminhada à equipe de campo.',
-  'Cachorro',
   'PROC-SEC-2025-045',
   'Fiscal João da Silva',
   '2025-11-06',
@@ -93,3 +91,10 @@ INSERT INTO `bem_estar_animal`.`ficha` (
   0,
   'PROTO-2025-98765'
 );
+
+-- ANIMAL (insert after ficha)
+INSERT INTO `bem_estar_animal`.`animal` (
+  `registro`, `possui_chip`, `numero_chip`, `observacao`, `ficha_id`
+) VALUES
+('Cachorro', 0, NULL, 'Animal encontrado em situação de risco', 1),
+('Gato', 1, 'CHIP-12345', 'Animal com chip, resgatado', 1);
