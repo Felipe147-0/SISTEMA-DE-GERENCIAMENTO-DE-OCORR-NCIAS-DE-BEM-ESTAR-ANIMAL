@@ -44,13 +44,33 @@
                 </select>
             </div>
 
+            <!-- CPF -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold" for="cpf">CPF</label>
+                <input type="text" class="form-control" id="cpf" th:field="*{cpf}" placeholder="CPF do funcionário">
+            </div>
+
+            <!-- Telefone -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold" for="telefone">Telefone</label>
+                <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{telefone}" placeholder="Telefone">
+            </div>
+
+            <!-- Endereço -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold" for="endereco">Endereço</label>
+                <input type="text" class="form-control" id="endereco" th:field="*{endereco}" placeholder="Endereço completo">
+            </div>
+
             <!-- Botões -->
             <div class="d-flex justify-content-center gap-3 mt-4">
                 <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-                <button type="submit" class="btn btn-success btn-custom">SALVAR</button>
+                <button type="submit" id="enviar" disabled class="btn btn-success btn-custom">SALVAR</button>
             </div>
         </form>
     </div>
+
+    <script src="/js/cpfExiste.js"></script>
 
 </body>
 

@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,4 +39,10 @@ public class Funcionario {
     @ManyToOne
     @JoinColumn(name = "id_setor")
     private Setor setor;
+
+    private String cpf;  
+
+    private String telefone; 
+
+    private String endereco;  
 }

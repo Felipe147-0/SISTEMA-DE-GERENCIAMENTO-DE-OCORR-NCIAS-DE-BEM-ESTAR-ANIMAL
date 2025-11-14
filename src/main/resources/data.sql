@@ -22,8 +22,9 @@ INSERT INTO `setor` VALUES
 (4, 'FISCAL');
 
 -- FUNCIONARIO
-INSERT INTO `funcionario`
-VALUES (1, 'Pietro', 2222, 'Usuário', 1);
+INSERT INTO `funcionario` (nome, cpf, telefone, endereco, registro, funcao, id_setor)
+VALUES ('Pietro', '2222', '123456789', 'Rua Exemplo, 123', 'REG-001', 'Usuário', 1);
+
 
 -- FICHA
 INSERT INTO `bem_estar_animal`.`ficha` (
