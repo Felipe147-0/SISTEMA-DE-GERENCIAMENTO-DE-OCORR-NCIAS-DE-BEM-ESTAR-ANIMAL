@@ -1,6 +1,7 @@
 package bem_estar_animal.tcc.MVC.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,9 @@ public interface ListaDeExclusaoRepository extends JpaRepository<ListaExclusao, 
 
     @Query(value = "SELECT * FROM lista_exclusao WHERE id_denunciante = :denuncianteId", nativeQuery = true)
     ListaExclusao findByDenuncianteId(@Param("denuncianteId") Long denuncianteId);
+
+    @Query(value = "delete from lista_exclusao where id_denunciante = :id", nativeQuery = true)
+    @Modifying
+    void deleteDenuncianteDaLista(Long id);
 
 }

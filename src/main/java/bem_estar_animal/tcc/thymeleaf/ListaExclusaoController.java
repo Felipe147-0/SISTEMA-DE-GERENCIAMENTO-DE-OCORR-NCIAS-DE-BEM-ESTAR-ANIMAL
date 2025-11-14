@@ -11,18 +11,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.model.ListaExclusao;
 import bem_estar_animal.tcc.MVC.service.DenuncianteService;
+import bem_estar_animal.tcc.MVC.service.ListaExclusaoService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 @RequestMapping("/listaExclusao")
 public class ListaExclusaoController {
 
+    private ListaExclusaoService listaExclusaoService;
     private DenuncianteService denuncianteService;
 
-    public ListaExclusaoController(DenuncianteService denuncianteService) {
+    public ListaExclusaoController(DenuncianteService denuncianteService, ListaExclusaoService listaExclusaoService) {
         this.denuncianteService = denuncianteService;
+        this.listaExclusaoService = listaExclusaoService;
     }
 
     @ModelAttribute("listaExclusao")
@@ -50,4 +56,11 @@ public class ListaExclusaoController {
 
         return "listaExclusao-home";
     }
+
+    @PostMapping("/remover/{id}")
+    public String removerDenuncianteDaLista(@PathVariable("id") Long idDenunciante) {
+        listaExclusaoService.removerDenuncianteDaLista(idDenunciante);
+        return "redirect:/listaExclusao/buscar";
+    }
+    
 }
