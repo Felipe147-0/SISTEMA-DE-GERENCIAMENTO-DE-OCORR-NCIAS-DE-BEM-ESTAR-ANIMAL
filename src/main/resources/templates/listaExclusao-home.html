@@ -5,43 +5,53 @@
 
 <body>
 
-<!-- Filtro de pesquisa -->
-<form th:action="@{/denunciante/buscar}" method="get" class="d-flex form-filtro mb-4 justify-content-center">
-    <div class="input-group w-50">
-        <input type="text" class="form-control" name="query" placeholder="Buscar denunciante..." th:value="${query}">
-        <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
-            <i class="bi bi-search"></i>
-        </button>
-    </div>
-</form>
+    <!-- Filtro de pesquisa -->
+    <form th:action="@{/denunciante/buscar}" method="get" class="d-flex form-filtro mb-4 justify-content-center">
+        <div class="input-group w-50">
+            <input type="text" class="form-control" name="query" placeholder="Buscar denunciante..."
+                th:value="${query}">
+            <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
 
-<div class="container container-listar">
+    <div class="container container-listar">
 
-    <!-- Botões centralizados -->
-    <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
-        <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-        <a th:href="@{/denunciante/buscar}" class="btn btn-danger">ADICIONAR DENUNCIANTE</a>
-    </div>
+        <!-- Botões centralizados -->
+        <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
+            <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
+            <a th:href="@{/denunciante/buscar}" class="btn btn-danger">ADICIONAR DENUNCIANTE</a>
+        </div>
 
-    <!-- Lista de denunciantes -->
-    <ul class="list-group mt-3">
-        <li class="list-group-item" th:each="denunciante : ${denuncianteList}">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <strong th:text="${denunciante.nome}">Nome do Denunciante</strong>
-                    <div class="text-muted">
-                        <span th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
-                        <span class="ms-2" th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>
+        <!-- Lista de denunciantes -->
+        <ul class="list-group mt-3">
+            <li class="list-group-item" th:each="denunciante : ${denuncianteList}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong th:text="${denunciante.nome}">Nome do Denunciante</strong>
+                        <div class="text-muted">
+                            <span
+                                th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
+                            <span class="ms-2"
+                                th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>
+                        </div>
+                    </div>
+                    <!-- Botões lado a lado -->
+                    <div class="d-flex gap-2">
+                        <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}"
+                            class="btn btn-sm btn-primary">VER</a>
+                        <form th:action="@{/listaExclusao/remover/{id}(id=${denunciante.id_denunciante})}"
+                            method="post">
+                            <input type="hidden" value="DELETE" name="_method">
+                            <button type="submit" class="btn btn-sm btn-danger">REMOVER</button>
+                        </form>
                     </div>
                 </div>
-                <div>
-                    <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}" class="btn btn-sm btn-primary">VER</a>
-                    <a th:href="@{/denunciante/editar/{id}(id=${denunciante.id_denunciante})}" class="btn btn-sm btn-warning">EDITAR</a>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
+            </li>
+        </ul>
+    </div>
 
 </body>
+
 </html>
