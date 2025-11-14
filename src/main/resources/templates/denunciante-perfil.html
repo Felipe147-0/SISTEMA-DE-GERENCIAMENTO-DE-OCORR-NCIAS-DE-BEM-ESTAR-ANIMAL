@@ -3,67 +3,58 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
-    <div class="container-ouvidoria" th:object="${denunciante}">
-        <h4 class="titulo-principal">DENUNCIANTE</h4>
-        <h2>INFORMAÇÕES DO DENUNCIANTE</h2>
-        <div class="linha"></div>
+<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 50px 0;">
 
-        <div class="dados-grid">
-            <div>
-                <p><b>CPF:</b> <span th:text="*{cpf}"></span></p>
-            </div>
-            <div>
-                <p><b>Nome:</b> <span th:text="*{nome}"></span></p>
-            </div>
-            <div>
-                <p><b>Telefone:</b> <span th:text="*{telefone}"></span></p>
-            </div>
+    <div class="card shadow-lg border-0 rounded-5 p-5" style="width: 700px; background: #fff;" th:object="${denunciante}">
+        <div class="text-center mb-4">
+            <i class="bi bi-person-circle text-success fs-1"></i>
+            <h3 class="fw-bold text-success mb-0">Informações do Denunciante</h3>
+            <p class="text-muted mb-0">Confira os dados e gerencie a lista de exclusão</p>
         </div>
 
-        <div th:if="${denunciante.emLista}" class="mt-4">
-            <p class="text-danger">
-                <b>ESTE DENUNCIANTE ESTÁ EM LISTA NEGRA</b>
-            </p>
-            <p>
-                <b>OBSERVAÇÃO DA EXCLUSÃO:</b>
-                <span th:text="${listaExclusao?.observacao}">[Observação não carregada]</span>
-            </p>
+        <!-- Campos do Denunciante -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">CPF</label>
+            <input type="text" class="form-control" th:field="*{cpf}" readonly>
         </div>
 
-        <div class="linha mt-4"></div>
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Nome</label>
+            <input type="text" class="form-control" th:field="*{nome}" readonly>
+        </div>
 
-        <div id="exclusao-form-container" style="display: none;" class="observacoes-container mt-4">
-            <h4 class="titulo-secundario">Observações para Lista de Exclusão:</h4>
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Telefone</label>
+            <input type="text" class="form-control" th:field="*{telefone}" readonly>
+        </div>
 
-            <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post"
-                id="formExclusao">
+        <!-- Lista de exclusão -->
+        <div th:if="${denunciante.emLista}" class="mb-3 p-3 border rounded-3 bg-light">
+            <p class="text-danger fw-bold mb-1">ESTE DENUNCIANTE ESTÁ EM LISTA NEGRA</p>
+            <p><b>Observação da Exclusão:</b> <span th:text="${listaExclusao?.observacao}">[Observação não carregada]</span></p>
+        </div>
+
+        <!-- Formulário de observação para exclusão -->
+        <div id="exclusao-form-container" style="display: none;" class="mb-3">
+            <label class="form-label fw-semibold">Observações para Lista de Exclusão</label>
+            <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post" id="formExclusao">
                 <input type="hidden" name="em_lista" value="true" />
-
-                <textarea id="observacaoLista" name="observacao" rows="5" class="form-control mb-3"
-                    placeholder="Descreva aqui o motivo detalhado para inclusão na Lista de Exclusão..."
-                    required></textarea>
-
-                <div class="botoes-form-exclusao">
-                    <button type="submit" id="confirmarExclusao" class="btn btn-danger btn-custom">
-                        CONFIRMAR EXCLUSÃO
-                    </button>
-                    <button type="button" onclick="cancelarExclusao()" class="btn btn-secondary btn-custom">
-                        CANCELAR
-                    </button>
+                <textarea id="observacaoLista" name="observacao" rows="4" class="form-control mb-3"
+                    placeholder="Descreva aqui o motivo detalhado..." required></textarea>
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-danger btn-custom">CONFIRMAR EXCLUSÃO</button>
+                    <button type="button" class="btn btn-secondary btn-custom" onclick="cancelarExclusao()">CANCELAR</button>
                 </div>
             </form>
         </div>
 
-        <div class="botoes mt-4">
+        <!-- Botões principais -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
             <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
-            <button type="button" id="ativarExclusao" class="btn btn-dark btn-custom" onclick="exibirCampoObservacao()">
-                LISTA DE EXCLUSÃO
-            </button>
+            <button type="button" class="btn btn-dark btn-custom" id="ativarExclusao" onclick="exibirCampoObservacao()">LISTA DE EXCLUSÃO</button>
         </div>
     </div>
 
     <script src="/js/observacao.js"></script>
 </body>
-
 </html>

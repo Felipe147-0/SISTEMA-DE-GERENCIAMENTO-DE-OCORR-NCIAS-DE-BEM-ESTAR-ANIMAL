@@ -36,7 +36,10 @@ CREATE TABLE IF NOT EXISTS `denunciante` (
 -- TABELA FUNCIONARIO
 CREATE TABLE IF NOT EXISTS `funcionario` (
   `id_funcionario` BIGINT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(255) NULL DEFAULT NULL,
+  `nome` VARCHAR(255) NOT NULL,
+  `cpf` VARCHAR(15) NOT NULL,
+  `telefone` VARCHAR(15) NOT NULL,
+  `endereco` VARCHAR(255) NOT NULL,
   `registro` VARCHAR(255) NULL DEFAULT NULL,
   `funcao` VARCHAR(255) NULL DEFAULT NULL,
   `id_setor` BIGINT NULL,
@@ -100,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `possui_chip` TINYINT(1) NULL DEFAULT 0,
   `numero_chip` VARCHAR(255) NULL,
   `observacao` VARCHAR(500) NULL,
+  `tipo` VARCHAR(50) NULL,
   `ficha_id` BIGINT NULL,
   PRIMARY KEY (`id_animal`),
   INDEX `ficha_id_idx` (`ficha_id` ASC),

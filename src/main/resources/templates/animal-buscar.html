@@ -19,7 +19,7 @@
     <!-- Botões de ação -->
     <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
         <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-        <a th:href="@{/animal/adicionar}" class="btn btn-success">ADICIONAR ANIMAL</a>
+        <a th:href="@{/animal/cadastro}" class="btn btn-success">ADICIONAR ANIMAL</a>
     </div>
 
     <!-- Lista de animais -->
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" class="btn btn-sm btn-primary">VER</a>
-                    <a th:href="@{/animal/editar/{id}(id=${animal.idAnimal})}" class="btn btn-sm btn-warning">EDITAR</a>
+                    <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" class="btn btn-sm btn-warning">EDITAR</a>
                 </div>
             </div>
         </li>

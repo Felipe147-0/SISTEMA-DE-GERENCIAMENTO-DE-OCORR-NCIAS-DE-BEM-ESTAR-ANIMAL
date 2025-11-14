@@ -28,7 +28,10 @@ public class FuncionarioService {
             funcionarioRecebido.getRegistro(),
             funcionarioRecebido.getFuncao(),
             null,
-            funcionarioRecebido.getSetor()
+            funcionarioRecebido.getSetor(),
+            funcionarioRecebido.getCpf(),
+            funcionarioRecebido.getTelefone(),
+            funcionarioRecebido.getEndereco()
         );
 
         funcionarioRepository.save(funcionario);

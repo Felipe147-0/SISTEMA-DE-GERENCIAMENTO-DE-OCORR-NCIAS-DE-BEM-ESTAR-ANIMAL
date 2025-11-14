@@ -1,5 +1,6 @@
 package bem_estar_animal.tcc.thymeleaf;
 
+import bem_estar_animal.tcc.MVC.model.Animal;
 import bem_estar_animal.tcc.MVC.model.Denunciante;
 import bem_estar_animal.tcc.MVC.model.Endereco;
 import bem_estar_animal.tcc.MVC.model.Ficha;
@@ -41,6 +42,7 @@ public class FichaController {
         Ficha ficha = new Ficha();
         Denunciante denunciante = new Denunciante();
         Endereco endereco = new Endereco();
+        Animal animal = new Animal();
 
         denunciante.setEndereco(endereco);
         ficha.setDenunciante(denunciante);

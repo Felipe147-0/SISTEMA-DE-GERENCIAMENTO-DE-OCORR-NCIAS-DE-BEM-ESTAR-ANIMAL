@@ -1,11 +1,23 @@
 package bem_estar_animal.tcc.MVC.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import bem_estar_animal.tcc.MVC.model.Animal;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
+
+    @Query(value = "select count(id_animal) from animal", nativeQuery = true)
+    int contarAnimais();
+
+    List<Animal> findByRegistroContainingIgnoreCase(String registro);
+
+    List<Animal> findByNumeroChipContaining(String numeroChip);
+
+    boolean existsByNumeroChip(String numeroChip);
 
 }
