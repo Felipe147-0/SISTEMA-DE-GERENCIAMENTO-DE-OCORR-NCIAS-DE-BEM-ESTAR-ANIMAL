@@ -51,7 +51,9 @@
         <!-- Botões principais -->
         <div class="d-flex justify-content-center gap-3 mt-4">
             <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
-            <button type="button" class="btn btn-dark btn-custom" id="ativarExclusao" onclick="exibirCampoObservacao()">LISTA DE EXCLUSÃO</button>
+            <div th:if="${!denunciante.emLista}">
+                <button type="button" class="btn btn-dark btn-custom" id="ativarExclusao" onclick="exibirCampoObservacao()">LISTA DE EXCLUSÃO</button>
+            </div>
         </div>
     </div>
 
