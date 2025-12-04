@@ -3,61 +3,98 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
-    <div class="card shadow-lg border-0 rounded-5 p-5" style="width: 700px; background: #fff;">
+<body
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 700px; background: #fff;" th:object="${animal}">
         <div class="text-center mb-4">
-            <i class="bi bi-patch-check text-success fs-1"></i>
-            <h3 class="fw-bold text-success mb-0">Informações do Animal</h3>
-            <p class="text-muted mb-0">Registre e mantenha os dados dos animais atualizados</p>
+            <i class="bi bi-patch-check-fill text-success" style="font-size: 3.5rem;"></i>
+            <h2 class="fw-bold text-success mb-1">Informações do Animal</h2>
+            <p class="text-muted mb-0">Visualize e edite os dados do animal</p>
         </div>
 
-        <form method="post" th:action="@{/animal/salvar}" th:object="${animal}" th:attr="data-animal-id=${animal.idAnimal}">
+        <form method="post" th:action="@{/animal/salvar}" th:attr="data-animal-id=${animal.idAnimal}">
             
-            <!-- Tipo do Animal -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Tipo do Animal</label>
-                <select class="form-select" th:field="*{tipo}" disabled>
-                    <option th:each="tipo : ${tipoAnimalEnums}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
-                </select>
-            </div>
-
-            <!-- Número do Chip -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Número do Chip</label>
-                <div class="input-group gap-2">
-                    <input type="text" class="form-control" th:field="*{numeroChip}" id="numeroChip" readonly>
-                    <button type="button" class="btn btn-success btn-custom d-none" id="btnGerarChip">
-                        <i class="bi bi-cpu"></i> Adicionar Chip
-                    </button>
-                    <button type="button" class="btn btn-danger btn-custom d-none" id="btnRemoverChip">
-                        <i class="bi bi-trash"></i> Remover Chip
-                    </button>
+            <!-- Seção 1: Identificação -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-tag-fill me-2"></i>Identificação</h4>
+                <div class="row">
+                    <!-- Tipo do Animal -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Tipo do Animal</label>
+                        <select class="form-select" th:field="*{tipo}" disabled>
+                            <option th:each="tipo:${tipoAnimalEnums}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+                        </select>
+                    </div>
+                    <!-- Registro -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Registro</label>
+                        <input type="text" class="form-control" th:field="*{registro}" readonly>
+                    </div>
                 </div>
             </div>
 
-            <!-- Registro -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Registro</label>
-                <input type="text" class="form-control" th:field="*{registro}" readonly>
+            <!-- Seção 2: Gerenciamento de Chip -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-cpu-fill me-2"></i>Gerenciamento de Chip</h4>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-semibold">Número do Chip</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:field="*{numeroChip}" id="numeroChip" readonly>
+                            <button type="button" class="btn btn-success btn-custom" id="btnGerarChip" style="display:none;">
+                                <i class="bi bi-cpu"></i> Adicionar Chip
+                            </button>
+                            <button type="button" class="btn btn-danger btn-custom" id="btnRemoverChip" style="display:none;">
+                                <i class="bi bi-trash"></i> Remover Chip
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Observação -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Observação</label>
-                <textarea class="form-control" th:field="*{observacao}" rows="3" readonly placeholder="Digite observações sobre o animal..."></textarea>
+            <!-- Seção 3: Observações -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-chat-left-text-fill me-2"></i>Observações</h4>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-semibold">Observação</label>
+                        <textarea class="form-control" th:field="*{observacao}" rows="3" readonly placeholder="Digite observações sobre o animal..."></textarea>
+                    </div>
+                </div>
             </div>
 
             <!-- Botões -->
             <div class="d-flex justify-content-center gap-3 mt-4">
-                <a th:href="@{/animal/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
-                <button type="button" class="btn btn-warning btn-custom" id="editarBtn">EDITAR</button>
-                <button type="submit" class="btn btn-success btn-custom" id="salvarBtn" style="display: none;">SALVAR</button>
+                <a th:href="@{/animal/buscar}" class="btn btn-primary btn-lg px-5 btn-custom">
+                    <i class="bi bi-arrow-left"></i> VOLTAR
+                </a>
+                <button type="button" class="btn btn-warning btn-lg px-5 btn-custom" id="editarBtn">
+                    <i class="bi bi-pencil"></i> EDITAR
+                </button>
+                <button type="submit" class="btn btn-success btn-lg px-5 btn-custom" id="salvarBtn" style="display:none;">
+                    <i class="bi bi-save"></i> SALVAR
+                </button>
             </div>
-
         </form>
     </div>
 
     <script th:src="@{/js/editar-animal.js}"></script>
+    
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+    </style>
+
 </body>
 
 </html>

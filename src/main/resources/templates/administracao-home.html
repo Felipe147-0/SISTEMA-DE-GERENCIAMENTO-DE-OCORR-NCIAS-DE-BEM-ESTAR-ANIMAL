@@ -1,18 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
+<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-    <div class="centralizar">
-        <a th:href="@{/animal/buscar}" class="btn btnHome btn-primary btn-lg">CONSULTAR DADOS DE ANIMAIS COM CHIP</a>
-        <a class="btn btnHome btn-primary btn-lg">CONSULTA DE OCORRENCIAS</a>
-        <a th:href="@{/funcionario/criar}" class="btn btnHome btn-primary btn-lg">ADICIONAR FUNCIONARIO</a>
-        <a th:href="@{/denunciante/buscar}" class="btn btnHome btn-primary btn-lg">DENUNCIANTES</a>
-        <a th:href="@{/listaExclusao/buscar}" class="btn btnHome btn-dark btn-lg">LISTA DE EXCLUSÃO</a>
-        <a th:href="@{/}" class="btn btnHome btn-success btn-lg">VOLTAR</a>
+    <div class="container" style="max-width: 1200px;">
+        
+        <!-- Cabeçalho da página -->
+        <div class="text-center mb-5">
+            <i class="bi bi-gear-fill text-success" style="font-size: 4rem;"></i>
+            <h1 class="fw-bold text-success mt-3 mb-2">Painel de Administração</h1>
+            <p class="text-muted fs-5">Acesse as ferramentas de gestão e configuração do sistema</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Card 1: Consultar Dados de Animais com Chip -->
+            <div class="col-lg-4 col-md-6">
+                <a th:href="@{/animal/buscar}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover bg-primary-subtle" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-cpu-fill text-primary" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-primary mb-3">Consulta de Animais</h3>
+                            <p class="text-muted mb-4">Busca e visualização de dados de animais registrados com chip</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-primary rounded-pill px-4 py-2">Acessar Consulta</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 2: Consulta de Ocorrências -->
+            <div class="col-lg-4 col-md-6">
+                <a href="#" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover bg-warning-subtle" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-file-earmark-text-fill text-warning" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-warning mb-3">Consulta de Ocorrências</h3>
+                            <p class="text-muted mb-4">Visualização e gestão de todas as ocorrências registradas</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-warning text-dark rounded-pill px-4 py-2">Acessar Módulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 3: Adicionar Funcionário -->
+            <div class="col-lg-4 col-md-6">
+                <a th:href="@{/funcionario/criar}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover bg-success-subtle" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-person-plus-fill text-success" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-success mb-3">Adicionar Funcionário</h3>
+                            <p class="text-muted mb-4">Cadastro de novos usuários e colaboradores do sistema</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-success rounded-pill px-4 py-2">Novo Cadastro</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 4: Denunciantes -->
+            <div class="col-lg-4 col-md-6">
+                <a th:href="@{/denunciante/buscar}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover bg-info-subtle" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-person-badge-fill text-info" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-info mb-3">Gestão de Denunciantes</h3>
+                            <p class="text-muted mb-4">Visualização e gerenciamento de registros de denunciantes</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-info text-dark rounded-pill px-4 py-2">Acessar Módulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card 5: Lista de Exclusão -->
+            <div class="col-lg-4 col-md-6">
+                <a th:href="@{/listaExclusao/buscar}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover bg-danger-subtle" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-x-octagon-fill text-danger" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-danger mb-3">Lista de Exclusão</h3>
+                            <p class="text-muted mb-4">Gerenciamento de registros marcados para exclusão ou restrição</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-danger rounded-pill px-4 py-2">Acessar Lista</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Botão Voltar -->
+        <div class="text-center mt-5">
+            <a th:href="@{/}" class="btn btn-success btn-lg px-5 btn-custom">
+                <i class="bi bi-house-door"></i> VOLTAR PARA HOME
+            </a>
+        </div>
     </div>
+
+    <style>
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;
+        }
+
+        .card-hover {
+            cursor: pointer;
+        }
+
+        .card {
+            background: #fff;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+    </style>
 
 </body>
 

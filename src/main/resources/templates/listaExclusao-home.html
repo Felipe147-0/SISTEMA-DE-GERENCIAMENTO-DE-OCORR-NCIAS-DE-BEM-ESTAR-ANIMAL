@@ -1,56 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
+<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; padding: 2rem 0;">
 
-    <!-- Filtro de pesquisa -->
-    <form th:action="@{/denunciante/buscar}" method="get" class="d-flex form-filtro mb-4 justify-content-center">
-        <div class="input-group w-50">
-            <input type="text" class="form-control" name="query" placeholder="Buscar denunciante..."
-                th:value="${query}">
-            <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
-                <i class="bi bi-search"></i>
-            </button>
+    <div class="container" style="max-width: 1200px;">
+        
+        <!-- Cabeçalho da página -->
+        <div class="card shadow-lg border-0 rounded-4 mb-4" style="background: #fff;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-x-octagon-fill text-danger" style="font-size: 2.5rem;"></i>
+                        <div>
+                            <h2 class="fw-bold text-danger mb-1">Lista de Exclusão</h2>
+                            <p class="text-muted mb-0">Gerencie os denunciantes incluídos na lista de restrição</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a th:href="@{/administracao}" class="btn btn-primary btn-lg px-5 btn-custom">
+                            <i class="bi bi-arrow-left"></i> VOLTAR
+                        </a>
+                        <!-- Mantendo o botão de adicionar, mas com estilo consistente -->
+                        <a th:href="@{/denunciante/buscar}" class="btn btn-success btn-lg px-5 btn-custom">
+                            <i class="bi bi-person-plus"></i> ADICIONAR DENUNCIANTE
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
 
-    <div class="container container-listar">
-
-        <!-- Botões centralizados -->
-        <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
-            <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-            <a th:href="@{/denunciante/buscar}" class="btn btn-danger">ADICIONAR DENUNCIANTE</a>
+        <!-- Filtro de pesquisa -->
+        <div class="card shadow-lg border-0 rounded-4 mb-4" style="background: #fff;">
+            <div class="card-body p-4">
+                <form th:action="@{/denunciante/buscar}" method="get">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0 ps-0" name="query" 
+                               placeholder="Buscar por nome ou CPF..." 
+                               th:value="${query}"
+                               style="font-size: 1rem;">
+                        <button class="btn btn-success px-4" type="submit">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Lista de denunciantes -->
-        <ul class="list-group mt-3">
-            <li class="list-group-item" th:each="denunciante : ${denuncianteList}">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong th:text="${denunciante.nome}">Nome do Denunciante</strong>
-                        <div class="text-muted">
-                            <span
-                                th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
-                            <span class="ms-2"
-                                th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>
+        <div class="card shadow-lg border-0 rounded-4" style="background: #fff;">
+            <div class="card-body p-4">
+                
+                <!-- Contador de resultados -->
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                    <h5 class="fw-semibold text-dark mb-0">
+                        <i class="bi bi-card-list text-danger"></i> 
+                        Denunciantes em Lista de Exclusão
+                    </h5>
+                    <span class="badge bg-danger rounded-pill px-3 py-2" th:text="${denuncianteList.size()} + ' registro(s)'">
+                        0 registro(s)
+                    </span>
+                </div>
+
+                <!-- Lista -->
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item border-0 rounded-3 mb-3 shadow-sm item-hover" 
+                         th:each="denunciante : ${denuncianteList}"
+                         style="transition: all 0.3s ease; background: #f8f9fa;">
+                        
+                        <div class="d-flex justify-content-between align-items-start gap-3">
+                            
+                            <!-- Informações do denunciante -->
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <i class="bi bi-person-fill text-danger"></i>
+                                    <strong class="fs-5 text-dark" th:text="${denunciante.nome}">Nome do Denunciante</strong>
+                                    
+                                    <!-- Badge de Status -->
+                                    <span class="badge bg-danger ms-2">
+                                        <i class="bi bi-x-octagon-fill"></i> EM LISTA DE EXCLUSÃO
+                                    </span>
+                                </div>
+
+                                <!-- Detalhes -->
+                                <div class="text-muted" style="font-size: 0.95rem;">
+                                    <i class="bi bi-credit-card me-1"></i>
+                                    <span th:text="${denunciante.cpf != null ? 'CPF: ' + denunciante.cpf : 'CPF não informado'}"></span>
+                                    <span class="mx-3">|</span>
+                                    <i class="bi bi-phone me-1"></i>
+                                    <span th:text="${denunciante.telefone != null ? 'Telefone: ' + denunciante.telefone : 'Telefone não informado'}"></span>
+                                </div>
+                            </div>
+
+                            <!-- Botões de ação -->
+                            <div class="d-flex flex-column gap-2" style="min-width: 120px;">
+                                <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}" 
+                                   class="btn btn-sm btn-primary w-100 btn-custom">
+                                    <i class="bi bi-eye"></i> VER PERFIL
+                                </a>
+                                <form th:action="@{/listaExclusao/remover/{id}(id=${denunciante.id_denunciante})}"
+                                    method="post">
+                                    <input type="hidden" value="DELETE" name="_method">
+                                    <button type="submit" class="btn btn-sm btn-danger w-100 btn-custom">
+                                        <i class="bi bi-trash"></i> REMOVER
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <!-- Botões lado a lado -->
-                    <div class="d-flex gap-2">
-                        <a th:href="@{/denunciante/perfil/{id}(id=${denunciante.id_denunciante})}"
-                            class="btn btn-sm btn-primary">VER</a>
-                        <form th:action="@{/listaExclusao/remover/{id}(id=${denunciante.id_denunciante})}"
-                            method="post">
-                            <input type="hidden" value="DELETE" name="_method">
-                            <button type="submit" class="btn btn-sm btn-danger">REMOVER</button>
-                        </form>
+
+                    <!-- Mensagem quando não há denunciantes -->
+                    <div th:if="${denuncianteList.isEmpty()}" class="text-center py-5">
+                        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+                        <p class="text-muted mt-3 fs-5">Nenhum denunciante encontrado na Lista de Exclusão</p>
+                        <p class="text-muted">Utilize o botão "ADICIONAR DENUNCIANTE" para incluir um novo registro</p>
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        .item-hover:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1) !important;
+            background: #fff !important;
+        }
+
+        .input-group-text {
+            border-right: none;
+        }
+
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+
+        .badge {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+    </style>
 
 </body>
 
