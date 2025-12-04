@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/headPrincipal :: headBase}"></head>
+<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+<div class="card shadow-lg border-0 rounded-5 p-5" style="width: 500px; background: #fff;">
+    <div class="text-center mb-4">
+        <i class="bi bi-shield-lock text-success fs-1"></i>
+        <h3 class="fw-bold text-success mb-2">Bem vindo ao Sistema do Bem Estar Animal de Araraquara</h3>
+        <p class="text-muted mb-0">Faça login para acessar o sistema</p>
+    </div>
+
+    <form method="post" th:action="@{/login}">
+        <!-- Protocolo do Funcionário -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold" for="protocolo">Protocolo do Funcionário</label>
+            <input type="text"
+                   class="form-control"
+                   id="protocolo"
+                   name="protocolo"
+                   placeholder="Digite seu protocolo"
+                   required>
+        </div>
+
+        <!-- Senha -->
+        <div class="mb-4">
+            <label class="form-label fw-semibold" for="senha">Sua Senha</label>
+            <input type="password"
+                   class="form-control"
+                   id="senha"
+                   name="senha"
+                   placeholder="Digite sua senha"
+                   required>
+        </div>
+
+        <!-- Botão de Login -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <button type="submit" class="btn btn-success btn-custom w-100">
+                ENTRAR
+            </button>
+        </div>
+
+        <!-- Link de recuperação de senha (opcional) -->
+        <div class="text-center mt-3">
+            <a href="#" class="text-muted text-decoration-none small">Esqueceu sua senha?</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
