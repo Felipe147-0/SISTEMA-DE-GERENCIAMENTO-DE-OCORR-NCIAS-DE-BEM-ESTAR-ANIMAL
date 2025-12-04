@@ -1,15 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
+<body style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-<div class="centralizar">
-    <a th:href="@{/ouvidoria}" class="btn btnHome btn-primary btn-lg">ouvidoria</a>
-    <a th:href="@{/secretaria}" class="btn btnHome btn-success btn-lg">secretaria</a>
-    <a th:href="@{/administracao}" class="btn btnHome btn-dark btn-lg">administracao</a>
-</div>
+    <div class="container">
+        <div class="text-center mb-5">
+            <i class="bi bi-house-heart-fill text-primary" style="font-size: 4rem;"></i>
+            <h1 class="fw-bold text-primary mt-3 mb-2">Bem-Estar Animal</h1>
+            <p class="text-muted fs-5">Selecione o módulo que deseja acessar</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Card Ouvidoria -->
+            <div class="col-md-4">
+                <a th:href="@{/ouvidoria}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-megaphone-fill text-primary" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-primary mb-3">Ouvidoria</h3>
+                            <p class="text-muted mb-4">Gerencie reclamações, sugestões e elogios da comunidade</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-primary rounded-pill px-4 py-2">Acessar Módulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card Secretaria -->
+            <div class="col-md-4">
+                <a th:href="@{/secretaria}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-clipboard-check-fill text-success" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-success mb-3">Secretaria</h3>
+                            <p class="text-muted mb-4">Controle documentos, processos e atendimentos administrativos</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-success rounded-pill px-4 py-2">Acessar Módulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Card Administração -->
+            <div class="col-md-4">
+                <a th:href="@{/administracao}" class="text-decoration-none">
+                    <div class="card shadow-lg border-0 rounded-4 h-100 card-hover" style="transition: all 0.3s ease;">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <i class="bi bi-gear-fill text-dark" style="font-size: 3.5rem;"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark mb-3">Administração</h3>
+                            <p class="text-muted mb-4">Configure usuários, permissões e parâmetros do sistema</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-dark rounded-pill px-4 py-2">Acessar Módulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;
+        }
+
+        .card-hover {
+            cursor: pointer;
+        }
+
+        .card {
+            background: #fff;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
 
 </body>
 

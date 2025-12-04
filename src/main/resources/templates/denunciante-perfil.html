@@ -3,60 +3,103 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 50px 0;">
+<body
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-    <div class="card shadow-lg border-0 rounded-5 p-5" style="width: 700px; background: #fff;" th:object="${denunciante}">
+    <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 700px; background: #fff;" th:object="${denunciante}">
         <div class="text-center mb-4">
-            <i class="bi bi-person-circle text-success fs-1"></i>
-            <h3 class="fw-bold text-success mb-0">Informações do Denunciante</h3>
+            <i class="bi bi-person-circle text-success" style="font-size: 3.5rem;"></i>
+            <h2 class="fw-bold text-success mb-1">Informações do Denunciante</h2>
             <p class="text-muted mb-0">Confira os dados e gerencie a lista de exclusão</p>
         </div>
 
-        <!-- Campos do Denunciante -->
-        <div class="mb-3">
-            <label class="form-label fw-semibold">CPF</label>
-            <input type="text" class="form-control" th:field="*{cpf}" readonly>
+        <!-- Seção 1: Dados do Denunciante -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-person-vcard-fill me-2"></i>Dados Cadastrais</h4>
+            <div class="row">
+                <!-- Nome -->
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-semibold">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}" readonly>
+                </div>
+                <!-- CPF -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">CPF</label>
+                    <input type="text" class="form-control" th:field="*{cpf}" readonly>
+                </div>
+                <!-- Telefone -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Telefone</label>
+                    <input type="text" class="form-control" th:field="*{telefone}" readonly>
+                </div>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label fw-semibold">Nome</label>
-            <input type="text" class="form-control" th:field="*{nome}" readonly>
+        <!-- Seção 2: Status da Lista de Exclusão -->
+        <div class="mb-4 p-4 border rounded-3" th:classappend="${denunciante.emLista} ? 'border-danger bg-danger-subtle' : 'border-success bg-success-subtle'">
+
+            <!-- Denunciante em Lista -->
+            <div th:if="${denunciante.emLista}">
+                <p class="text-danger fw-bold mb-1">ESTE DENUNCIANTE ESTÁ EM LISTA DE EXCLUSÃO</p>
+                <p class="text-dark"><b>Observação da Exclusão:</b> <span th:text="${listaExclusao?.observacao}">[Observação não carregada]</span></p>
+            </div>
+
+            <!-- Denunciante Regular -->
+            <div th:unless="${denunciante.emLista}">
+                <p class="text-success fw-bold mb-1">Denunciante em situação regular.</p>
+                <p class="text-dark">Não há restrições ativas para este registro.</p>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label fw-semibold">Telefone</label>
-            <input type="text" class="form-control" th:field="*{telefone}" readonly>
-        </div>
-
-        <!-- Lista de exclusão -->
-        <div th:if="${denunciante.emLista}" class="mb-3 p-3 border rounded-3 bg-light">
-            <p class="text-danger fw-bold mb-1">ESTE DENUNCIANTE ESTÁ EM LISTA NEGRA</p>
-            <p><b>Observação da Exclusão:</b> <span th:text="${listaExclusao?.observacao}">[Observação não carregada]</span></p>
-        </div>
-
-        <!-- Formulário de observação para exclusão -->
-        <div id="exclusao-form-container" style="display: none;" class="mb-3">
+        <!-- Formulário de observação para exclusão (Ação) -->
+        <div id="exclusao-form-container" style="display: none;" class="mb-4 p-4 border rounded-3 bg-warning-subtle">
+            <h4 class="text-warning mb-3"><i class="bi bi-pencil-square me-2"></i>Motivo da Exclusão</h4>
             <label class="form-label fw-semibold">Observações para Lista de Exclusão</label>
             <form th:action="@{/denunciante/aprovar/{id}(id=${denunciante.id_denunciante})}" method="post" id="formExclusao">
                 <input type="hidden" name="em_lista" value="true" />
                 <textarea id="observacaoLista" name="observacao" rows="4" class="form-control mb-3"
-                    placeholder="Descreva aqui o motivo detalhado..." required></textarea>
+                    placeholder="Descreva aqui o motivo detalhado para a inclusão na lista de exclusão..." required></textarea>
                 <div class="d-flex justify-content-center gap-3">
-                    <button type="submit" class="btn btn-danger btn-custom">CONFIRMAR EXCLUSÃO</button>
-                    <button type="button" class="btn btn-secondary btn-custom" onclick="cancelarExclusao()">CANCELAR</button>
+                    <button type="submit" class="btn btn-danger btn-lg px-5 btn-custom">
+                        <i class="bi bi-x-octagon"></i> CONFIRMAR EXCLUSÃO
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg px-5 btn-custom" onclick="cancelarExclusao()">
+                        <i class="bi bi-x"></i> CANCELAR
+                    </button>
                 </div>
             </form>
         </div>
 
         <!-- Botões principais -->
         <div class="d-flex justify-content-center gap-3 mt-4">
-            <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
+            <a th:href="@{/denunciante/buscar}" class="btn btn-primary btn-lg px-5 btn-custom">
+                <i class="bi bi-arrow-left"></i> VOLTAR
+            </a>
             <div th:if="${!denunciante.emLista}">
-                <button type="button" class="btn btn-dark btn-custom" id="ativarExclusao" onclick="exibirCampoObservacao()">LISTA DE EXCLUSÃO</button>
+                <button type="button" class="btn btn-dark btn-lg px-5 btn-custom" id="ativarExclusao" onclick="exibirCampoObservacao()">
+                    <i class="bi bi-person-x"></i> INCLUIR NA LISTA DE EXCLUSÃO
+                </button>
             </div>
+            <!-- TODO: Adicionar botão para REMOVER da lista de exclusão se estiver emLista -->
         </div>
     </div>
 
     <script src="/js/observacao.js"></script>
+    
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+    </style>
+
 </body>
+
 </html>

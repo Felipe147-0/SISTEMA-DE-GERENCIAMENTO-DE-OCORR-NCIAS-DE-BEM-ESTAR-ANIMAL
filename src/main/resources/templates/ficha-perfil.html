@@ -3,86 +3,156 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
-<div class="container-ouvidoria" th:object="${ficha}">
-    <h4 class="titulo-principal">OUVIDORIA</h4>
-    <h2>ABERTURA DE OCORRÊNCIA</h2>
-    <div class="linha"></div>
+<body
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-    <div class="info-topo">
-        <div>
-            <p><b>Processo:</b> <span th:text="*{processoOuvidoria}"></span></p>
-            <p><b>Recebido por:</b> <span th:text="*{recebido_por_ouvidoria}"></span></p>
+    <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 900px; background: #fff;" th:object="${ficha}">
+        <div class="text-center mb-4">
+            <i class="bi bi-file-earmark-text-fill text-danger" style="font-size: 3.5rem;"></i>
+            <h2 class="fw-bold text-danger mb-1">Detalhes da Ocorrência</h2>
+            <p class="text-muted mb-0">Visualização completa da Ficha de Ouvidoria</p>
         </div>
-        <div>
-            <p><b>Data:</b> <span th:text="*{data_ouvidoria}"></span></p>
-            <p><b>Hora:</b> <span th:text="*{hora_ouvidoria}"></span></p>
+
+        <!-- Seção 1: Informações do Protocolo -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-info-circle-fill me-2"></i>Protocolo e Registro</h4>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-semibold">Processo</label>
+                    <p class="form-control-plaintext fw-bold" th:text="*{processoOuvidoria}"></p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-semibold">Recebido por</label>
+                    <p class="form-control-plaintext" th:text="*{recebido_por_ouvidoria}"></p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-semibold">Data/Hora</label>
+                    <p class="form-control-plaintext">
+                        <span th:text="*{data_ouvidoria}"></span> às <span th:text="*{hora_ouvidoria}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 2: Dados do Denunciante -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-person-vcard-fill me-2"></i>Dados do Denunciante</h4>
+            <div class="row">
+                <!-- Nome -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Nome</label>
+                    <p class="form-control-plaintext fw-bold" th:text="*{denunciante.nome}"></p>
+                </div>
+                <!-- CPF -->
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">CPF</label>
+                    <p class="form-control-plaintext" th:text="*{denunciante.cpf}"></p>
+                </div>
+                <!-- Telefone -->
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Telefone</label>
+                    <p class="form-control-plaintext" th:text="*{denunciante.telefone}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 3: Local da Ocorrência -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Local da Ocorrência</h4>
+            <div class="row">
+                <!-- Endereço -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Logradouro</label>
+                    <p class="form-control-plaintext" th:text="*{denunciante.endereco.logradouro}"></p>
+                </div>
+                <!-- Bairro -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Bairro</label>
+                    <p class="form-control-plaintext" th:text="*{denunciante.endereco.bairro}"></p>
+                </div>
+                <!-- Ponto de Referência -->
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-semibold">Ponto de Referência</label>
+                    <p class="form-control-plaintext" th:text="*{denunciante.endereco.ponto_de_referencia}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 4: Detalhes da Ocorrência -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-chat-left-text-fill me-2"></i>Detalhes da Ocorrência</h4>
+            <!-- Assunto -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Assunto</label>
+                <p class="form-control-plaintext" th:text="*{assunto}"></p>
+            </div>
+            <!-- Desfecho -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Desfecho da Notificação</label>
+                <p class="form-control-plaintext" th:text="*{desfecho_da_notificacao}"></p>
+            </div>
+        </div>
+
+        <!-- Seção 5: Tramitação -->
+        <div class="mb-4 p-4 border rounded-3 bg-light">
+            <h4 class="text-dark mb-3"><i class="bi bi-clock-history me-2"></i>Informações de Tramitação</h4>
+            <div class="row">
+                <!-- Funcionário -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Funcionário</label>
+                    <p class="form-control-plaintext" th:text="*{funcionario.nome}"></p>
+                </div>
+                <!-- Data Tramite -->
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Data Tramite</label>
+                    <p class="form-control-plaintext" th:text="*{data_tramite}"></p>
+                </div>
+                <!-- Hora Tramite -->
+                <div class="col-md-3 mb-3">
+                    <label class="form-label fw-semibold">Hora Tramite</label>
+                    <p class="form-control-plaintext" th:text="*{hora_tramite}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a th:href="@{/ficha/buscar}" class="btn btn-primary btn-lg px-5 btn-custom">
+                <i class="bi bi-arrow-left"></i> VOLTAR
+            </a>
+            <form th:action="@{/ficha/edit/{id}(id=${ficha.id_ficha})}" method="get">
+                <button type="submit" class="btn btn-success btn-lg px-5 btn-custom">
+                    <i class="bi bi-pencil"></i> EDITAR
+                </button>
+            </form>
         </div>
     </div>
 
-    <h5><b>FICHA DE OUVIDORIA</b></h5>
+    <script src="/js/formatarData.js"></script>
+    
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
 
-    <div class="dados-grid">
-        <div>
-            <p><b>CPF:</b> <span th:text="*{denunciante.cpf}"></span></p>
-        </div>
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
 
-        <div>
-            <p><b>Nome:</b> <span th:text="*{denunciante.nome}"></span></p>
-        </div>
+        .form-control-plaintext {
+            padding-top: 0.375rem;
+            padding-bottom: 0.375rem;
+            margin-bottom: 0;
+            line-height: 1.5;
+            color: #212529; /* Cor do texto padrão */
+            font-size: 1.1rem; /* Aumenta o tamanho da fonte */
+        }
+    </style>
 
-        <div>
-            <p><b>Telefone:</b> <span th:text="*{denunciante.telefone}"></span></p>
-        </div>
-
-        <div>
-            <p><b>Endereço:</b> <span th:text="*{denunciante.endereco.logradouro}"></span></p>
-        </div>
-
-        <div>
-            <p><b>Bairro:</b> <span th:text="*{denunciante.endereco.bairro}"></span></p>
-        </div>
-
-        <div>
-            <p><b>Ponto de Referência:</b> <span th:text="*{denunciante.endereco.ponto_de_referencia}"></span>
-            </p>
-        </div>
-    </div>
-
-    <br><br>
-
-    <h5><b>INFORMAÇÕES</b></h5>
-
-    <p><b>Assunto:</b> <span th:text="*{assunto}"></span></p>
-
-    <p><b>Desfecho da Notificação:</b> <span th:text="*{desfecho_da_notificacao}"></span></p>
-
-    <div class="dados-grid">
-        <div>
-            <p><b>Funcionário:</b> <span th:text="*{funcionario.nome}"></span></p>
-        </div>
-
-        <br>
-
-        <div>
-            <p><b>Data:</b> <span th:text="*{data_tramite}"></span></p>
-        </div>
-
-        <div>
-            <p><b>Hora:</b> <span th:text="*{hora_tramite}"></span></p>
-        </div>
-    </div>
-
-    <div class="botoes mt-4">
-        <a th:href="@{/ficha/buscar}" class="btn btn-primary btn-custom">VOLTAR</a>
-
-        <form th:action="@{/ficha/edit/{id}(id=${ficha.id_ficha})}" method="get">
-            <button type="submit" class="btn btn-success btn-custom">EDITAR</button>
-        </form>
-    </div>
-</div>
-
-<script src="/js/formatarData.js"></script>
 </body>
 
 </html>

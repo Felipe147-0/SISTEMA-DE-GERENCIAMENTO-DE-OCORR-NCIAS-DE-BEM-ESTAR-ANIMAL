@@ -1,49 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
+<body style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; padding: 2rem 0;">
 
-<!-- Filtro de pesquisa -->
-<form th:action="@{/animal/buscar}" method="get" class="d-flex form-filtro">
-    <div class="input-group">
-        <input type="text" class="form-control" name="query" placeholder="Buscar animal..." th:value="${query}">
-        <button class="btn btn-outline-secondary" type="submit" style="margin-top:4px;">
-            <i class="bi bi-search"></i>
-        </button>
-    </div>
-</form>
-
-<div class="container container-listar">
-    <!-- Botões de ação -->
-    <div class="d-flex justify-content-center gap-2 mt-4 mb-4">
-        <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-        <a th:href="@{/animal/cadastro}" class="btn btn-success">ADICIONAR ANIMAL</a>
-    </div>
-
-    <!-- Lista de animais -->
-    <ul class="list-group mt-3">
-        <li class="list-group-item" th:each="animal : ${animalList}">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <strong th:text="${animal.registro}">Nome do Animal</strong>
-                    
-                    <!-- Chip badge: vermelho se não possui chip -->
-                    <span th:text="${animal.possuiChip ? 'Chip: ' + animal.numeroChip : 'Sem chip'}"
-                          th:classappend="${!animal.possuiChip} ? 'badge bg-danger ms-2' : 'badge bg-info ms-2'">
-                    </span>
-
-                    <div class="text-muted" th:text="${animal.observacao}">Observações</div>
-                </div>
-                <div>
-                    <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" class="btn btn-sm btn-primary">VER</a>
-                    <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" class="btn btn-sm btn-warning">EDITAR</a>
+    <div class="container" style="max-width: 1200px;">
+        
+        <!-- Cabeçalho da página -->
+        <div class="card shadow-lg border-0 rounded-4 mb-4" style="background: #fff;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-list-ul text-success" style="font-size: 2.5rem;"></i>
+                        <div>
+                            <h2 class="fw-bold text-success mb-1">Gerenciamento de Animais</h2>
+                            <p class="text-muted mb-0">Visualize, busque e gerencie os animais cadastrados</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a th:href="@{/administracao}" class="btn btn-primary btn-custom">
+                            <i class="bi bi-arrow-left"></i> VOLTAR
+                        </a>
+                        <a th:href="@{/animal/cadastro}" class="btn btn-success btn-custom">
+                            <i class="bi bi-plus-circle"></i> ADICIONAR ANIMAL
+                        </a>
+                    </div>
                 </div>
             </div>
-        </li>
-    </ul>
-</div>
+        </div>
+
+        <!-- Filtro de pesquisa -->
+        <div class="card shadow-lg border-0 rounded-4 mb-4" style="background: #fff;">
+            <div class="card-body p-4">
+                <form th:action="@{/animal/buscar}" method="get">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control border-start-0 ps-0" name="query" 
+                               placeholder="Buscar por registro, chip ou observação..." 
+                               th:value="${query}"
+                               style="font-size: 1rem;">
+                        <button class="btn btn-success px-4" type="submit">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de animais -->
+        <div class="card shadow-lg border-0 rounded-4" style="background: #fff;">
+            <div class="card-body p-4">
+                
+                <!-- Contador de resultados -->
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                    <h5 class="fw-semibold text-dark mb-0">
+                        <i class="bi bi-card-list text-success"></i> 
+                        Animais Cadastrados
+                    </h5>
+                    <span class="badge bg-success rounded-pill px-3 py-2" th:text="${animalList.size()} + ' registro(s)'">
+                        0 registro(s)
+                    </span>
+                </div>
+
+                <!-- Lista -->
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item border-0 rounded-3 mb-3 shadow-sm animal-item" 
+                         th:each="animal : ${animalList}"
+                         style="transition: all 0.3s ease; background: #f8f9fa;">
+                        
+                        <div class="d-flex justify-content-between align-items-start gap-3">
+                            
+                            <!-- Informações do animal -->
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <i class="bi bi-tag-fill text-success"></i>
+                                    <strong class="fs-5 text-dark" th:text="${animal.registro}">Registro</strong>
+                                    
+                                    <!-- Badge do tipo -->
+                                    <span class="badge bg-secondary rounded-pill" th:text="${animal.tipo?.descricao ?: 'Não especificado'}">
+                                        Tipo
+                                    </span>
+                                </div>
+
+                                <!-- Informação do chip -->
+                                <div class="mb-2">
+                                    <span th:if="${animal.possuiChip}" class="badge bg-info text-dark">
+                                        <i class="bi bi-cpu"></i> Chip: <span th:text="${animal.numeroChip}">000000</span>
+                                    </span>
+                                    <span th:unless="${animal.possuiChip}" class="badge bg-danger">
+                                        <i class="bi bi-exclamation-triangle"></i> Sem chip
+                                    </span>
+                                </div>
+
+                                <!-- Observação -->
+                                <div class="text-muted" style="font-size: 0.95rem;">
+                                    <i class="bi bi-chat-left-text text-muted"></i>
+                                    <span th:text="${animal.observacao ?: 'Sem observações'}">Observação</span>
+                                </div>
+                            </div>
+
+                            <!-- Botões de ação -->
+                            <div class="d-flex flex-column gap-2" style="min-width: 120px;">
+                                <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" 
+                                   class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-eye"></i> Visualizar
+                                </a>
+                                <a th:href="@{/animal/perfil/{id}(id=${animal.idAnimal})}" 
+                                   class="btn btn-sm btn-warning w-100">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mensagem quando não há animais -->
+                    <div th:if="${animalList.isEmpty()}" class="text-center py-5">
+                        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+                        <p class="text-muted mt-3 fs-5">Nenhum animal encontrado</p>
+                        <p class="text-muted">Tente ajustar os filtros de busca ou adicione um novo animal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        .animal-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1) !important;
+            background: #fff !important;
+        }
+
+        .input-group-text {
+            border-right: none;
+        }
+
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+
+        .badge {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+    </style>
 
 </body>
+
 </html>

@@ -3,111 +3,150 @@
 
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
-<body>
-    <div class="container-ouvidoria">
-        <h4 class="titulo-principal">OUVIDORIA</h4>
+<body
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-        <h2>ABERTURA DE OCORRÊNCIA</h2>
-
-        <div class="linha"></div>
+    <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 900px; background: #fff;">
+        <div class="text-center mb-4">
+            <i class="bi bi-exclamation-octagon-fill text-danger" style="font-size: 3.5rem;"></i>
+            <h2 class="fw-bold text-danger mb-1">Abertura de Ocorrência</h2>
+            <p class="text-muted mb-0">Preencha os dados para registrar uma nova manifestação na Ouvidoria</p>
+        </div>
 
         <form method="post" th:action="@{/ficha/criar}" th:object="${ficha}">
-            <div class="info-topo">
-                <div>
-                    <p><b>Processo:</b> <span th:text="*{processoOuvidoria}"></span></p>
-                    <p><b>Recebido por:</b> <span th:text="*{recebido_por_ouvidoria}"></span></p>
-                </div>
-                <div>
-                    <p><b>Data:</b> <span th:text="*{data_ouvidoria}"></span></p>
-                    <input type="hidden" th:field="*{data_ouvidoria}">
 
-                    <p><b>Hora:</b> <span th:text="*{hora_ouvidoria}"></span></p>
-                    <input type="hidden" th:field="*{hora_ouvidoria}">
-                </div>
-            </div>
-
-            <h5><b>FICHA DE OUVIDORIA</b></h5>
-
-            <div class="dados-grid">
-                <div>
-                    <label for="cpf">CPF:</label>
-                    <input type="text" class="apenas-numeros" id="cpf" th:field="*{denunciante.cpf}">
-                </div>
-
-                <div>
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" th:field="*{denunciante.nome}">
-                </div>
-
-                <div>
-                    <label for="telefone">Telefone:</label>
-                    <input type="text" class="apenas-numeros" id="telefone" th:field="*{denunciante.telefone}">
-                </div>
-
-                <div>
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" th:field="*{denunciante.endereco.logradouro}">
-                </div>
-
-                <div>
-                    <label for="bairro">Bairro:</label>
-                    <input type="text" id="bairro" th:field="*{denunciante.endereco.bairro}">
-                </div>
-
-                <div>
-                    <label for="ponto">Ponto de Referência:</label>
-                    <input type="text" th:field="*{denunciante.endereco.ponto_de_referencia}" />
+            <!-- Seção 1: Informações do Protocolo -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-info-circle-fill me-2"></i>Informações do Protocolo</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Processo</label>
+                        <p class="form-control-plaintext" th:text="*{processoOuvidoria}"></p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Recebido por</label>
+                        <p class="form-control-plaintext" th:text="*{recebido_por_ouvidoria}"></p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Data/Hora</label>
+                        <p class="form-control-plaintext">
+                            <span th:text="*{data_ouvidoria}"></span> às <span th:text="*{hora_ouvidoria}"></span>
+                        </p>
+                        <input type="hidden" th:field="*{data_ouvidoria}">
+                        <input type="hidden" th:field="*{hora_ouvidoria}">
+                    </div>
                 </div>
             </div>
 
-            <br><br>
-
-            <h5><b>INFORMAÇÕES</b></h5>
-
-            <div>
-                <label for="assunto">Assunto:</label>
-                <textarea id="assunto" rows="2" th:field="*{assunto}"></textarea>
-            </div>
-
-            <br>
-
-            <!-- TODO deixar campos invisiveis quando colocar o login -->
-            <!-- colocar isso nas divs do desfecho, funcionario, data/hora tramite -->
-            <!--  th:if="${user.isAdmin} ou th:unless="${user.isGuest} -->
-            <div>
-                <label for="desfecho">Desfecho da Notificação:</label>
-                <textarea id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}"></textarea>
-            </div>
-
-            <br>
-
-            <div class="dados-grid">
-                <div>
-                    <!-- TODO colocar o nome do funcionario automaticamente quando colocar o login-->
-                    <!-- pegar o nome do funcionario logado -->
-                    <label for="funcionario">Funcionário:</label>
-                    <input type="text" id="funcionario" th:field="*{funcionario.nome}">
-                </div>
-
-                <div>
-                    <label for="dataTramite">Data:</label>
-                    <input type="text" class="data-format" id="dataTramite" th:field="*{data_tramite}">
-                </div>
-
-                <div>
-                    <label for="horaTramite">Hora:</label>
-                    <input type="text" id="horaTramite" th:field="*{hora_tramite}">
+            <!-- Seção 2: Dados do Denunciante -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-person-vcard-fill me-2"></i>Dados do Denunciante</h4>
+                <div class="row">
+                    <!-- CPF -->
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold" for="cpf">CPF</label>
+                        <input type="text" class="form-control apenas-numeros" id="cpf" th:field="*{denunciante.cpf}" placeholder="CPF do denunciante">
+                    </div>
+                    <!-- Nome -->
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold" for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" th:field="*{denunciante.nome}" placeholder="Nome completo">
+                    </div>
+                    <!-- Telefone -->
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold" for="telefone">Telefone</label>
+                        <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{denunciante.telefone}" placeholder="Telefone de contato">
+                    </div>
                 </div>
             </div>
 
-            <div class="botoes mt-4">
-                <a th:href="@{/ouvidoria}" class="btn btn-primary btn-custom">VOLTAR</a>
-                <button type="submit" id="enviar" disabled class="btn btn-success btn-custom">ENVIAR</button>
+            <!-- Seção 3: Endereço da Ocorrência -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Local da Ocorrência</h4>
+                <div class="row">
+                    <!-- Endereço -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="endereco">Logradouro</label>
+                        <input type="text" class="form-control" id="endereco" th:field="*{denunciante.endereco.logradouro}" placeholder="Rua, Avenida, etc.">
+                    </div>
+                    <!-- Bairro -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="bairro">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" th:field="*{denunciante.endereco.bairro}" placeholder="Bairro">
+                    </div>
+                    <!-- Ponto de Referência -->
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-semibold" for="ponto">Ponto de Referência</label>
+                        <input type="text" class="form-control" id="ponto" th:field="*{denunciante.endereco.ponto_de_referencia}" placeholder="Ex: Próximo à escola X">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 4: Detalhes da Ocorrência -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-chat-left-text-fill me-2"></i>Detalhes da Ocorrência</h4>
+                <!-- Assunto -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" for="assunto">Assunto</label>
+                    <textarea class="form-control" id="assunto" rows="2" th:field="*{assunto}" placeholder="Breve descrição do assunto"></textarea>
+                </div>
+                <!-- Desfecho -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" for="desfecho">Desfecho da Notificação</label>
+                    <textarea class="form-control" id="desfecho" rows="4" th:field="*{desfecho_da_notificacao}" placeholder="Detalhes da notificação ou ocorrência"></textarea>
+                </div>
+            </div>
+
+            <!-- Seção 5: Tramitação -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-clock-history me-2"></i>Informações de Tramitação</h4>
+                <div class="row">
+                    <!-- Funcionário -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="funcionario">Funcionário</label>
+                        <input type="text" class="form-control" id="funcionario" th:field="*{funcionario.nome}" placeholder="Funcionário responsável">
+                    </div>
+                    <!-- Data Tramite -->
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-semibold" for="dataTramite">Data Tramite</label>
+                        <input type="text" class="form-control data-format" id="dataTramite" th:field="*{data_tramite}" placeholder="DD/MM/AAAA">
+                    </div>
+                    <!-- Hora Tramite -->
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-semibold" for="horaTramite">Hora Tramite</label>
+                        <input type="text" class="form-control" id="horaTramite" th:field="*{hora_tramite}" placeholder="HH:MM">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a th:href="@{/ouvidoria}" class="btn btn-primary btn-lg px-5 btn-custom">
+                    <i class="bi bi-arrow-left"></i> VOLTAR
+                </a>
+                <button type="submit" id="enviar" disabled class="btn btn-success btn-lg px-5 btn-custom">
+                    <i class="bi bi-send"></i> ENVIAR
+                </button>
             </div>
         </form>
     </div>
 
     <script src="/js/cpfExiste.js"></script>
+    
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+    </style>
+
 </body>
 
 </html>

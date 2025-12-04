@@ -4,73 +4,105 @@
 <head th:replace="~{fragments/headPrincipal :: headBase}"></head>
 
 <body
-    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 
-    <div class="card shadow-lg border-0 rounded-5 p-5" style="width: 700px; background: #fff;">
+    <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 800px; background: #fff;">
         <div class="text-center mb-4">
-            <i class="bi bi-person-plus text-success fs-1"></i>
-            <h3 class="fw-bold text-success mb-0">Cadastro de Funcionário</h3>
-            <p class="text-muted mb-0">Registre e mantenha os dados dos funcionários atualizados</p>
+            <i class="bi bi-person-plus-fill text-success" style="font-size: 3.5rem;"></i>
+            <h2 class="fw-bold text-success mb-1">Cadastro de Funcionário</h2>
+            <p class="text-muted mb-0">Registre e mantenha os dados dos colaboradores atualizados</p>
         </div>
 
         <form method="post" th:action="@{/funcionario/criar}" th:object="${funcionario}">
 
-            <!-- Nome -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Nome completo">
+            <!-- Seção 1: Dados Pessoais -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-person-vcard-fill me-2"></i>Dados Pessoais</h4>
+                <div class="row">
+                    <!-- Nome -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="nome">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Nome completo" required>
+                    </div>
+                    <!-- CPF -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="cpf">CPF</label>
+                        <input type="text" class="form-control apenas-numeros" id="cpf" th:field="*{cpf}" placeholder="CPF do funcionário" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Telefone -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="telefone">Telefone</label>
+                        <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{telefone}" placeholder="Telefone" required>
+                    </div>
+                    <!-- Registro -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="registro">Registro</label>
+                        <input type="text" class="form-control apenas-numeros" id="registro" th:field="*{registro}"
+                            placeholder="Número do registro" required>
+                    </div>
+                </div>
             </div>
 
-            <!-- Registro -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="registro">Registro</label>
-                <input type="text" class="form-control apenas-numeros" id="registro" th:field="*{registro}"
-                    placeholder="Número do registro">
+            <!-- Seção 2: Dados Profissionais -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-briefcase-fill me-2"></i>Dados Profissionais</h4>
+                <div class="row">
+                    <!-- Função -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="funcao">Função</label>
+                        <input type="text" class="form-control" id="funcao" th:field="*{funcao}" placeholder="Cargo ou função" required>
+                    </div>
+                    <!-- Setor -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold" for="setor-select">Setor</label>
+                        <select id="setor-select" class="form-select" th:field="*{setor}" required>
+                            <option value="">--Selecione um setor--</option>
+                            <option th:each="setor : ${setoresList}" th:value="${setor.id_setor}" th:text="${setor.nome}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <!-- Função -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="funcao">Função</label>
-                <input type="text" class="form-control" id="funcao" th:field="*{funcao}" placeholder="Cargo ou função">
-            </div>
-
-            <!-- Setor -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="setor-select">Escolha o setor</label>
-                <select id="setor-select" class="form-select" th:field="*{setor}">
-                    <option value="">--Selecione um setor--</option>
-                    <option th:each="setor : ${setoresList}" th:value="${setor.id_setor}" th:text="${setor.nome}">
-                    </option>
-                </select>
-            </div>
-
-            <!-- CPF -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="cpf">CPF</label>
-                <input type="text" class="form-control apenas-numeros" id="cpf" th:field="*{cpf}" placeholder="CPF do funcionário">
-            </div>
-
-            <!-- Telefone -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="telefone">Telefone</label>
-                <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{telefone}" placeholder="Telefone">
-            </div>
-
-            <!-- Endereço -->
-            <div class="mb-3">
-                <label class="form-label fw-semibold" for="endereco">Endereço</label>
-                <input type="text" class="form-control" id="endereco" th:field="*{endereco}" placeholder="Endereço completo">
+            <!-- Seção 3: Endereço -->
+            <div class="mb-4 p-4 border rounded-3 bg-light">
+                <h4 class="text-dark mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</h4>
+                <!-- Endereço -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" for="endereco">Endereço Completo</label>
+                    <input type="text" class="form-control" id="endereco" th:field="*{endereco}" placeholder="Rua, número, bairro, cidade" required>
+                </div>
             </div>
 
             <!-- Botões -->
             <div class="d-flex justify-content-center gap-3 mt-4">
-                <a th:href="@{/administracao}" class="btn btn-primary btn-custom">VOLTAR</a>
-                <button type="submit" id="enviar" disabled class="btn btn-success btn-custom">SALVAR</button>
+                <a th:href="@{/administracao}" class="btn btn-primary btn-lg px-5 btn-custom">
+                    <i class="bi bi-arrow-left"></i> VOLTAR
+                </a>
+                <button type="submit" id="enviar" disabled class="btn btn-success btn-lg px-5 btn-custom">
+                    <i class="bi bi-save"></i> SALVAR
+                </button>
             </div>
         </form>
     </div>
 
     <script src="/js/cpfExiste.js"></script>
+    
+    <style>
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+    </style>
 
 </body>
 
