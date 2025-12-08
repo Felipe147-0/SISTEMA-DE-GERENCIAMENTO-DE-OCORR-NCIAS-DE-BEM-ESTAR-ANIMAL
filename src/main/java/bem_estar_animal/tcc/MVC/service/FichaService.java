@@ -67,7 +67,7 @@ public class FichaService {
         int ano = Year.now().getValue();
         int mes = MonthDay.now().getMonthValue();
         int dia = MonthDay.now().getDayOfMonth();
-        return String.format("PROC-OUV-%d%d%d-%04d", ano, mes, dia, numero);
+        return String.format("PROC-OUV-%d%d%d-%04d", ano, dia, mes, numero);
 
         /*USADO NO PROCESSO OUVIDORIA*/
         /*CHAMA OS METODOS DO REPOSITORY*/

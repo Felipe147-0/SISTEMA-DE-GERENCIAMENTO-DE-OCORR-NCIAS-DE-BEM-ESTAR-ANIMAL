@@ -59,7 +59,7 @@
                     <!-- Telefone -->
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold" for="telefone">Telefone</label>
-                        <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{denunciante.telefone}" placeholder="Telefone de contato">
+                        <input type="text" class="form-control" id="telefone" th:field="*{denunciante.telefone}" placeholder="Telefone de contato">
                     </div>
                 </div>
             </div>
@@ -152,5 +152,8 @@
     </style>
 
 </body>
+
+<script src="/js/formatarTelefone.js"></script>
+<script src="/js/formatarHora.js"></script>
 
 </html>

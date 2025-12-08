@@ -45,7 +45,7 @@
                     <!-- CPF -->
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold" for="cpf">CPF</label>
-                        <input type="text" class="form-control apenas-numeros" id="cpf" th:field="*{denunciante.cpf}" placeholder="CPF do denunciante">
+                        <input type="text" class="form-control" id="cpf" th:field="*{denunciante.cpf}" placeholder="CPF do denunciante">
                     </div>
                     <!-- Nome -->
                     <div class="col-md-4 mb-3">
@@ -55,7 +55,7 @@
                     <!-- Telefone -->
                     <div class="col-md-4 mb-3">
                         <label class="form-label fw-semibold" for="telefone">Telefone</label>
-                        <input type="text" class="form-control apenas-numeros" id="telefone" th:field="*{denunciante.telefone}" placeholder="Telefone de contato">
+                        <input type="text" class="form-control" id="telefone" th:field="*{denunciante.telefone}" placeholder="Telefone de contato">
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     <!-- Data Tramite -->
                     <div class="col-md-3 mb-3">
                         <label class="form-label fw-semibold" for="dataTramite">Data Tramite</label>
-                        <input type="text" class="form-control data-format" id="dataTramite" th:field="*{data_tramite}" placeholder="DD/MM/AAAA">
+                        <input type="text" class="form-control" id="dataTramite" th:field="*{data_tramite}" placeholder="DD/MM/AAAA">
                     </div>
                     <!-- Hora Tramite -->
                     <div class="col-md-3 mb-3">
@@ -148,5 +148,8 @@
     </style>
 
 </body>
+
+<script src="/js/formatarTelefone.js"></script>
+<script src="/js/formatarHora.js"></script>
 
 </html>
