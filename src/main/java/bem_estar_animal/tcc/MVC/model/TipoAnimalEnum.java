@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 public enum TipoAnimalEnum {
 
     GATO("GATO"),
-    CACHORRO("CACHORRO"),
-    CAVALO("CAVALO"),
-    AVE("AVE");
+    CACHORRO("CACHORRO");
 
     private String descricao;
 }
